@@ -1,6 +1,6 @@
 # Day 05 — Packet-Level Walkthrough: ARP, ICMP, and Routing
 
-I use this page to connect the commands I ran with the headers and packets Wireshark shows. The first case is based on my supplied same-subnet capture. The second case explains the expected routed packet flow from my configured topology; I still need a packet capture from both router links to verify every step in that case.
+I use this page to connect the commands I ran with the headers and packets Wireshark shows. Case 1 is based on my same-subnet capture. For Case 2, I captured the PC3-to-R1 link and can see ICMP Echo Requests and Echo Replies between the two subnets. I have not captured every ARP step or the full packet flow on both router links.
 
 ## Case 1 — PC1 pings PC2 on the same subnet
 
@@ -90,7 +90,7 @@ If the sender already has a valid ARP cache entry, it may send ICMP without firs
 | R1 G2/0 | `192.168.20.200/24` | PC4's default gateway |
 | PC4 | `192.168.20.1/24` | Destination host |
 
-PC3 and PC4 are in different subnets. I configured the router interfaces and default gateways, and I was able to ping PC4 from PC3. The packet-by-packet sequence below is the expected flow for this topology; I still need to capture it on both links to verify each frame in Wireshark.
+PC3 and PC4 are in different subnets. I configured the router interfaces and default gateways, and I was able to ping PC4 from PC3. My capture on the PC3-to-R1 G1/0 link shows ICMP Echo Requests from PC3 to PC4 and Echo Replies in the reverse direction. The full ARP and forwarding sequence below explains the expected flow; the screenshots do not expose every step or both router links.
 
 ### Step 1 — PC3 determines the destination is remote
 
@@ -149,6 +149,7 @@ A missing ARP entry alone does not prove a physical-layer fault. I need to use m
 
 ## What I have and have not captured
 
-- **Captured:** Case 1 topology, successful ping output, ARP request details, and an expanded IPv4 header showing ICMP protocol number 1.
-- **Confirmed by my lab report:** Case 2 router interface/gateway configuration and successful PC3-to-PC4 ping.
-- **Still needed for Case 2:** Wireshark screenshots from the PC3-to-R1 and R1-to-PC4 links, plus terminal output. I will update the explanation if the actual capture differs from the expected sequence.
+- **Captured for Case 1:** Topology, successful ping output, ARP request details, and an expanded IPv4 header showing ICMP protocol number 1.
+- **Captured for Case 2:** Wireshark packet-list evidence on the PC3-to-R1 G1/0 link showing ICMP Echo Requests from `192.168.1.1` to `192.168.20.1` and Echo Replies in the reverse direction. The visible list also contains CDP and local LOOP packets.
+- **Observed separately:** A capture with repeated gratuitous ARP announcements for `192.168.1.1`, `192.168.1.3`, and `192.168.10.1`. The screenshot alone does not establish an address conflict or the reason for each announcement.
+- **Still not fully verified:** The complete gateway ARP exchange, every routed packet field, and the packet flow on the R1-to-PC4 link. I will label those as expected behavior unless I capture the relevant packets.
