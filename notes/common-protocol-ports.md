@@ -1,5 +1,6 @@
 # Common Protocols and Port Numbers
 
+I use this table as a quick revision sheet for common services, their default ports, and the transport protocols they use.
 Port numbers identify application/service endpoints at the transport layer. These are common defaults; deployments can use other ports.
 
 | Protocol / service | Common port(s) | Transport | Purpose / note |
