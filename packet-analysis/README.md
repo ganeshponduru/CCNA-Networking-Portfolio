@@ -1,43 +1,36 @@
-# Wireshark Packet-Analysis Exercise — Template
+# My Wireshark Packet-Analysis Practice
 
-**Status: Planned exercise.** This is a worksheet, not evidence that a capture has already been performed. Complete it after running Wireshark and save your own screenshots/capture where appropriate.
+**Status: Planned — not completed yet.** This page is my checklist for a future capture, not evidence that I have already run Wireshark or inspected packets. I'll update it after I perform the exercise and record my own observations.
 
-## Objective
+## Goal
 
-Observe protocol headers in a packet capture and relate Ethernet, IP, TCP/UDP, and application fields to Day 1 concepts.
+I want to inspect a small packet capture and connect the fields I see to the networking concepts in my notes: Ethernet framing, IP addressing, TCP/UDP ports, and application protocols.
 
-## Procedure
+## Planned steps
 
-1. Install Wireshark from its official website and select the interface carrying your test traffic.
-2. Capture only on a device/network you own or are authorized to monitor.
-3. Generate ordinary traffic to a permitted service, then stop the capture.
-4. Try display filters: dns, tcp, udp, tcp.port == 443, or ip.addr == YOUR_TEST_IP (replace the placeholder).
-5. Select a packet and expand Ethernet, IP, TCP/UDP, and application protocol details.
+1. Install Wireshark from its official website and choose the interface carrying my test traffic.
+2. Start a capture and generate simple traffic, such as opening a website or running a DNS lookup.
+3. Stop the capture and apply a filter such as `dns`, `tcp`, `udp`, or `icmp`.
+4. Select a packet and expand the Ethernet, IP, transport, and application protocol sections.
+5. Record the source and destination addresses, protocol, ports where applicable, and any flags or response codes I can identify.
+6. Save screenshots that show my own capture and the fields I describe. Avoid publishing private addresses, usernames, tokens, or other sensitive data.
 
-## Record your evidence
+## Notes I will record after the lab
 
-- Date / environment:
-- Interface captured:
-- Traffic generated:
-- Display filter:
-- Packet number and protocol:
-- Ethernet source / destination MAC:
-- IP source / destination:
-- Transport protocol and source / destination ports:
-- Relevant TCP flags or DNS fields:
-- What the fields indicate:
-- What cannot be concluded from this packet alone:
-- Screenshot filenames:
-- PCAP filename (remove sensitive data before sharing):
+- What traffic I generated:
+- Capture interface:
+- Display filter used:
+- Example packet and protocol:
+- Fields I identified:
+- What I learned from the capture:
+- Any question I still need to investigate:
 
-## Analysis prompts
+## What I expect to practise
 
-1. For a remote IP destination, is the Ethernet destination the remote host or the local next hop?
-2. Which IPv4 header field identifies TCP versus UDP?
-3. Are you seeing a DNS query, response, or both?
-4. With encrypted traffic, what metadata remains visible and what payload details are unavailable?
-5. What additional packets/logs would be needed before concluding a root cause?
+- Ethernet source and destination MAC addresses
+- Source and destination IPv4 addresses
+- TCP or UDP source and destination ports
+- The difference between a protocol number in an IP header and a transport-layer port
+- How the visible packet fields relate to encapsulation
 
-## Evidence and privacy
-
-Do not upload captures containing credentials, private messages, customer information, or other sensitive data. Anonymize details. Add actual findings and change the status from Planned only after personally performing and documenting the exercise.
+I'll replace this planned status with actual results only after I complete the capture.
