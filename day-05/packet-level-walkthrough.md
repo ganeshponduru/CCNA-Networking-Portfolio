@@ -151,5 +151,6 @@ A missing ARP entry alone does not prove a physical-layer fault. I need to use m
 
 - **Captured for Case 1:** Topology, successful ping output, ARP request details, and an expanded IPv4 header showing ICMP protocol number 1.
 - **Captured for Case 2:** Wireshark packet-list evidence on the PC3-to-R1 G1/0 link showing ICMP Echo Requests from `192.168.1.1` to `192.168.20.1` and Echo Replies in the reverse direction. The visible list also contains CDP and local LOOP packets.
+- **Captured for gateway verification:** An ARP request asking who has `192.168.1.100`, an ARP reply identifying that address as MAC `ca:01:39:88:00:1c`, and successful ICMP Echo exchanges between `192.168.1.1` and `192.168.1.100`. This confirms PC3 resolved and could ping its gateway; it is not itself evidence of a ping to PC4.
 - **Observed separately:** A capture with repeated gratuitous ARP announcements for `192.168.1.1`, `192.168.1.3`, and `192.168.10.1`. The screenshot alone does not establish an address conflict or the reason for each announcement.
 - **Still not fully verified:** The complete gateway ARP exchange, every routed packet field, and the packet flow on the R1-to-PC4 link. I will label those as expected behavior unless I capture the relevant packets.
