@@ -1,5 +1,6 @@
 # IPv4 Addressing, Classes and Private Ranges
 
+I use this page to revise IPv4 address structure, private ranges, and the difference between historical classful addressing and modern CIDR.
 ## IPv4 basics
 IPv4 addresses are 32 bits long, represented as four 8-bit octets in dotted-decimal notation. Each octet ranges from 0 to 255 because 2^8 = 256 possible values, numbered 0 through 255.
 
