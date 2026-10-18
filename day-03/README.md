@@ -1,22 +1,26 @@
-# Day 03 — IPv4 Subnetting Fundamentals
+# Day 03 — IPv4 Subnetting
 
-These notes follow the lesson sequence and keep the instructor's main examples. The correction log calls out inaccurate, oversimplified, or transcript-affected statements.
+I used these notes to make subnetting easier to understand step by step: first identifying a network and its usable addresses, then checking whether two IP addresses belong to the same subnet, and finally dividing a larger network into smaller subnets.
 
-## In this lesson
+## My notes
+
 - [Subnetting fundamentals and formulas](subnetting-fundamentals.md)
-- [Worked example: dividing 192.168.1.0/24 into four /26 subnets](worked-example.md)
-- [Correction log](correction-log.md)
-- [Review and interview questions](interview-questions.md)
+- [Worked example: splitting 192.168.1.0/24 into four /26 subnets](worked-example.md)
+- [Things I corrected or clarified while studying](correction-log.md)
+- [Revision and interview questions](interview-questions.md)
 
-## Lesson summary
-The class begins with IPv4 address ranges and network IDs, then explains how a host uses its IP address and subnet mask to decide whether a destination is on the local subnet. It then introduces subnetting as a way to divide an address block into smaller networks based on requirements.
+## What I learned
 
-The main example starts with `192.168.1.0/24` and borrows two host bits, producing a `/26` mask and four subnets. Each /26 subnet has 64 total addresses and 62 traditionally usable host addresses.
+A /24 contains 256 total IPv4 addresses. In a conventional subnet, the first address identifies the network and the last is the broadcast address, leaving 254 usable host addresses.
 
-## Source and scope
-Based on the subnetting lesson taught by E. Ramesh Goud at TungaBadra Networks, as provided in the class transcript. These are original study notes, not a verbatim transcript or reproduction of course slides.
+Borrowing two host bits from a /24 gives a /26. That creates four equal-sized subnets, each containing 64 total addresses and 62 conventionally usable host addresses. I worked through the ranges in the worked example.
 
-**Accuracy note:** The instructor uses classful A/B/C terminology to introduce the concept. Modern networks use CIDR prefixes, so classful defaults should not be treated as the normal method for designing or calculating today's networks. See the correction log for details.
+A host compares the network portion of its own IP address and the destination IP address using its subnet mask. If the destination is on the local subnet, it can send directly on the local link. If it is remote, the host normally sends the packet to a next hop, commonly its default gateway.
 
-## Practical status
-This page documents the lesson and worked calculations. It does not claim that a Packet Tracer, router, switch, or PC lab has been completed. Add lab evidence only after performing and verifying it.
+## Important distinction
+
+Classful addressing is historical background. For modern network planning, I need to understand CIDR prefixes and choose a subnet based on the required number of hosts and the overall addressing plan.
+
+## Practice status
+
+The calculations here are written study examples. I have not claimed to complete a router, switch, or Packet Tracer lab. I'll add practical evidence when I perform the configuration and verify the results.
