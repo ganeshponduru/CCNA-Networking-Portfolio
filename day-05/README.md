@@ -1,0 +1,61 @@
+# Day 05 — Ping, ARP, and ICMP in a Same-Subnet Lab
+
+## What I worked on
+
+I built a small topology with two VPCS hosts connected to a switch and tested connectivity between them. I used Wireshark to inspect the packets generated when PC1 pinged PC2.
+
+## Topology and addressing
+
+| Device | IPv4 address | Subnet mask | MAC address shown in capture |
+|---|---|---|---|
+| PC1 | 192.168.1.1/24 | 255.255.255.0 | 00:50:79:66:68:00 |
+| PC2 | 192.168.1.2/24 | 255.255.255.0 | 00:50:79:66:68:01 |
+
+Both PCs are in the same IPv4 subnet, so PC1 can send traffic directly to PC2 at Layer 2. A default gateway is not needed for this same-subnet test.
+
+## What I observed
+
+- The ping from PC1 to `192.168.1.2` received five replies.
+- In the capture, I saw an ARP request asking who has `192.168.1.2`, followed by an ARP reply.
+- After ARP resolution, Wireshark showed ICMP Echo requests from `192.168.1.1` to `192.168.1.2` and Echo replies in the opposite direction.
+- The IPv4 header showed protocol number `1`, which identifies ICMP.
+- The Ethernet destination for the ARP request was the broadcast MAC `ff:ff:ff:ff:ff:ff`. The ICMP frames were sent to the destination host's MAC address.
+
+## Packet flow I learned
+
+1. PC1 checks whether it already knows the MAC address for `192.168.1.2`.
+2. If the mapping is missing, PC1 broadcasts an ARP request on the local LAN.
+3. PC2 recognises its own IPv4 address in the ARP target and sends an ARP reply containing its MAC address.
+4. PC1 can then send the ICMP Echo request in an Ethernet frame addressed to PC2.
+5. PC2 sends an ICMP Echo reply back to PC1.
+
+The exact capture can differ if the ARP mapping is already cached. In that case, the ping may begin with ICMP packets and no new ARP exchange.
+
+## Evidence
+
+- The topology screenshot shows PC1 and PC2 connected through Switch1.
+- The terminal screenshot shows the configured PC1 address and five successful ping replies.
+- The Wireshark packet list shows the ARP request/reply followed by ICMP Echo requests and replies.
+- The expanded ARP packet shows sender IP `192.168.1.1`, target IP `192.168.1.2`, and broadcast target MAC.
+- The expanded IPv4 header shows source `192.168.1.1`, destination `192.168.1.2`, and `ICMP (1)`.
+
+## Commands used
+
+```text
+PC1> ip 192.168.1.1/24
+PC1> ping 192.168.1.2
+```
+
+I captured traffic on the PC1-to-switch link in Wireshark.
+
+## Key takeaways
+
+- Ping is a utility that uses ICMP Echo messages to test IP-layer reachability and measure round-trip time.
+- ARP resolves an IPv4 address to a link-layer MAC address on the local Ethernet network.
+- An ARP request is broadcast; a normal ARP reply is usually unicast to the requester.
+- A switch learns source MAC addresses from incoming Ethernet frames and uses its MAC address table to forward known unicast traffic.
+- IP addresses identify the Layer 3 endpoints, while MAC addresses deliver a frame across the local Layer 2 link.
+
+## Scope
+
+This page documents the same-subnet case only. I will document the different-subnet/default-gateway case separately after I capture and verify that lab as well.
