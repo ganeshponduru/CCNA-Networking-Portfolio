@@ -6,7 +6,8 @@ A structured portfolio documenting CCNA learning, networking concepts, lab pract
 
 | Day | Topic | Status |
 |---|---|---|
-| Day 01 | Data flow, OSI/TCP-IP models, encapsulation, TCP vs UDP, protocol ports, packet-header basics | Notes published; Wireshark exercise is planned until personal evidence is added |
+| Day 01 | Data flow, OSI/TCP-IP models, encapsulation, TCP vs UDP, protocol ports, packet-header basics | Notes published; Wireshark exercise planned |
+| Day 02 | Switching, traffic types, domains, topologies, IPv4, private ranges, binary conversion | Notes published; practical lab evidence not yet added |
 
 ## Day 01 — Data Flow, OSI & TCP/IP
 
