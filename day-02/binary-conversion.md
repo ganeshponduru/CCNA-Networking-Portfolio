@@ -1,5 +1,6 @@
 # Binary and Decimal Conversion for IPv4
 
+I practise binary conversion because the bit values make IPv4 octets and subnet masks easier to understand.
 Each IPv4 octet is eight bits. From left to right, the bit weights are 128, 64, 32, 16, 8, 4, 2, 1.
 
 ## Binary to decimal
