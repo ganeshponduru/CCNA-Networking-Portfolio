@@ -1,5 +1,6 @@
 # Day 2 — Interview and Revision Questions
 
+I use these questions to test my understanding of switching, traffic types, network domains, IPv4 addressing, and binary conversion.
 1. **Circuit switching vs packet switching?** Circuit switching establishes a dedicated circuit for a session; packet switching sends packets over shared links.
 2. **Is packet switching a TCP feature?** No. IP networks are packet-switched; TCP is a transport protocol that provides reliable, ordered delivery.
 3. **What are common protocol data units?** Bits at the physical layer, frames at the data-link layer, packets at the network layer, and TCP segments / UDP datagrams at the transport layer.
