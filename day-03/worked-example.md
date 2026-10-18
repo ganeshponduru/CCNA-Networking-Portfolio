@@ -1,6 +1,6 @@
 # Worked Example — Split 192.168.1.0/24 into Four /26 Subnets
 
-This is the main calculation from the lesson, laid out so the results can be checked.
+I worked through this example to see how a /24 can be divided into four equal /26 subnets and how the ranges line up.
 
 ## Requirement
 
