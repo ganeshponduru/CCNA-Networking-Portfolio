@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">Simplified network encapsulation flow</title><desc id="desc">Application data is wrapped in transport, IP, and Ethernet information before transmission, then decapsulated at the receiver.</desc>
+<rect width="1000" height="560" rx="20" fill="#f8fafc"/><text x="250" y="42" font-family="Arial,sans-serif" font-size="23" font-weight="700" text-anchor="middle" fill="#0f172a">Sender: encapsulation</text><text x="750" y="42" font-family="Arial,sans-serif" font-size="23" font-weight="700" text-anchor="middle" fill="#0f172a">Receiver: decapsulation</text>
+<g font-family="Arial,sans-serif" text-anchor="middle" font-size="16" fill="#0f172a">
+<rect x="70" y="80" width="360" height="56" rx="8" fill="#bfdbfe"/><text x="250" y="114">Application data</text>
+<path d="M250 136 V157" stroke="#334155" stroke-width="2"/><path d="M244 151 L250 159 L256 151" fill="none" stroke="#334155" stroke-width="2"/>
+<rect x="70" y="162" width="360" height="56" rx="8" fill="#bbf7d0"/><text x="250" y="196">TCP segment / UDP datagram</text>
+<path d="M250 218 V239" stroke="#334155" stroke-width="2"/><path d="M244 233 L250 241 L256 233" fill="none" stroke="#334155" stroke-width="2"/>
+<rect x="70" y="244" width="360" height="56" rx="8" fill="#fde68a"/><text x="250" y="278">IP packet</text>
+<path d="M250 300 V321" stroke="#334155" stroke-width="2"/><path d="M244 315 L250 323 L256 315" fill="none" stroke="#334155" stroke-width="2"/>
+<rect x="70" y="326" width="360" height="56" rx="8" fill="#fed7aa"/><text x="250" y="360">Ethernet frame</text>
+<rect x="70" y="408" width="360" height="56" rx="8" fill="#e2e8f0"/><text x="250" y="442">Bits / signals on the medium</text>
+<rect x="570" y="408" width="360" height="56" rx="8" fill="#e2e8f0"/><text x="750" y="442">Bits / signals received</text>
+<path d="M570 436 H448" stroke="#64748b" stroke-width="2" stroke-dasharray="6 5"/><path d="M455 430 L447 436 L455 442" fill="none" stroke="#64748b" stroke-width="2"/>
+<path d="M750 408 V391" stroke="#334155" stroke-width="2"/><path d="M744 397 L750 389 L756 397" fill="none" stroke="#334155" stroke-width="2"/>
+<rect x="570" y="326" width="360" height="56" rx="8" fill="#fed7aa"/><text x="750" y="360">Ethernet frame processed</text>
+<path d="M750 326 V309" stroke="#334155" stroke-width="2"/><path d="M744 315 L750 307 L756 315" fill="none" stroke="#334155" stroke-width="2"/>
+<rect x="570" y="244" width="360" height="56" rx="8" fill="#fde68a"/><text x="750" y="278">IP packet processed</text>
+<path d="M750 244 V227" stroke="#334155" stroke-width="2"/><path d="M744 233 L750 225 L756 233" fill="none" stroke="#334155" stroke-width="2"/>
+<rect x="570" y="162" width="360" height="56" rx="8" fill="#bbf7d0"/><text x="750" y="196">Transport data delivered</text>
+<path d="M750 162 V145" stroke="#334155" stroke-width="2"/><path d="M744 151 L750 143 L756 151" fill="none" stroke="#334155" stroke-width="2"/>
+<rect x="570" y="80" width="360" height="56" rx="8" fill="#bfdbfe"/><text x="750" y="114">Application receives data</text>
+</g><text x="500" y="510" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#334155">Conceptual view; actual headers and processing depend on protocols in use.</text><text x="500" y="538" font-family="Arial,sans-serif" font-size="13" text-anchor="middle" fill="#64748b">Original study diagram · CCNA Networking Portfolio</text></svg>
