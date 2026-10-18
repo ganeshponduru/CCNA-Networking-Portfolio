@@ -1,5 +1,6 @@
 # OSI and TCP/IP Reference Models
 
+I learned to use these models as a way to organize what happens during network communication. I wrote down the layer responsibilities and examples I want to remember.
 Reference models help explain network communication by separating functions. OSI is a seven-layer conceptual model; the Internet protocol suite is commonly presented as a four-layer TCP/IP model. Real implementations do not always align perfectly with textbook boundaries.
 
 ## OSI layers
