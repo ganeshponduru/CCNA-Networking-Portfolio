@@ -1,5 +1,6 @@
 # Encapsulation and Decapsulation
 
+I use encapsulation to trace how data gets wrapped as it moves down the stack, then unwrapped by the receiving device.
 ## Encapsulation
 
 Encapsulation is the process in which protocol layers add their own control information as application data is prepared for transmission.
