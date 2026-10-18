@@ -1,5 +1,6 @@
 # Unicast, Broadcast and Multicast
 
+I learned to distinguish these traffic types by asking how many destinations should receive a frame or packet.
 | Type | Meaning | Example |
 |---|---|---|
 | Unicast | One sender to one intended destination | Client connecting to a web server |
