@@ -1,0 +1,9 @@
+# Packet captures can contain sensitive data; do not commit by default
+*.pcap
+*.pcapng
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
