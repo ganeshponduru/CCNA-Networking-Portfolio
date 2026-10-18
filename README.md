@@ -9,6 +9,7 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 | Day 01 | How data moves, OSI and TCP/IP models, encapsulation, TCP/UDP, common ports, packet headers | Notes added; Wireshark practice still to be completed and documented |
 | Day 02 | Circuit and packet switching, traffic types, network domains, topologies, IPv4 basics, binary conversion | Notes added; hands-on evidence not yet added |
 | Day 03 | IPv4 subnetting, network IDs, subnet masks, and /26 calculations | Notes and worked examples added; hands-on evidence not yet added |
+| Day 04 | Network and broadcast address calculations, next subnet ranges, and subnet design | Notes and worked examples added; hands-on evidence not yet added |
 
 ## Day 01 — How data moves across a network
 
@@ -41,6 +42,14 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 - [Worked example: four /26 subnets](day-03/worked-example.md)
 - [Things I corrected or clarified](day-03/correction-log.md)
 - [Revision questions](day-03/interview-questions.md)
+
+## Day 04 — Subnet calculations and subnet design
+
+- [Day 4 notes](day-04/README.md)
+- [Finding network, broadcast, and usable addresses](day-04/address-range-calculations.md)
+- [Finding the next subnet and planning subnets](day-04/next-subnet-and-subnet-design.md)
+- [Practice questions and answers](day-04/practice-questions.md)
+- [Points I clarified while studying](day-04/things-i-checked.md)
 
 ## How I document my progress
 
