@@ -8,6 +8,7 @@ A structured portfolio documenting CCNA learning, networking concepts, lab pract
 |---|---|---|
 | Day 01 | Data flow, OSI/TCP-IP models, encapsulation, TCP vs UDP, protocol ports, packet-header basics | Notes published; Wireshark exercise planned |
 | Day 02 | Switching, traffic types, domains, topologies, IPv4, private ranges, binary conversion | Notes published; practical lab evidence not yet added |
+| Day 03 | Subnetting, network IDs, subnet masks, /26 worked example, correction log | Notes published; practical lab evidence not yet added |
 
 ## Day 01 — Data Flow, OSI & TCP/IP
 
@@ -33,12 +34,20 @@ A structured portfolio documenting CCNA learning, networking concepts, lab pract
 - [Binary/decimal conversion](day-02/binary-conversion.md)
 - [Interview questions](day-02/interview-questions.md)
 
+## Day 03 — IPv4 Subnetting
+
+- [Day 3 overview](day-03/README.md)
+- [Subnetting fundamentals and formulas](day-03/subnetting-fundamentals.md)
+- [Worked example: four /26 subnets](day-03/worked-example.md)
+- [Correction log](day-03/correction-log.md)
+- [Review and interview questions](day-03/interview-questions.md)
+
 ## Practical-work integrity
 
 These are study notes, not a claim that every listed activity has been performed. The Wireshark section is a template until I add my own capture, observations, and screenshots. Practical work will be labelled as concept learned, lab performed, or troubleshooting case study, with evidence for practical claims.
 
 ## Learning source
 
-Day 1 lesson: “How Data Travels, Network Reference Models & Packet Header Analysis,” and Day 2 CCNA lesson, taught by E. Ramesh Goud, TungaBadra Networks. Day 2 notes are in [day-02](day-02/README.md). See references.md for technical references.
+Day 1 lesson: “How Data Travels, Network Reference Models & Packet Header Analysis,” and Day 2 and Day 3 CCNA lessons, taught by E. Ramesh Goud, TungaBadra Networks. Day 2 notes are in [day-02](day-02/README.md), and Day 3 notes are in [day-03](day-03/README.md). See references.md for technical references.
 
 Notes are an original study summary, not a reproduction of the instructor's handout or transcript.
