@@ -1,5 +1,6 @@
 # TCP vs UDP
 
+These are the differences I need to understand when choosing between TCP and UDP and when explaining what each protocol does not guarantee.
 | Feature | TCP | UDP |
 |---|---|---|
 | Connection model | Connection-oriented | Connectionless; no transport connection setup |
