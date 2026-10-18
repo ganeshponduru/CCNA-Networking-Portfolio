@@ -41,6 +41,10 @@ I uploaded the screenshots from my lab to this folder. The images below show the
 
 ![ICMP traffic on the PC3-to-R1 link](./Screenshot%202026-10-19%20005453.png)
 
+**Additional capture 3 — Gateway ARP and ping:** This capture shows PC3 asking for the MAC address of its default gateway, `192.168.1.100`, and receiving an ARP reply. It then shows ICMP Echo Requests from `192.168.1.1` to `192.168.1.100` and replies from the gateway. This verifies gateway address resolution and reachability; it is a ping to the gateway, not the remote PC4.
+
+![Gateway ARP resolution and ping](./Screenshot%202026-10-19%20010125.png)
+
 ## Topology and addressing
 
 | Device | IPv4 address | Subnet mask | MAC address shown in capture |
@@ -95,7 +99,7 @@ I captured traffic on the PC1-to-switch link in Wireshark.
 
 ## Scope
 
-This README includes same-subnet ARP/ICMP evidence, the different-subnet topology, a capture of ICMP requests and replies on the PC3-to-R1 link, and a separate capture showing gratuitous ARP announcements. The routed ping is capture-supported on the PC3-to-R1 link, but the screenshots do not verify every ARP step or the full packet flow on both router links.
+This README includes same-subnet ARP/ICMP evidence, the different-subnet topology, a capture of ICMP requests and replies on the PC3-to-R1 link, and a separate capture showing gratuitous ARP announcements. The captures show gateway ARP resolution and a successful ping to the gateway, as well as ICMP requests and replies between PC3 and PC4 visible on the PC3-to-R1 link. They do not verify every ARP step or the full packet flow on both router links.
 
 ## Packet-level walkthrough
 
