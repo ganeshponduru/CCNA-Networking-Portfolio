@@ -33,6 +33,12 @@ I uploaded the screenshots from my lab to this folder. The images below show the
 
 ![Case Study 2 routed topology](./Screenshot%202026-10-18%20235903.png)
 
+**Additional screenshots uploaded on 19 October:**
+
+![Additional Day 5 lab screenshot 1](./Screenshot%202026-10-19%20005413.png)
+
+![Additional Day 5 lab screenshot 2](./Screenshot%202026-10-19%20005453.png)
+
 ## Topology and addressing
 
 | Device | IPv4 address | Subnet mask | MAC address shown in capture |
@@ -87,7 +93,7 @@ I captured traffic on the PC1-to-switch link in Wireshark.
 
 ## Scope
 
-This page documents the same-subnet case only. I will document the different-subnet/default-gateway case separately after I capture and verify that lab as well.
+This README includes evidence for both the same-subnet topology and the different-subnet topology, plus the additional screenshots uploaded on 19 October. The packet-level walkthrough explains the expected routed flow; details should be treated as capture-verified only where the relevant packet fields are visible in the screenshots.
 
 ## Packet-level walkthrough
 
