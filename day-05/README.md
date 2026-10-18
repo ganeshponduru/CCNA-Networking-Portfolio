@@ -59,3 +59,8 @@ I captured traffic on the PC1-to-switch link in Wireshark.
 ## Scope
 
 This page documents the same-subnet case only. I will document the different-subnet/default-gateway case separately after I capture and verify that lab as well.
+
+## Case Study 2 — Routing between different subnets
+
+- [Different-subnet routing lab](different-subnet-routing-lab.md)
+- [Verification checklist for routed ping](routing-lab-checklist.md)
