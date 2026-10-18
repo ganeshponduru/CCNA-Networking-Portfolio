@@ -33,11 +33,13 @@ I uploaded the screenshots from my lab to this folder. The images below show the
 
 ![Case Study 2 routed topology](./Screenshot%202026-10-18%20235903.png)
 
-**Additional screenshots uploaded on 19 October:**
+**Additional capture 1 — Gratuitous ARP announcements:** This capture shows repeated broadcast ARP packets labelled as gratuitous ARP for several IPv4 addresses. These packets are distinct from the gateway ARP exchange used to forward traffic to a remote subnet. The screenshot alone does not establish an IP conflict or explain why each announcement occurred.
 
-![Additional Day 5 lab screenshot 1](./Screenshot%202026-10-19%20005413.png)
+![Gratuitous ARP announcements](./Screenshot%202026-10-19%20005413.png)
 
-![Additional Day 5 lab screenshot 2](./Screenshot%202026-10-19%20005453.png)
+**Additional capture 2 — ICMP across different subnets:** Wireshark is capturing on the PC3-to-R1 G1/0 link. The packet list shows Echo Requests from `192.168.1.1` to `192.168.20.1` and Echo Replies in the reverse direction. This supports successful routed ping traffic on the captured link. The displayed list does not show the complete ARP exchange or every packet on the destination-side router link.
+
+![ICMP traffic on the PC3-to-R1 link](./Screenshot%202026-10-19%20005453.png)
 
 ## Topology and addressing
 
@@ -93,7 +95,7 @@ I captured traffic on the PC1-to-switch link in Wireshark.
 
 ## Scope
 
-This README includes evidence for both the same-subnet topology and the different-subnet topology, plus the additional screenshots uploaded on 19 October. The packet-level walkthrough explains the expected routed flow; details should be treated as capture-verified only where the relevant packet fields are visible in the screenshots.
+This README includes same-subnet ARP/ICMP evidence, the different-subnet topology, a capture of ICMP requests and replies on the PC3-to-R1 link, and a separate capture showing gratuitous ARP announcements. The routed ping is capture-supported on the PC3-to-R1 link, but the screenshots do not verify every ARP step or the full packet flow on both router links.
 
 ## Packet-level walkthrough
 
