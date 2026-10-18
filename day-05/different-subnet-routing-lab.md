@@ -35,7 +35,7 @@ The two IPv4 networks are:
 - I configured the default gateways on the VPCS hosts.
 - I was then able to ping PC4 from PC3.
 
-The screenshot I supplied shows the intended topology and gateway addressing. I have not yet added a packet-capture screenshot or terminal output for this second case, so those details are not claimed as captured evidence here.
+My Wireshark screenshot captured on the PC3-to-R1 G1/0 link shows ICMP Echo Requests from `192.168.1.1` to `192.168.20.1` and Echo Replies from `192.168.20.1` to `192.168.1.1`. This is packet-list evidence that the ping exchange crossed the subnet boundary and that the return traffic was visible on this link. The screenshot does not show the complete gateway ARP exchange or the R1-to-PC4 link, so I do not claim those individual steps were captured.
 
 ## Proxy ARP clarification
 
