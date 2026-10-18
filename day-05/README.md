@@ -60,6 +60,10 @@ I captured traffic on the PC1-to-switch link in Wireshark.
 
 This page documents the same-subnet case only. I will document the different-subnet/default-gateway case separately after I capture and verify that lab as well.
 
+## Packet-level walkthrough
+
+- [Full packet-level walkthrough: ARP, ICMP, and routing](packet-level-walkthrough.md)
+
 ## Case Study 2 — Routing between different subnets
 
 - [Different-subnet routing lab](different-subnet-routing-lab.md)
