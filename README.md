@@ -10,6 +10,7 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 | Day 02 | Circuit and packet switching, traffic types, network domains, topologies, IPv4 basics, binary conversion | Notes added; hands-on evidence not yet added |
 | Day 03 | IPv4 subnetting, network IDs, subnet masks, and /26 calculations | Notes and worked examples added; hands-on evidence not yet added |
 | Day 04 | Network and broadcast address calculations, next subnet ranges, and subnet design | Notes and worked examples added; hands-on evidence not yet added |
+| Day 05 | Ping, ICMP, ARP, and Wireshark packet inspection | Same-subnet lab completed; screenshots and observations documented |
 
 ## Day 01 — How data moves across a network
 
@@ -58,3 +59,10 @@ I keep theory, calculations, and hands-on work separate. I only mark a lab as co
 ## My goal
 
 I want to explain these concepts in my own words, solve addressing problems without memorising answers, and gradually add practical configuration and troubleshooting evidence as I build my skills.
+
+## Day 05 — Ping, ARP, and ICMP
+
+- [Day 5 lab overview and evidence](day-05/README.md)
+- [ARP fundamentals](day-05/arp-fundamentals.md)
+- [ICMP and ping](day-05/icmp-and-ping.md)
+- [Revision questions](day-05/practice-questions.md)
