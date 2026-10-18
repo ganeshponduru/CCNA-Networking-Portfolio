@@ -1,5 +1,6 @@
 # Network Topologies
 
+These notes help me compare common physical and logical network layouts, including their trade-offs.
 Topology describes how devices and links are arranged. Physical topology describes the actual cabling/layout; logical topology describes communication behavior.
 
 | Topology | Structure | Advantages | Limitations / notes |
