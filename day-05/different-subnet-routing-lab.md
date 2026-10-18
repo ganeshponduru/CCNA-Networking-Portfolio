@@ -35,7 +35,9 @@ The two IPv4 networks are:
 - I configured the default gateways on the VPCS hosts.
 - I was then able to ping PC4 from PC3.
 
-My Wireshark screenshot captured on the PC3-to-R1 G1/0 link shows ICMP Echo Requests from `192.168.1.1` to `192.168.20.1` and Echo Replies from `192.168.20.1` to `192.168.1.1`. This is packet-list evidence that the ping exchange crossed the subnet boundary and that the return traffic was visible on this link. The screenshot does not show the complete gateway ARP exchange or the R1-to-PC4 link, so I do not claim those individual steps were captured.
+My Wireshark screenshot captured on the PC3-to-R1 G1/0 link shows ICMP Echo Requests from `192.168.1.1` to `192.168.20.1` and Echo Replies from `192.168.20.1` to `192.168.1.1`. This is packet-list evidence that the ping exchange crossed the subnet boundary and that the return traffic was visible on this link.
+
+I also captured PC3 resolving its default gateway: the ARP request asks who has `192.168.1.100`, and the reply maps that IP to MAC `ca:01:39:88:00:1c`. The following ICMP packets in that screenshot are between PC3 (`192.168.1.1`) and the gateway (`192.168.1.100`), so they verify gateway reachability rather than remote-PC reachability. The screenshots do not show the complete packet flow on the R1-to-PC4 link.
 
 ## Proxy ARP clarification
 
