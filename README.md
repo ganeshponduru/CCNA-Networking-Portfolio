@@ -1,53 +1,51 @@
 # CCNA Networking Portfolio
 
-A structured portfolio documenting CCNA learning, networking concepts, lab practice, packet analysis, and troubleshooting.
+I'm building this repository as I learn networking and prepare for CCNA and entry-level network support/TAC roles. I use it to keep my notes, worked examples, revision questions, and evidence from labs I actually complete.
 
 ## Learning roadmap
 
-| Day | Topic | Status |
+| Day | What I studied | Status |
 |---|---|---|
-| Day 01 | Data flow, OSI/TCP-IP models, encapsulation, TCP vs UDP, protocol ports, packet-header basics | Notes published; Wireshark exercise planned |
-| Day 02 | Switching, traffic types, domains, topologies, IPv4, private ranges, binary conversion | Notes published; practical lab evidence not yet added |
-| Day 03 | Subnetting, network IDs, subnet masks, /26 worked example, correction log | Notes published; practical lab evidence not yet added |
+| Day 01 | How data moves, OSI and TCP/IP models, encapsulation, TCP/UDP, common ports, packet headers | Notes added; Wireshark practice still to be completed and documented |
+| Day 02 | Circuit and packet switching, traffic types, network domains, topologies, IPv4 basics, binary conversion | Notes added; hands-on evidence not yet added |
+| Day 03 | IPv4 subnetting, network IDs, subnet masks, and /26 calculations | Notes and worked examples added; hands-on evidence not yet added |
 
-## Day 01 — Data Flow, OSI & TCP/IP
+## Day 01 — How data moves across a network
 
-- [OSI vs TCP/IP](notes/osi-vs-tcp-ip.md)
+- [OSI and TCP/IP models](notes/osi-vs-tcp-ip.md)
 - [Encapsulation and decapsulation](notes/encapsulation-decapsulation.md)
 - [TCP vs UDP](notes/tcp-vs-udp.md)
 - [Common protocol ports](notes/common-protocol-ports.md)
-- [Packet-header overview](notes/packet-header-overview.md)
-- [Interview questions](notes/interview-questions.md)
-- [Packet-analysis exercise template](packet-analysis/README.md)
-- [References and attribution](references.md)
+- [Understanding packet headers](notes/packet-header-overview.md)
+- [Revision questions](notes/interview-questions.md)
+- [Wireshark practice plan](packet-analysis/README.md)
+- [References I used](references.md)
 - [OSI/TCP-IP diagram](diagrams/osi-tcpip-mapping.svg)
 - [Encapsulation diagram](diagrams/encapsulation-flow.svg)
 
-## Day 02 — Switching, Traffic Types & IPv4 Fundamentals
+## Day 02 — Switching and IPv4 basics
 
-- [Day 2 overview](day-02/README.md)
-- [Circuit vs packet switching](day-02/switching.md)
-- [Unicast, broadcast and multicast](day-02/traffic-types.md)
+- [Day 2 notes](day-02/README.md)
+- [Circuit switching and packet switching](day-02/switching.md)
+- [Unicast, broadcast, and multicast](day-02/traffic-types.md)
 - [Collision and broadcast domains](day-02/domains.md)
 - [Network topologies](day-02/topologies.md)
 - [IPv4 addressing and private ranges](day-02/ipv4-addressing.md)
-- [Binary/decimal conversion](day-02/binary-conversion.md)
-- [Interview questions](day-02/interview-questions.md)
+- [Binary and decimal conversion](day-02/binary-conversion.md)
+- [Revision questions](day-02/interview-questions.md)
 
-## Day 03 — IPv4 Subnetting
+## Day 03 — Subnetting
 
-- [Day 3 overview](day-03/README.md)
-- [Subnetting fundamentals and formulas](day-03/subnetting-fundamentals.md)
+- [Day 3 notes](day-03/README.md)
+- [Subnetting fundamentals](day-03/subnetting-fundamentals.md)
 - [Worked example: four /26 subnets](day-03/worked-example.md)
-- [Correction log](day-03/correction-log.md)
-- [Review and interview questions](day-03/interview-questions.md)
+- [Things I corrected or clarified](day-03/correction-log.md)
+- [Revision questions](day-03/interview-questions.md)
 
-## Practical-work integrity
+## How I document my progress
 
-These are study notes, not a claim that every listed activity has been performed. The Wireshark section is a template until I add my own capture, observations, and screenshots. Practical work will be labelled as concept learned, lab performed, or troubleshooting case study, with evidence for practical claims.
+I keep theory, calculations, and hands-on work separate. I only mark a lab as completed after I perform it and record what I configured and observed. Planned exercises are labelled as planned, not presented as completed.
 
-## Learning source
+## My goal
 
-Day 1 lesson: “How Data Travels, Network Reference Models & Packet Header Analysis,” and Day 2 and Day 3 CCNA lessons, taught by E. Ramesh Goud, TungaBadra Networks. Day 2 notes are in [day-02](day-02/README.md), and Day 3 notes are in [day-03](day-03/README.md). See references.md for technical references.
-
-Notes are an original study summary, not a reproduction of the instructor's handout or transcript.
+I want to explain these concepts in my own words, solve addressing problems without memorising answers, and gradually add practical configuration and troubleshooting evidence as I build my skills.
