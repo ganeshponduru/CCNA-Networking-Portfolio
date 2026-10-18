@@ -17,6 +17,12 @@ Both addresses belong to `192.168.1.0/24`. PC1 can send directly to PC2 on the l
 
 In my Wireshark list, the first packet says: `Who has 192.168.1.2? Tell 192.168.1.1`.
 
+![Same-subnet ping and packet list](./Screenshot%202026-10-18%20233353.png)
+
+The topology I used is shown here:
+
+![PC1 and PC2 connected through Switch1](./Screenshot%202026-10-18%20232631.png)
+
 | Field | What the capture shows | Meaning |
 |---|---|---|
 | Ethernet destination | `ff:ff:ff:ff:ff:ff` | Broadcast to devices in the local Layer 2 broadcast domain |
@@ -26,6 +32,8 @@ In my Wireshark list, the first packet says: `Who has 192.168.1.2? Tell 192.168.
 | Sender protocol address | `192.168.1.1` | PC1's IPv4 address |
 | Target protocol address | `192.168.1.2` | The IPv4 address PC1 wants to reach |
 | Target hardware address | `ff:ff:ff:ff:ff:ff` in the displayed decode | The request is sent in a broadcast Ethernet frame; the target MAC is not yet known |
+
+![Expanded ARP request in Wireshark](./Screenshot%202026-10-18%20233444.png)
 
 ARP is carried directly inside the Ethernet frame, not inside an IPv4 packet. That is why this packet has an ARP decode rather than an IPv4 header.
 
@@ -64,6 +72,8 @@ The Ethernet frame delivers the packet across the local link. The IPv4 addresses
 
 In the supplied expanded IPv4 decode, Wireshark shows IPv4, a 20-byte IPv4 header, TTL 64, source `192.168.1.1`, destination `192.168.1.2`, and `Protocol: ICMP (1)`. The capture's packet list shows a 98-byte frame for this ICMP message. Frame sizes can vary with the utility, payload, and capture environment.
 
+![Expanded IPv4 header for the ICMP packet](./Screenshot%202026-10-18%20233707.png)
+
 ### Packet 4 — ICMP Echo Reply
 
 PC2 responds with an ICMP Echo Reply:
@@ -90,7 +100,13 @@ If the sender already has a valid ARP cache entry, it may send ICMP without firs
 | R1 G2/0 | `192.168.20.200/24` | PC4's default gateway |
 | PC4 | `192.168.20.1/24` | Destination host |
 
-PC3 and PC4 are in different subnets. I configured the router interfaces and default gateways, and I was able to ping PC4 from PC3. My capture on the PC3-to-R1 G1/0 link shows ICMP Echo Requests from PC3 to PC4 and Echo Replies in the reverse direction. The full ARP and forwarding sequence below explains the expected flow; the screenshots do not expose every step or both router links.
+PC3 and PC4 are in different subnets. I configured the router interfaces and default gateways, and I was able to ping PC4 from PC3. The topology is shown below.
+
+![PC3 and PC4 connected through R1](./Screenshot%202026-10-18%20235903.png)
+
+My capture on the PC3-to-R1 G1/0 link shows ICMP Echo Requests from PC3 to PC4 and Echo Replies in the reverse direction. The full ARP and forwarding sequence below explains the expected flow; the screenshots do not expose every step or both router links.
+
+![ICMP requests and replies between PC3 and PC4](./Screenshot%202026-10-19%20005453.png)
 
 ### Step 1 — PC3 determines the destination is remote
 
@@ -105,6 +121,12 @@ If the gateway mapping is not cached, PC3 broadcasts an ARP request for `192.168
 - ARP target IP: `192.168.1.100`.
 
 PC3 does **not** ARP directly for PC4's MAC address, because PC4 is on a remote subnet. The router's G1/0 interface responds with its own MAC address.
+
+My gateway capture shows the ARP request for `192.168.1.100`, the reply mapping it to `ca:01:39:88:00:1c`, and subsequent pings between PC3 and the gateway:
+
+![Gateway ARP reply and ICMP ping](./Screenshot%202026-10-19%20010125.png)
+
+This capture verifies gateway resolution and gateway reachability. The Echo packets in this particular screenshot target `192.168.1.100`, not PC4.
 
 ### Step 3 — PC3 sends the packet to R1
 
@@ -146,6 +168,14 @@ Resolving a default gateway's MAC address is ordinary ARP, not Proxy ARP. Proxy 
 | Ping fails | Do not immediately conclude the host is down; ICMP can be filtered or rate-limited |
 
 A missing ARP entry alone does not prove a physical-layer fault. I need to use multiple observations to narrow down the cause.
+
+## Additional observation — Gratuitous ARP
+
+A separate capture shows repeated broadcast packets labelled as gratuitous ARP for `192.168.1.1`, `192.168.1.3`, and `192.168.10.1`.
+
+![Gratuitous ARP announcements in Wireshark](./Screenshot%202026-10-19%20005413.png)
+
+These are distinct from the normal ARP request PC3 uses to resolve its gateway. The screenshot alone does not prove an IP conflict or establish why each announcement occurred.
 
 ## What I have and have not captured
 
