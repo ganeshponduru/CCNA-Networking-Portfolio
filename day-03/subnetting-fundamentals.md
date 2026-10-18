@@ -1,132 +1,96 @@
 # Subnetting Fundamentals
 
-## 1. Starting point from the lesson
+## 1. Start with an IPv4 network
 
-The instructor first revisits IPv4 address ranges and uses `192.168.0.0` as the example private address block. He then walks through the addresses in a /24 network:
+I use 192.168.0.0/24 as a simple example. The /24 prefix means the first 24 bits identify the network and the remaining 8 bits are available for host addresses.
 
-- Network: `192.168.0.0/24`
-- First traditionally usable host: `192.168.0.1`
-- Last traditionally usable host: `192.168.0.254`
-- Broadcast address: `192.168.0.255`
+- Network address: 192.168.0.0
+- First conventional usable host: 192.168.0.1
+- Last conventional usable host: 192.168.0.254
+- Broadcast address: 192.168.0.255
+- Total addresses: 256
+- Conventional usable host addresses: 254
 
-A /24 contains 256 total IPv4 addresses because the last octet has 8 host bits: (2^8 = 256). In a conventional IPv4 subnet, the network address and directed broadcast address are not assigned to ordinary hosts, leaving 254 usable host addresses.
+The last octet has 8 bits, so there are 2^8 = 256 possible combinations. In a conventional subnet, the all-zero host portion identifies the network and the all-one host portion is the broadcast address.
 
-The next /24 network is `192.168.1.0/24`, then `192.168.2.0/24`, and so on. This progression is useful for understanding the instructor's example, but the block `192.168.0.0/16` is the private range; it contains 256 individual /24-sized networks if divided that way.
+## 2. Private IPv4 ranges
 
-## 2. Network address and broadcast address
+The RFC 1918 private IPv4 blocks are:
 
-- **Network address / network ID:** identifies the subnet itself. For `192.168.1.0/24`, the network address is `192.168.1.0`.
-- **Broadcast address:** the last address in a conventional IPv4 subnet, used to reach all hosts on that subnet. For `192.168.1.0/24`, it is `192.168.1.255`.
-- **Usable host addresses:** in a conventional /24, these are `192.168.1.1` through `192.168.1.254`.
+| Private block | Prefix | Address range |
+|---|---|---|
+| 10.0.0.0–10.255.255.255 | /8 | 10.0.0.0/8 |
+| 172.16.0.0–172.31.255.255 | /12 | 172.16.0.0/12 |
+| 192.168.0.0–192.168.255.255 | /16 | 192.168.0.0/16 |
 
-These familiar rules have exceptions for special prefix lengths, such as /31 point-to-point links and /32 host routes. For ordinary CCNA subnetting exercises, the network/broadcast/usable-host model is commonly used unless the question says otherwise.
+The 192.168.0.0/16 private block contains 256 /24-sized networks. A specific /24, such as 192.168.1.0/24, is only one part of that block.
 
-## 3. How a host decides whether a destination is local
+## 3. How I check if a destination is local
 
-The instructor's key question is: how does PC1 know whether a destination IP belongs to its own subnet if it cannot “look” at the topology?
+A host uses its configured IP address and subnet mask to determine its local network. It applies the mask to its own address and to the destination address, then compares the network results.
 
-A host uses its configured IP address and subnet mask (or prefix length) to calculate the local network. In the usual IPv4 model:
+Example:
 
-1. The host performs a bitwise AND between its own IP address and its subnet mask.
-2. It performs a bitwise AND between the destination IP address and the **host's own subnet mask**.
-3. It compares the two results.
+- My PC: 192.168.1.1/24
+- Destination: 192.168.20.1
+- My local network: 192.168.1.0/24
+- Destination network when checked with my /24 mask: 192.168.20.0/24
 
-If the results match, the destination is considered on-link, and the host tries to deliver directly on the local Layer 2 network (using ARP to resolve the destination IPv4 address to a MAC address on Ethernet). If the results differ, the host sends the packet to its configured next-hop router/default gateway, assuming a suitable route exists.
-
-### Worked comparison
-
-Assume:
-- PC1: `192.168.1.1/24`
-- Destination PC2: `192.168.20.1`
-- PC1 subnet mask: `255.255.255.0`
-
-PC1's network calculation:
-
-`192.168.1.1 AND 255.255.255.0 = 192.168.1.0`
-
-Destination calculation using PC1's mask:
-
-`192.168.20.1 AND 255.255.255.0 = 192.168.20.0`
-
-The results differ, so PC1 treats PC2 as remote and sends the packet to its default gateway. A router or another Layer 3 path is needed for communication between these subnets. A switch alone does not route between different IPv4 subnets.
-
-**Important:** A ping may still fail for other reasons even when two hosts are in the same subnet, including VLAN separation, incorrect addressing, firewall rules, or a link problem. Being in the same subnet is not a guarantee that ping will succeed.
+The network results differ, so the destination is remote from my PC's point of view. My PC checks its routing table and normally sends the packet to a next hop, commonly the default gateway. The sending PC does not learn the destination device's subnet mask from its IP address alone.
 
 ## 4. What subnetting means
 
-Subnetting divides an existing address block into smaller IP subnets by extending the network prefix—usually by borrowing bits from the host portion. This lets a network administrator allocate address space to separate teams, VLANs, links, or other network segments according to requirements.
+Subnetting divides a larger address block into smaller networks by extending the network prefix and borrowing bits from the host portion. It helps separate groups, control broadcast domains when combined with Layer 2/Layer 3 design, and allocate address space more appropriately.
 
-A clear interview definition:
+If I need at least x equal-sized subnets, I can calculate borrowed bits with:
 
-> Subnetting is the process of dividing an IP address block into smaller subnets by increasing the network prefix length, so address space can be allocated more appropriately and networks can be organized into separate Layer 3 segments.
+2^n >= x
 
-The instructor emphasizes efficient address use. That is a major benefit, but subnetting also helps with network segmentation, broadcast-domain design, routing, and administration.
+Here, n is the number of bits borrowed from the host portion. If I need at least h conventional usable host addresses in each subnet, I need enough host bits b to satisfy:
 
-## 5. Formula for the number of subnets
+2^b - 2 >= h
 
-The lesson uses:
+I should not mix up the subnet-count calculation with the host-count calculation.
 
-`2^n >= x`
+## 5. Example: /24 to /26
 
-Where:
-- `n` = number of bits borrowed from the host portion
-- `x` = number of subnets required
+Starting prefix: /24. Borrowing two bits gives /26. The subnet mask becomes 255.255.255.192.
 
-For three required subnets:
-- Borrow 0 bits: `2^0 = 1` subnet — not enough
-- Borrow 1 bit: `2^1 = 2` subnets — not enough
-- Borrow 2 bits: `2^2 = 4` subnets — enough
+- Borrowed bits: 2
+- Remaining host bits: 6
+- Number of equal-sized subnets created from the /24: 2^2 = 4
+- Total addresses per /26: 2^6 = 64
+- Conventional usable hosts per /26: 64 - 2 = 62
 
-Therefore, borrow 2 bits. The number of resulting equal-size subnets is 4, even though the example only needs 3 immediately.
+The block size in the last octet is 256 - 192 = 64, so the subnet network addresses start at .0, .64, .128, and .192.
 
-## 6. Formula for addresses per subnet
+## 6. Common prefix and mask values
 
-If `h` host bits remain:
+| Prefix | Subnet mask | Total addresses | Conventional usable hosts |
+|---|---|---:|---:|
+| /24 | 255.255.255.0 | 256 | 254 |
+| /25 | 255.255.255.128 | 128 | 126 |
+| /26 | 255.255.255.192 | 64 | 62 |
+| /27 | 255.255.255.224 | 32 | 30 |
+| /28 | 255.255.255.240 | 16 | 14 |
+| /29 | 255.255.255.248 | 8 | 6 |
+| /30 | 255.255.255.252 | 4 | 2 |
 
-`Total addresses per subnet = 2^h`
+These usable-host counts apply to conventional IPv4 subnets; special-purpose prefixes such as /31 point-to-point links use different rules.
 
-For ordinary IPv4 subnets, the usual usable-host calculation is:
+## 7. Matching subnet sizes to host requirements
 
-`Usable hosts = 2^h - 2`
+The example groups have 35, 40, and 30 devices. A /26 supports up to 62 conventional usable hosts, so it can fit each group if the device count is the only requirement and the addressing plan allows it.
 
-In the example, the starting prefix is /24, leaving 8 host bits. Borrowing 2 gives /26, leaving 6 host bits:
-- Total addresses per /26: `2^6 = 64`
-- Traditionally usable host addresses: `64 - 2 = 62`
+A /26 is too small for 70 hosts. A /25 provides 126 conventional usable host addresses. For 300 hosts, a /23 provides 510 conventional usable host addresses, though the correct allocation depends on the available address space and wider network design.
 
-## 7. Prefix and mask changes
+## What I need to remember
 
-Starting from a /24:
-- Borrow 1 bit → /25 → `255.255.255.128`
-- Borrow 2 bits → /26 → `255.255.255.192`
-- Borrow 3 bits → /27 → `255.255.255.224`
-- Borrow 4 bits → /28 → `255.255.255.240`
-- Borrow 5 bits → /29 → `255.255.255.248`
-- Borrow 6 bits → /30 → `255.255.255.252`
+1. Identify the given prefix and subnet mask.
+2. Work out how many subnet bits or host bits are required.
+3. Calculate the block size and list the network boundaries.
+4. Identify each subnet's network, usable range, and broadcast address.
+5. Check whether the question asks for total addresses or usable hosts.
+6. Use CIDR rather than relying on classful defaults for modern network planning.
 
-These are prefix lengths, not separate “class” masks. The same CIDR approach works with any suitable starting prefix.
-
-## 8. Planning around host requirements
-
-The instructor's example has departments with 35, 40, and 30 devices. A /26 provides 62 usable host addresses, so it fits each department individually. A fourth /26 subnet can be kept for future use.
-
-If a team later needs 70 hosts, a /26 is too small. The solution is to redesign the allocation with a larger subnet (for example, a /25 has 126 traditionally usable host addresses), while checking the surrounding address plan and avoiding overlaps. It is not automatically necessary to “move to Class B”; modern subnetting uses CIDR and chooses a suitable prefix based on host count and design requirements.
-
-## 9. Classful ranges: context, not modern design rules
-
-The lesson reviews the traditional classful ranges:
-- Class A: first octet 1–126 for ordinary unicast networks in the old classful model
-- Class B: first octet 128–191
-- Class C: first octet 192–223
-- 127.0.0.0/8 is loopback; 0.0.0.0 has special meaning; 224.0.0.0/4 is multicast
-
-The transcript's spoken range “Class C is 191 to 230” is a speech/transcription error. The conventional Class C first-octet range is 192–223. In modern networking, use CIDR prefixes such as /24 and /26 instead of relying on class defaults.
-
-## Quick revision
-
-- /24 = 256 total addresses, conventionally 254 usable hosts.
-- A network address identifies a subnet; a broadcast address targets all hosts on that subnet.
-- A host uses its own IP address and subnet mask to decide whether a destination is on-link.
-- Different subnets generally need Layer 3 routing to communicate.
-- `2^n >= required subnets` finds how many bits to borrow.
-- `2^h` gives total addresses in a subnet; conventionally subtract 2 for usable hosts.
-- /26 = 64 total addresses, 62 conventionally usable hosts.
+These are worked study notes. I will document practical configuration separately after I complete and verify a lab.
