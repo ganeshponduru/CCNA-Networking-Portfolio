@@ -1,5 +1,6 @@
 # Collision Domains and Broadcast Domains
 
+I keep collision domains and broadcast domains separate in my notes because they describe different things and are affected by devices differently.
 ## Collision domain
 A collision domain is a shared Ethernet segment where simultaneous transmissions can collide in half-duplex operation.
 
