@@ -4,6 +4,35 @@
 
 I built a small topology with two VPCS hosts connected to a switch and tested connectivity between them. I used Wireshark to inspect the packets generated when PC1 pinged PC2.
 
+
+## Screenshots and lab evidence
+
+I uploaded the screenshots from my lab to this folder. The images below show the topology, ping results, and selected Wireshark packet details.
+
+### Case Study 1 — Same subnet
+
+**Topology:** PC1 and PC2 are connected through Switch1 and use addresses in `192.168.1.0/24`.
+
+![Case Study 1 topology](./Screenshot%202026-10-18%20232631.png)
+
+**Ping results and packet list:** The terminal shows five replies from PC2. The Wireshark list shows the ARP exchange followed by ICMP Echo requests and replies.
+
+![Ping results and Wireshark packet list](./Screenshot%202026-10-18%20233353.png)
+
+**ARP request details:** The request asks for `192.168.1.2` and is carried in a broadcast Ethernet frame.
+
+![ARP request details](./Screenshot%202026-10-18%20233444.png)
+
+**IPv4 header:** The selected packet shows source `192.168.1.1`, destination `192.168.1.2`, and protocol `ICMP (1)`.
+
+![IPv4 and ICMP packet details](./Screenshot%202026-10-18%20233707.png)
+
+### Case Study 2 — Different subnets
+
+**Topology:** PC3 and PC4 use different /24 networks and reach each other through R1. The image documents the topology and configured gateway addresses; the routed packet flow is explained separately in the packet-level walkthrough.
+
+![Case Study 2 routed topology](./Screenshot%202026-10-18%20235903.png)
+
 ## Topology and addressing
 
 | Device | IPv4 address | Subnet mask | MAC address shown in capture |
