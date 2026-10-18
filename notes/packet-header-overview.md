@@ -1,5 +1,6 @@
 # Packet-Header Overview
 
+When I inspect a packet capture, these are the fields I want to identify and understand rather than memorising packet names alone.
 Packet analyzers such as Wireshark display captured frames and decode protocol fields. They show captured data and decoded fields—not a direct view of every physical signal or bit transmitted on the medium.
 
 ## What to inspect
