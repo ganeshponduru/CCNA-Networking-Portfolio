@@ -1,5 +1,6 @@
 # Day 1 — Interview and Revision Questions
 
+I use these questions to check whether I can explain the basic networking concepts in my own words.
 1. **What is the purpose of a reference model?** It structures communication functions and helps organize troubleshooting.
 2. **How many layers are in OSI?** Seven: Physical, Data Link, Network, Transport, Session, Presentation, Application.
 3. **What are the four common TCP/IP layers?** Application, Transport, Internet, Network Access/Link.
