@@ -22,7 +22,7 @@ Today I studied how a computer resolves a domain name, how a DNS query appears i
 
 ## Practice status
 
-I reviewed Wireshark screenshots showing a DNS query/response, TCP flags and payload, and an SSH connection sequence. I documented only the fields visible in those screenshots in the [case study](dns-tcp-wireshark-case-study.md). I will add the actual image files to the repository and embed them in the case study once they are available in the repo.
+I reviewed Wireshark screenshots showing a DNS query/response, TCP flags and payload, and an SSH connection sequence. I documented only the fields visible in those screenshots in the [case study](dns-tcp-wireshark-case-study.md). The six uploaded screenshots are embedded in the [case study](dns-tcp-wireshark-case-study.md). The write-up separates visible packet evidence from conclusions that the screenshots cannot establish.
 
 ## Points I clarified while studying
 
