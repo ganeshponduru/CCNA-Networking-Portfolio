@@ -12,6 +12,7 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 | Day 04 | Network and broadcast address calculations, next subnet ranges, and subnet design | Notes and worked examples added; hands-on evidence not yet added |
 | Day 05 | Ping, ICMP, ARP, and Wireshark packet inspection | Same-subnet lab completed; screenshots and observations documented |
 | Day 06 | DNS resolution, DNS records, Wireshark DNS analysis, TCP three-way handshake, and TCP flags | Notes and screenshot-based DNS/TCP/SSH packet observations documented; further independent captures can be added as practice |
+| Day 07 | Networking hardware, fiber optics, transceivers, chassis modules, physical-link troubleshooting, and console access | Study notes and troubleshooting checklist added; hardware and console labs not claimed as completed |
 
 ## Day 01 — How data moves across a network
 
@@ -76,3 +77,14 @@ I want to explain these concepts in my own words, solve addressing problems with
 - [TCP three-way handshake and flags](day-06/tcp-handshake-and-flags.md)
 - [Packet-analysis checklist](day-06/packet-analysis-checklist.md)
 - [Revision questions](day-06/practice-questions.md)
+
+
+## Day 07 — Networking hardware and physical connectivity
+
+- [Day 7 overview](day-07/README.md)
+- [Networking hardware components](day-07/hardware-components.md)
+- [Fiber optics, transceivers, and connectors](day-07/fiber-optics-and-transceivers.md)
+- [Chassis, line cards, and redundancy](day-07/chassis-and-modular-hardware.md)
+- [Physical-link troubleshooting checklist](day-07/physical-link-troubleshooting.md)
+- [Console access basics](day-07/console-access-basics.md)
+- [Revision questions](day-07/practice-questions.md)
