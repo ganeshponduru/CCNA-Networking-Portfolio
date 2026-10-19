@@ -7,6 +7,7 @@ Today I studied how a computer resolves a domain name, how a DNS query appears i
 - [DNS basics and resolution flow](dns-resolution.md)
 - [TCP three-way handshake and control flags](tcp-handshake-and-flags.md)
 - [Packet-analysis and troubleshooting checklist](packet-analysis-checklist.md)
+- [DNS and TCP Wireshark case study](dns-tcp-wireshark-case-study.md)
 - [Revision questions](practice-questions.md)
 
 ## My key takeaways
@@ -21,7 +22,7 @@ Today I studied how a computer resolves a domain name, how a DNS query appears i
 
 ## Practice status
 
-These notes are based on the lesson transcript and my study. I will mark a Wireshark exercise as completed only after I run my own capture and save my own evidence. The live demonstration described in the lesson is not being presented here as my personal capture.
+I reviewed Wireshark screenshots showing a DNS query/response, TCP flags and payload, and an SSH connection sequence. I documented only the fields visible in those screenshots in the [case study](dns-tcp-wireshark-case-study.md). I will add the actual image files to the repository and embed them in the case study once they are available in the repo.
 
 ## Points I clarified while studying
 
