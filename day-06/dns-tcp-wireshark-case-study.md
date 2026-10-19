@@ -93,4 +93,18 @@ ip.addr == 192.168.1.1 && ip.addr == 192.168.1.2
 
 ## Evidence status
 
-The screenshots supplied for this case study show the DNS query and response fields, TCP flag details, a TCP segment with payload, and an SSH handshake in a lab capture. If I add these images to the repository, I should embed them here with relative paths so that the evidence remains visible to anyone reviewing the portfolio.
+The screenshots below are the evidence files uploaded to this folder. I have kept their original filenames and included them here so they render directly in the case study.
+
+### Uploaded Wireshark screenshots
+
+![Wireshark screenshot 1](Screenshot%202026-09-09%20085816.png)
+
+![Wireshark screenshot 2](Screenshot%202026-09-09%20090300.png)
+
+![Wireshark screenshot 3](Screenshot%202026-09-09%20120929.png)
+
+![Wireshark screenshot 4](Screenshot%202026-09-09%20121037.png)
+
+![Wireshark screenshot 5](Screenshot%202026-09-09%20121125.png)
+
+![Wireshark screenshot 6](Screenshot%202026-09-10%20111315.png)
