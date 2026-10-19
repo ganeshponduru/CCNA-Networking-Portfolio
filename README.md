@@ -11,6 +11,7 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 | Day 03 | IPv4 subnetting, network IDs, subnet masks, and /26 calculations | Notes and worked examples added; hands-on evidence not yet added |
 | Day 04 | Network and broadcast address calculations, next subnet ranges, and subnet design | Notes and worked examples added; hands-on evidence not yet added |
 | Day 05 | Ping, ICMP, ARP, and Wireshark packet inspection | Same-subnet lab completed; screenshots and observations documented |
+| Day 06 | DNS resolution, DNS records, Wireshark DNS analysis, TCP three-way handshake, and TCP flags | Notes added; personal packet-capture exercises still need to be completed and documented |
 
 ## Day 01 — How data moves across a network
 
@@ -66,3 +67,12 @@ I want to explain these concepts in my own words, solve addressing problems with
 - [ARP fundamentals](day-05/arp-fundamentals.md)
 - [ICMP and ping](day-05/icmp-and-ping.md)
 - [Revision questions](day-05/practice-questions.md)
+
+
+## Day 06 — DNS and TCP
+
+- [Day 6 overview](day-06/README.md)
+- [DNS resolution and record types](day-06/dns-resolution.md)
+- [TCP three-way handshake and flags](day-06/tcp-handshake-and-flags.md)
+- [Packet-analysis checklist](day-06/packet-analysis-checklist.md)
+- [Revision questions](day-06/practice-questions.md)
