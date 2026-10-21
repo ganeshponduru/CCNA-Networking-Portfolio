@@ -1,6 +1,6 @@
 # Day 8 — TCP Handshake, SSH, Telnet, and Cisco CLI Basics
 
-These notes summarize the Day 8 online class transcript and the supplied SSH Configuration PDF. I reorganized the material, used placeholders instead of publishing example credentials, and clarified a few technical points.
+These are my notes from the Day 8 online class and the supplied SSH Configuration PDF.
 
 ## Notes
 
@@ -17,10 +17,6 @@ These notes summarize the Day 8 online class transcript and the supplied SSH Con
 - SSH remote management over TCP port 22 and Telnet over TCP port 23.
 - Basic Cisco IOS CLI modes, interface addressing, `no shutdown`, and verification commands.
 - The main steps for enabling SSH using a hostname, domain name, RSA keys, VTY lines, and local user authentication.
-
-## Practice status
-
-I studied these topics through online instruction and reviewed the provided configuration example. The instructor demonstrated a two-router configuration and packet captures, but I have **not** marked that demonstration as a lab I personally completed. I will add my own topology, configuration, command output, and packet evidence after I run the exercise myself.
 
 ## Important cautions
 
