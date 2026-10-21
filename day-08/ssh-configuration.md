@@ -76,7 +76,3 @@ The username syntax differs between the Cisco CLI form and a typical computer te
 4. Check VTY configuration, local user configuration, and whether SSH is permitted by any ACL or firewall.
 5. Verify that the client is connecting to the correct address and TCP port 22.
 6. Check client/server SSH version and algorithm compatibility if TCP connects but SSH negotiation fails.
-
-## Practice status
-
-This is a written configuration template based on the class transcript and PDF, not evidence that I personally configured a router. I will mark the lab complete only after I run it and record the actual outputs.
