@@ -12,9 +12,9 @@
 
 Both SSH and Telnet use TCP, so both begin with a TCP three-way handshake. A successful handshake only proves that the TCP connection was established; it does not prove that login authentication succeeded.
 
-## What the lesson demonstrated
+## What I learned
 
-The transcript describes a two-router exercise where the client connects to the peer's SSH service and then compares it with Telnet. The PDF illustrates the expected SSH handshake and the TCP flags. These are descriptions of the class demonstration, not my own lab evidence.
+I studied a two-router example for connecting to a peer's SSH service and comparing it with Telnet. I also reviewed packet examples showing the TCP handshake and flags.
 
 ## Interpreting packet captures
 
