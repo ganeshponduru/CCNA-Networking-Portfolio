@@ -13,6 +13,7 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 | Day 05 | Ping, ICMP, ARP, and Wireshark packet inspection | Same-subnet lab completed; screenshots and observations documented |
 | Day 06 | DNS resolution, DNS records, Wireshark DNS analysis, TCP three-way handshake, and TCP flags | Notes and screenshot-based DNS/TCP/SSH packet observations documented; further independent captures can be added as practice |
 | Day 07 | Networking hardware, fiber optics, transceivers, chassis modules, physical-link troubleshooting, and console access | Study notes and troubleshooting checklist added; hardware and console labs not claimed as completed |
+| Day 08 | TCP handshake and flags, SSH vs. Telnet, SSH configuration, and Cisco IOS CLI basics | Online-class notes and configuration reference added; the demonstrated router lab is not claimed as personally completed |
 
 ## Day 01 — How data moves across a network
 
@@ -53,6 +54,15 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 - [Finding the next subnet and planning subnets](day-04/next-subnet-and-subnet-design.md)
 - [Practice questions and answers](day-04/practice-questions.md)
 - [Points I clarified while studying](day-04/things-i-checked.md)
+
+## Day 08 — TCP, SSH, Telnet, and Cisco CLI
+
+- [Day 8 overview](day-08/README.md)
+- [TCP three-way handshake and flags](day-08/tcp-handshake-and-flags.md)
+- [SSH configuration on Cisco IOS](day-08/ssh-configuration.md)
+- [SSH vs. Telnet and packet observations](day-08/ssh-vs-telnet.md)
+- [Cisco CLI modes and interface basics](day-08/cisco-cli-basics.md)
+- [Revision questions](day-08/practice-questions.md)
 
 ## How I document my progress
 
