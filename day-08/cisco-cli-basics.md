@@ -40,7 +40,3 @@ The interface name depends on the device model and available interfaces. `no shu
 ## ARP and first-ping behavior
 
 On a directly connected IPv4 Ethernet subnet, a router may need to resolve the peer's MAC address with ARP before it can send the first ICMP Echo Request. This can contribute to an initial ping timeout in some circumstances, but it is not the only possible cause. Confirm with ARP and packet evidence rather than assuming every first-packet loss is due to ARP.
-
-## Practice status
-
-These are study notes from the online class and provided PDF. The transcript shows the instructor configuring two routers in a demonstration. I have not marked that demonstration as a lab I personally completed.
