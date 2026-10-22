@@ -17,16 +17,18 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 
 ## Day 01 — How data moves across a network
 
-- [OSI and TCP/IP models](notes/osi-vs-tcp-ip.md)
-- [Encapsulation and decapsulation](notes/encapsulation-decapsulation.md)
-- [TCP vs UDP](notes/tcp-vs-udp.md)
-- [Common protocol ports](notes/common-protocol-ports.md)
-- [Understanding packet headers](notes/packet-header-overview.md)
-- [Revision questions](notes/interview-questions.md)
-- [Wireshark practice plan](packet-analysis/README.md)
-- [References I used](references.md)
-- [OSI/TCP-IP diagram](diagrams/osi-tcpip-mapping.svg)
-- [Encapsulation diagram](diagrams/encapsulation-flow.svg)
+- [Day 1 overview](day-01/README.md)
+
+- [OSI and TCP/IP models](day-01/osi-vs-tcp-ip.md)
+- [Encapsulation and decapsulation](day-01/encapsulation-decapsulation.md)
+- [TCP vs UDP](day-01/tcp-vs-udp.md)
+- [Common protocol ports](day-01/common-protocol-ports.md)
+- [Understanding packet headers](day-01/packet-header-overview.md)
+- [Revision questions](day-01/interview-questions.md)
+- [Wireshark practice plan](day-01/packet-analysis/README.md)
+- [References I used](day-01/references.md)
+- [OSI/TCP-IP diagram](day-01/diagrams/osi-tcpip-mapping.svg)
+- [Encapsulation diagram](day-01/diagrams/encapsulation-flow.svg)
 
 ## Day 02 — Switching and IPv4 basics
 
