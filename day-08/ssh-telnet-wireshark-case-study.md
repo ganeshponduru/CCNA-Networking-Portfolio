@@ -4,8 +4,8 @@
 
 The topology contains two routers connected through GigabitEthernet1/0:
 
-- **R1 (HYD):** `192.168.10.1`
-- **R2 (BLR):** `192.168.10.2`
+- **R1 (HYD):** `192.168.1.1`
+- **R2 (BLR):** `192.168.1.2`
 
 ## SSH packet observations
 
