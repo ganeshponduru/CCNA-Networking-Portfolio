@@ -4,12 +4,16 @@
 
 The topology contains two routers connected through GigabitEthernet1/0:
 
-- **R1 (HYD):** `192.168.1.1`
-- **R2 (BLR):** `192.168.1.2`
+- **R1 (HYD):** `192.168.10.1`
+- **R2 (BLR):** `192.168.10.2`
+
+![Two-router topology](./Screenshot%202026-10-22%20123249.png)
 
 ## SSH packet observations
 
 The screenshots show a TCP connection from `192.168.1.2` to `192.168.1.1` using client source port `56822` and destination port `22`.
+
+![SSH TCP handshake packets](./Screenshot%202026-10-22%20121618.png)
 
 | Packet | Observed flags | What it shows |
 |---|---|---|
@@ -19,6 +23,8 @@ The screenshots show a TCP connection from `192.168.1.2` to `192.168.1.1` using 
 | Packet 19 | PSH, ACK | TCP carries data for the established connection. PSH does not mean “urgent data.” |
 | Packet 128 | SSHv2 | Wireshark identifies SSH protocol data; the displayed SSH payload is encrypted. |
 
+![SSH data and TCP flags](./Screenshot%202026-10-22%20121735.png)
+
 The TCP handshake is only the start of the SSH connection. SSH protocol negotiation, key exchange, and authentication happen after the TCP connection is established.
 
 ## Telnet packet observations
@@ -27,7 +33,12 @@ The screenshots show a connection attempt from `192.168.1.2` to `192.168.1.1`, d
 
 - Packet 525 shows a SYN from client port `51451` to TCP port `23`.
 - Packet 526 shows `RST, ACK` from TCP port `23` back to client port `51451`. This indicates that the connection attempt was reset or rejected. The RST alone does not establish the exact reason.
+
+![Telnet connection attempt and RST ACK](./Screenshot%202026-10-22%20122455.png)
+
 - Later packets show Telnet data exchanged between `192.168.1.1` and `192.168.1.2`, including readable one-byte payload `a` in packet 575. This illustrates that Telnet terminal data is not encrypted.
+
+![Telnet readable payload](./Screenshot%202026-10-22%20122832.png)
 
 ## TCP flags reviewed
 
@@ -41,14 +52,3 @@ The screenshots show a connection attempt from `192.168.1.2` to `192.168.1.1`, d
 ## Main takeaway
 
 SSH uses TCP port 22 and encrypts its session data. Telnet uses TCP port 23 and sends terminal data without encryption. Wireshark can show TCP flags and connection metadata for both protocols, while Telnet payload may be readable.
-
-## Screenshot references
-
-The screenshots supplied for this case study cover the two-router topology, the SSH TCP handshake and SSHv2 data, TCP flags, the Telnet reset response, and readable Telnet payload. Add the image files to this folder using these names so they can be displayed here:
-
-- `images/day-08-router-topology.png`
-- `images/ssh-tcp-handshake.png`
-- `images/ssh-data-and-tcp-flags.png`
-- `images/telnet-reset.png`
-- `images/telnet-readable-payload.png`
-
