@@ -7,6 +7,7 @@ These are my notes from the Day 8 online class and the supplied SSH Configuratio
 - [TCP three-way handshake and flags](tcp-handshake-and-flags.md)
 - [SSH configuration on Cisco IOS](ssh-configuration.md)
 - [SSH vs. Telnet and packet observations](ssh-vs-telnet.md)
+- [SSH and Telnet Wireshark case study](ssh-telnet-wireshark-case-study.md)
 - [Cisco CLI modes and interface basics](cisco-cli-basics.md)
 - [Revision questions](practice-questions.md)
 
