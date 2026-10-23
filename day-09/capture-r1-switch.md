@@ -15,34 +15,50 @@ Transaction ID: `0xa5338232`
 | 11 | Request | `0.0.0.0` | `255.255.255.255` | 68 → 67 |
 | 12 | ACK | `192.168.1.100` | `192.168.1.1` | 67 → 68 |
 
-The DHCP client hardware address shown is `00:50:79:66:68:00`. The Discover's BOOTP broadcast flag is `0x0000`, so the broadcast flag is not set in that packet.
+The DHCP client hardware address shown is `00:50:79:66:68:00`. The Discover's BOOTP flags are `0x0000`, meaning the broadcast flag is not set in that packet.
 
-The Request includes:
-- Option 53: DHCP Request
-- Option 54: DHCP Server Identifier = `192.168.1.100`
-- Option 50: Requested IP Address = `192.168.1.1)
-- Option 61: Client Identifier
-- Option 12: Host Name
-- Option 55: Parameter Request List
+### Packet 8 — Discover
 
-The ACK includes:
-- Option 53: DHCP ACK
-- Option 54: DHCP Server Identifier = `192.168.1.100`
-- Option 51: IP Address Lease Time
-- Option 58: Renewal Time Value
-- Option 59: Rebinding Time Value
-- Option 1: Subnet Mask = `255.255.255.0`
-- Option 3: Router
-- Option 6: Domain Name Server
+- IPv4 source/destination: `0.0.0.0` → `255.255.255.255`
+- UDP ports: 68 → 67
+- DHCP message type (option 53): Discover
+- Client hardware address: `00:50:79:66:68:00)
+- Transaction ID: `0xa5338232`
+
+### Packet 10 — Offer
+
+- IPv4 source/destination: `192.168.1.100` → `192.168.1.1`
+- UDP ports: 67 → 68
+- DHCP message type: Offer
+- “Your (client) IP address” (`yiaddr`): `192.168.1.1`
+- Transaction ID matches the Discover: `0xa5338232`
+
+### Packet 11 — Request
+
+- IPv4 source/destination: `0.0.0.0` → `255.255.255.255`
+- UDP ports: 68 → 67
+- DHCP message type: Request
+- Server identifier (option 54): `192.168.1.100`
+- Requested IP address (option 50): `192.168.1.1`
+- Transaction ID: `0xa5338232`
+
+### Packet 12 — ACK
+
+- IPv4 source/destination: `192.168.1.100` → `192.168.1.1`
+- UDP ports: 67 → 68
+- DHCP message type: ACK
+- Server identifier (option 54): `192.168.1.100`
+- Subnet mask (option 1): `255.255.255.0`
+- Router (option 3), DNS server(s) (option 6), lease time (option 51), renewal time (option 58), and rebinding time (option 59) are present in the decoded options.
 
 ## Interpretation and items to verify
 
-The Offer and ACK use the offered client address `192.168.1.1` as their IPv4 destination in this capture, whereas Discover and Request use the limited broadcast address `255.255.255.255`.
+In this capture, Offer and ACK use `192.168.1.1` as their IPv4 destination, while Discover and Request use the limited broadcast address `255.255.255.255`.
 
-Before drawing a conclusion about why a different capture point shows broadcast Offer/ACK packets, compare the second capture's:
-1. DHCP BOOTP broadcast flag in Discover and Request
+The destination address alone does not explain why a second capture shows broadcast replies. To compare the R2–Switch capture, inspect:
+1. BOOTP broadcast flag in its Discover and Request packets
 2. IPv4 destination and Ethernet destination of Offer and ACK
 3. Client address (`ciaddr`), offered address (`yiaddr`), and client hardware address (`chaddr`)
 4. Server identifier and transaction ID
 
-The second capture has not been added yet. No conclusion about its cause is recorded here.
+**Addressing check:** `192.168.1.1` is shown as the offered client address. Verify that this does not conflict with the gateway address in the intended lab topology before making a final claim about the configuration.
