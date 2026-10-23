@@ -17,13 +17,14 @@ The screenshots show R1 labelled as the DHCP server connected to Switch1, with V
 
 - [DHCP DORA packet walkthrough](./dora-packet-walkthrough.md)
 - [DHCP options and header fields](./dhcp-options-and-fields.md)
+- [DHCP server configuration and client verification](./dhcp-server-and-client-verification.md)
 - [Configuration and verification checklist](./configuration-and-verification.md)
 
 ## Lab evidence
 
-The packet screenshots document a DHCP Discover, Offer, Request and ACK using transaction ID `0x00002242`. The client MAC shown in the DHCP messages is `ca:02:1f:ec:00:1c`; the offered and acknowledged address is `192.168.1.5`; the DHCP server identifier is `192.168.1.100`.
+The terminal screenshot documents the R1 DHCP pool and successful client lease output for PC1 and PC2. The packet screenshots document a DHCP Discover, Offer, Request and ACK using transaction ID `0x00002242`. The client MAC shown in the DHCP messages is `ca:02:1f:ec:00:1c`; the offered and acknowledged address is `192.168.1.5`; the DHCP server identifier is `192.168.1.100`.
 
-Screenshots are being organized separately; this README records only the fields visible in the supplied captures.
+The packet capture and client-output screenshot show different client MAC addresses and different assigned IPs, so they are recorded as distinct evidence rather than incorrectly treating them as the same DHCP transaction. Screenshot files still need to be uploaded to the repository before they can be embedded in the Markdown.
 
 ## Scope
 
