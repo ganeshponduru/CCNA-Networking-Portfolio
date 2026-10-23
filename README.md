@@ -14,7 +14,7 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 | Day 06 | DNS resolution, DNS records, Wireshark DNS analysis, TCP three-way handshake, and TCP flags | Notes and screenshot-based DNS/TCP/SSH packet observations documented; further independent captures can be added as practice |
 | Day 07 | Networking hardware, fiber optics, transceivers, chassis modules, physical-link troubleshooting, and console access | Study notes and troubleshooting checklist added; hardware and console labs not claimed as completed |
 | Day 08 | TCP handshake and flags, SSH vs. Telnet, SSH configuration, and Cisco IOS CLI basics | Notes and configuration reference added |
-| Day 09 | DHCP fundamentals, DORA, DHCP options, and Wireshark packet analysis | DHCP lab DORA packets documented; screenshot files still need to be added to the repository |
+| Day 09 | DHCP fundamentals, DORA, DHCP options, and Wireshark packet analysis | DHCP lab completed; R1–Switch1 screenshots uploaded and linked in the Day 9 notes; R2–Switch comparison pending |
 
 ## Day 01 — How data moves across a network
 
