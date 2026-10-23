@@ -26,6 +26,43 @@ The terminal screenshot documents the R1 DHCP pool and successful client lease o
 
 The packet capture and client-output screenshot show different client MAC addresses and different assigned IPs, so they are recorded as distinct evidence rather than incorrectly treating them as the same DHCP transaction. Screenshot files still need to be uploaded to the repository before they can be embedded in the Markdown.
 
+
+## Screenshot evidence
+
+The images below are the screenshots uploaded to this folder. They document the lab topology, packet capture and DHCP configuration/client output.
+
+### DHCP lab topology
+
+![DHCP lab topology](./Screenshot%202026-10-23%20081913.png)
+
+### Wireshark DHCP packet list showing DORA
+
+![Wireshark DHCP packet list showing DORA](./Screenshot%202026-10-23%20081959.png)
+
+### DHCP Discover packet fields
+
+![DHCP Discover packet fields](./Screenshot%202026-10-23%20085505.png)
+
+### DHCP Offer packet fields
+
+![DHCP Offer packet fields](./Screenshot%202026-10-23%20090058.png)
+
+### DHCP Request packet fields
+
+![DHCP Request packet fields](./Screenshot%202026-10-23%20090214.png)
+
+### DHCP ACK packet fields
+
+![DHCP ACK packet fields](./Screenshot%202026-10-23%20090444.png)
+
+### Additional DHCP packet analysis
+
+![Additional DHCP packet analysis](./Screenshot%202026-10-23%20090542.png)
+
+### DHCP server configuration and VPCS client verification
+
+![DHCP server configuration and VPCS client verification](./Screenshot%202026-10-23%20091407.png)
+
 ## Scope
 
 This is a lab-based packet-analysis note. The screenshots establish the DORA exchange for the displayed client; they do not establish that every client in the larger topology obtained a lease, nor do they demonstrate DHCP Snooping configuration.
