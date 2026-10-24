@@ -17,7 +17,7 @@ DHCP uses UDP:
 
 The exact IP and Ethernet destination addresses of Offer and ACK packets can vary with DHCP client behavior, BOOTP flags, server implementation, and network arrangement. Do not assume every Offer or ACK must be broadcast.
 
-## Evidence from the R1–Switch1 capture
+## R1–Switch1 capture
 
 The screenshots received so far show packets 8, 10, 11, and 12 with transaction ID `0xa5338232`.
 
@@ -46,7 +46,7 @@ The screenshots received so far show packets 8, 10, 11, and 12 with transaction 
 - UDP source/destination ports: 68 → 67
 - DHCP message type: Request
 - Server identifier (option 54): `192.168.1.100`
-- Requested IP address (option 50): `192.168.1.1)
+- Requested IP address (option 50): `192.168.1.1
 
 ### Packet 12 — ACK
 
@@ -55,17 +55,17 @@ The screenshots received so far show packets 8, 10, 11, and 12 with transaction 
 - UDP source/destination ports: 67 → 68
 - DHCP message type: ACK
 - Server identifier (option 54): `192.168.1.100`
-- Subnet mask (option 1): `255.255.255.0)
+- Subnet mask (option 1): `255.255.255.0
 - Router (option 3), DNS server(s) (option 6), lease time (option 51), renewal time (option 58), and rebinding time (option 59) are present in the decoded options.
 
-## Important interpretation note
+## Addressing note
 
 The DHCP packet details show `192.168.1.1` as the offered client address. Because that address is often used as a default gateway in example networks, confirm the actual lab addressing before documenting it as both a client lease and a router address. The packet evidence alone does not tell us whether the topology intentionally uses that address for a client.
 
-More screenshots will be added after they are reviewed. This file describes only the packets visible in the captures received so far.
 
 
-## Preliminary comparison: R1–Switch1 vs R2–Switch1
+
+## Comparing R1–Switch1 and R2–Switch1
 
 | Message | R1–Switch1 IPv4 destination | R2–Switch1 IPv4 destination |
 |---|---|---|
@@ -74,6 +74,6 @@ More screenshots will be added after they are reviewed. This file describes only
 | Request | `255.255.255.255` | `255.255.255.255` |
 | ACK | `192.168.1.1` | `255.255.255.255` |
 
-This is a comparison of the destinations visible in the packet lists, not yet a complete explanation of the behavior. To identify why the R2 Offer and ACK are broadcast, inspect the BOOTP broadcast flag in the client's Discover/Request and compare the Ethernet destination MAC, `ciaddr`, `yiaddr`, `chaddr`, and transaction ID. Do not infer the cause from the IPv4 destination alone.
+The screenshots show the different IPv4 destinations, but the R2 BOOTP flags and Ethernet destination MAC addresses are not visible. Without those fields, the exact reason for the broadcast replies cannot be confirmed.
 
 See [R2–Switch1 capture analysis](capture-r2-switch.md) for the fields to verify.
