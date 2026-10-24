@@ -1,10 +1,10 @@
-# Wireshark Capture Notes — R1 to Switch1
+# R1–Switch1 DHCP Capture
 
-## Capture point
+## Capture link
 
-The screenshots supplied so far are from the link labelled **R1 GigabitEthernet1/0 to Switch1 Ethernet2** in Wireshark.
+Wireshark was capturing on the link labelled **R1 GigabitEthernet1/0 to Switch1 Ethernet2**.
 
-## Observed DHCP exchange
+## DHCP packets
 
 Transaction ID: `0xa5338232`
 
@@ -15,50 +15,39 @@ Transaction ID: `0xa5338232`
 | 11 | Request | `0.0.0.0` | `255.255.255.255` | 68 → 67 |
 | 12 | ACK | `192.168.1.100` | `192.168.1.1` | 67 → 68 |
 
-The DHCP client hardware address shown is `00:50:79:66:68:00`. The Discover's BOOTP flags are `0x0000`, meaning the broadcast flag is not set in that packet.
+Client hardware address: `00:50:79:66:68:00`.
 
-### Packet 8 — Discover
+### Discover — frame 8
 
-- IPv4 source/destination: `0.0.0.0` → `255.255.255.255`
-- UDP ports: 68 → 67
 - DHCP message type (option 53): Discover
-- Client hardware address: `00:50:79:66:68:00)
+- BOOTP flags: `0x0000`; the broadcast flag is not set
+- Client hardware address: `00:50:79:66:68:00`
 - Transaction ID: `0xa5338232`
 
-### Packet 10 — Offer
+### Offer — frame 10
 
-- IPv4 source/destination: `192.168.1.100` → `192.168.1.1`
+- DHCP server source address: `192.168.1.100`
+- IPv4 destination: `192.168.1.1`
 - UDP ports: 67 → 68
-- DHCP message type: Offer
-- “Your (client) IP address” (`yiaddr`): `192.168.1.1`
-- Transaction ID matches the Discover: `0xa5338232`
+- Offered client address (`yiaddr`): `192.168.1.1`
 
-### Packet 11 — Request
+### Request — frame 11
 
 - IPv4 source/destination: `0.0.0.0` → `255.255.255.255`
 - UDP ports: 68 → 67
-- DHCP message type: Request
 - Server identifier (option 54): `192.168.1.100`
 - Requested IP address (option 50): `192.168.1.1`
-- Transaction ID: `0xa5338232`
 
-### Packet 12 — ACK
+### ACK — frame 12
 
-- IPv4 source/destination: `192.168.1.100` → `192.168.1.1`
+- IPv4 destination: `192.168.1.1`
 - UDP ports: 67 → 68
-- DHCP message type: ACK
 - Server identifier (option 54): `192.168.1.100`
 - Subnet mask (option 1): `255.255.255.0`
-- Router (option 3), DNS server(s) (option 6), lease time (option 51), renewal time (option 58), and rebinding time (option 59) are present in the decoded options.
+- Router (option 3), DNS servers (option 6), lease time (option 51), renewal time (option 58), and rebinding time (option 59) appear in the decoded options.
 
-## Interpretation and items to verify
+## Comparing with R2–Switch1
 
-In this capture, Offer and ACK use `192.168.1.1` as their IPv4 destination, while Discover and Request use the limited broadcast address `255.255.255.255`.
+In this capture, Offer and ACK use `192.168.1.1` as the IPv4 destination. In the R2–Switch1 capture, Offer and ACK use `255.255.255.255`.
 
-The destination address alone does not explain why a second capture shows broadcast replies. To compare the R2–Switch capture, inspect:
-1. BOOTP broadcast flag in its Discover and Request packets
-2. IPv4 destination and Ethernet destination of Offer and ACK
-3. Client address (`ciaddr`), offered address (`yiaddr`), and client hardware address (`chaddr`)
-4. Server identifier and transaction ID
-
-**Addressing check:** `192.168.1.1` is shown as the offered client address. Verify that this does not conflict with the gateway address in the intended lab topology before making a final claim about the configuration.
+The R1 packet details show `192.168.1.1` as the offered client address. Compare this with the gateway address in the lab configuration. See [R2–Switch1 DHCP capture](capture-r2-switch.md).
