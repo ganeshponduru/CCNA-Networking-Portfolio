@@ -1,25 +1,34 @@
 # CCNA Networking Portfolio
 
-I'm building this repository as I learn networking and prepare for CCNA and entry-level network support/TAC roles. I use it to keep my notes, worked examples, revision questions, and evidence from labs I actually complete.
+I'm building this repository as I learn networking and prepare for CCNA and entry-level Network Support/TAC roles. It contains my study notes, worked examples, revision questions, and evidence from labs I have actually completed.
+
+## How I organize my learning
+
+The [fundamentals folder](fundamentals/README.md) contains Days 01–09 in chronological order. Each day has its own folder so related notes, diagrams, screenshots, and lab observations stay together.
+
+I keep theory and practical work separate. I only mark a lab as completed after I perform it and record what I configured or observed. Study notes and planned exercises are labelled honestly rather than presented as completed labs.
+
+## My goal
+
+I want to explain networking concepts in my own words, solve addressing problems without memorising answers, and gradually add practical configuration and troubleshooting evidence as I build my skills.
 
 ## Learning roadmap
 
-| Day | What I studied | Status |
+| Day | Topics | Current documentation |
 |---|---|---|
-| Day 01 | How data moves, OSI and TCP/IP models, encapsulation, TCP/UDP, common ports, packet headers | Notes added; Wireshark practice still to be completed and documented |
-| Day 02 | Circuit and packet switching, traffic types, network domains, topologies, IPv4 basics, binary conversion | Notes added; hands-on evidence not yet added |
-| Day 03 | IPv4 subnetting, network IDs, subnet masks, and /26 calculations | Notes and worked examples added; hands-on evidence not yet added |
-| Day 04 | Network and broadcast address calculations, next subnet ranges, and subnet design | Notes and worked examples added; hands-on evidence not yet added |
-| Day 05 | Ping, ICMP, ARP, and Wireshark packet inspection | Same-subnet lab completed; screenshots and observations documented |
-| Day 06 | DNS resolution, DNS records, Wireshark DNS analysis, TCP three-way handshake, and TCP flags | Notes and screenshot-based DNS/TCP/SSH packet observations documented; further independent captures can be added as practice |
-| Day 07 | Networking hardware, fiber optics, transceivers, chassis modules, physical-link troubleshooting, and console access | Study notes and troubleshooting checklist added; hardware and console labs not claimed as completed |
-| Day 08 | TCP handshake and flags, SSH vs. Telnet, SSH configuration, and Cisco IOS CLI basics | Notes and configuration reference added |
-| Day 09 | DHCP fundamentals, DORA, DHCP options, and Wireshark packet analysis | DHCP lab completed; notes and R1–Switch1 and R2–Switch1 screenshots added |
+| [Day 01](fundamentals/day-01/README.md) | How data moves, OSI and TCP/IP, encapsulation, TCP/UDP, common ports, packet headers | Study notes, diagrams, and a Wireshark practice plan |
+| [Day 02](fundamentals/day-02/README.md) | Switching, traffic types, network domains, topologies, IPv4 basics, binary conversion | Study notes and revision questions |
+| [Day 03](fundamentals/day-03/README.md) | IPv4 subnetting, network IDs, subnet masks, and /26 calculations | Notes, worked examples, and correction log |
+| [Day 04](fundamentals/day-04/README.md) | Network and broadcast addresses, subnet ranges, subnet design | Worked calculations and practice questions |
+| [Day 05](fundamentals/day-05/README.md) | ARP, ICMP, ping, and inter-subnet routing | Lab notes, packet observations, and screenshots |
+| [Day 06](fundamentals/day-06/README.md) | DNS, TCP handshake and flags, packet analysis | Wireshark case study and screenshots |
+| [Day 07](fundamentals/day-07/README.md) | Networking hardware, fiber, transceivers, physical-link troubleshooting, console access | Study notes and troubleshooting checklist; hardware and console labs are not claimed as completed |
+| [Day 08](fundamentals/day-08/README.md) | TCP handshake, SSH, Telnet, and Cisco IOS CLI | Configuration notes, packet observations, and screenshots |
+| [Day 09](fundamentals/day-09/README.md) | DHCP, DORA, DHCP options, and Wireshark packet analysis | DHCP lab notes and R1–Switch1 / R2–Switch1 screenshots |
 
 ## Day 01 — How data moves across a network
 
 - [Day 1 overview](fundamentals/day-01/README.md)
-
 - [OSI and TCP/IP models](fundamentals/day-01/osi-vs-tcp-ip.md)
 - [Encapsulation and decapsulation](fundamentals/day-01/encapsulation-decapsulation.md)
 - [TCP vs UDP](fundamentals/day-01/tcp-vs-udp.md)
@@ -58,39 +67,23 @@ I'm building this repository as I learn networking and prepare for CCNA and entr
 - [Practice questions and answers](fundamentals/day-04/practice-questions.md)
 - [Points I clarified while studying](fundamentals/day-04/things-i-checked.md)
 
-## Day 08 — TCP, SSH, Telnet, and Cisco CLI
-
-- [Day 8 overview](fundamentals/day-08/README.md)
-- [TCP three-way handshake and flags](fundamentals/day-08/tcp-handshake-and-flags.md)
-- [SSH configuration on Cisco IOS](fundamentals/day-08/ssh-configuration.md)
-- [SSH vs. Telnet and packet observations](fundamentals/day-08/ssh-vs-telnet.md)
-- [Cisco CLI modes and interface basics](fundamentals/day-08/cisco-cli-basics.md)
-- [Revision questions](fundamentals/day-08/practice-questions.md)
-
-## How I document my progress
-
-I keep theory, calculations, and hands-on work separate. I only mark a lab as completed after I perform it and record what I configured and observed. Planned exercises are labelled as planned, not presented as completed.
-
-## My goal
-
-I want to explain these concepts in my own words, solve addressing problems without memorising answers, and gradually add practical configuration and troubleshooting evidence as I build my skills.
-
 ## Day 05 — Ping, ARP, and ICMP
 
 - [Day 5 lab overview and evidence](fundamentals/day-05/README.md)
 - [ARP fundamentals](fundamentals/day-05/arp-fundamentals.md)
 - [ICMP and ping](fundamentals/day-05/icmp-and-ping.md)
+- [Different-subnet routing lab](fundamentals/day-05/different-subnet-routing-lab.md)
+- [Packet-level walkthrough](fundamentals/day-05/packet-level-walkthrough.md)
 - [Revision questions](fundamentals/day-05/practice-questions.md)
-
 
 ## Day 06 — DNS and TCP
 
 - [Day 6 overview](fundamentals/day-06/README.md)
 - [DNS resolution and record types](fundamentals/day-06/dns-resolution.md)
+- [DNS and TCP Wireshark case study](fundamentals/day-06/dns-tcp-wireshark-case-study.md)
 - [TCP three-way handshake and flags](fundamentals/day-06/tcp-handshake-and-flags.md)
 - [Packet-analysis checklist](fundamentals/day-06/packet-analysis-checklist.md)
 - [Revision questions](fundamentals/day-06/practice-questions.md)
-
 
 ## Day 07 — Networking hardware and physical connectivity
 
@@ -102,6 +95,15 @@ I want to explain these concepts in my own words, solve addressing problems with
 - [Console access basics](fundamentals/day-07/console-access-basics.md)
 - [Revision questions](fundamentals/day-07/practice-questions.md)
 
+## Day 08 — TCP, SSH, Telnet, and Cisco CLI
+
+- [Day 8 overview](fundamentals/day-08/README.md)
+- [TCP three-way handshake and flags](fundamentals/day-08/tcp-handshake-and-flags.md)
+- [SSH configuration on Cisco IOS](fundamentals/day-08/ssh-configuration.md)
+- [SSH vs. Telnet and packet observations](fundamentals/day-08/ssh-vs-telnet.md)
+- [SSH and Telnet Wireshark case study](fundamentals/day-08/ssh-telnet-wireshark-case-study.md)
+- [Cisco CLI modes and interface basics](fundamentals/day-08/cisco-cli-basics.md)
+- [Revision questions](fundamentals/day-08/practice-questions.md)
 
 ## Day 09 — DHCP and DORA packet analysis
 
@@ -109,3 +111,5 @@ I want to explain these concepts in my own words, solve addressing problems with
 - [DHCP DORA packet-level walkthrough](fundamentals/day-09/dora-packet-walkthrough.md)
 - [DHCP options and header fields](fundamentals/day-09/dhcp-options-and-fields.md)
 - [DHCP configuration and verification checklist](fundamentals/day-09/configuration-and-verification.md)
+- [R1–Switch1 packet details](fundamentals/day-09/capture-r1-switch.md)
+- [R2–Switch1 packet details](fundamentals/day-09/capture-r2-switch.md)
