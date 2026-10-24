@@ -38,8 +38,8 @@ Use the operating system's IP configuration tools to check the assigned IPv4 add
 - [ ] Record the DHCP pool, excluded addresses, gateway, and DNS settings from the actual configuration.
 - [ ] Verify the client received an address and the expected options.
 - [x] Capture and identify Discover, Offer, Request, and ACK on the R1–Switch1 link.
-- [ ] Add the additional R2–Switch capture and compare Offer/ACK destination addressing.
-- [ ] Confirm whether the client broadcast flag is set in the second capture.
+- [x] Add the R2–Switch capture and compare the visible Offer/ACK destination addresses.
+- [ ] Confirm whether the client broadcast flag is set in the second capture (not visible in the supplied screenshot).
 - [ ] Confirm the leased client address does not conflict with the intended gateway address.
 
 ## DHCP snooping
