@@ -44,11 +44,28 @@ The screenshots below are the image files uploaded to this directory. Captions i
 
 ![R1–Switch1 Wireshark evidence 7](./Screenshot%202026-10-23%20232506.png)
 
+## R2–Switch1 comparison received
+
+A second capture screenshot was supplied showing Wireshark on **R2 GigabitEthernet1/0 to Switch1 Ethernet3**. Its packet list shows:
+
+| Packet | DHCP message | IPv4 source | IPv4 destination | UDP ports |
+|---|---|---|---|---|
+| 7 | Discover | `0.0.0.0` | `255.255.255.255` | 68 → 67 |
+| 9 | Offer | `192.168.1.100` | `255.255.255.255` | 67 → 68 |
+| 10 | Request | `0.0.0.0` | `255.255.255.255` | 68 → 67 |
+| 11 | ACK | `192.168.1.100` | `255.255.255.255` | 67 → 68 |
+
+Unlike the R1–Switch1 capture, the Offer and ACK in this packet list use the limited broadcast IPv4 destination. This establishes the observed difference, but not its cause. The BOOTP flags and Ethernet destination MAC addresses must be inspected in the individual R2 packets before explaining why the replies were broadcast.
+
+The screenshot also shows R2 reporting DHCP address `192.168.1.3/24` on `GigabitEthernet1/0`. This is R2's own interface address assignment and is not the DHCP server address `192.168.1.100`.
+
+- [Capture analysis: R2–Switch1](capture-r2-switch.md)
+
 ## Evidence still to add
 
-- Additional screenshots from the other capture point (R2–Switch)
+- Detailed packet-field screenshots for the R2 Offer and ACK, including BOOTP flags and Ethernet destination MAC
 - DHCP configuration and client/server verification output
-- A final comparison of BOOTP flags and IP/Ethernet destinations in both captures
+- Confirmation of the intended gateway/client addressing, because the R1 capture shows `192.168.1.1` as the offered client address
 
 ## Scope and accuracy
 
@@ -60,3 +77,4 @@ I will distinguish what I configured in the lab from what is visible in each cap
 - [DHCP options and header fields](dhcp-options-and-fields.md)
 - [Configuration and verification checklist](configuration-and-verification.md)
 - [Capture analysis: R1–Switch1](capture-r1-switch.md)
+- [Capture analysis: R2–Switch1](capture-r2-switch.md)
