@@ -63,3 +63,17 @@ The screenshots received so far show packets 8, 10, 11, and 12 with transaction 
 The DHCP packet details show `192.168.1.1` as the offered client address. Because that address is often used as a default gateway in example networks, confirm the actual lab addressing before documenting it as both a client lease and a router address. The packet evidence alone does not tell us whether the topology intentionally uses that address for a client.
 
 More screenshots will be added after they are reviewed. This file describes only the packets visible in the captures received so far.
+
+
+## Preliminary comparison: R1–Switch1 vs R2–Switch1
+
+| Message | R1–Switch1 IPv4 destination | R2–Switch1 IPv4 destination |
+|---|---|---|
+| Discover | `255.255.255.255` | `255.255.255.255` |
+| Offer | `192.168.1.1` | `255.255.255.255` |
+| Request | `255.255.255.255` | `255.255.255.255` |
+| ACK | `192.168.1.1` | `255.255.255.255` |
+
+This is a comparison of the destinations visible in the packet lists, not yet a complete explanation of the behavior. To identify why the R2 Offer and ACK are broadcast, inspect the BOOTP broadcast flag in the client's Discover/Request and compare the Ethernet destination MAC, `ciaddr`, `yiaddr`, `chaddr`, and transaction ID. Do not infer the cause from the IPv4 destination alone.
+
+See [R2–Switch1 capture analysis](capture-r2-switch.md) for the fields to verify.
