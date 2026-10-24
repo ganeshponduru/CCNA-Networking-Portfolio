@@ -1,79 +1,55 @@
 # DHCP DORA Packet Walkthrough
 
-## What DHCP does
+In this lab, I used Wireshark to observe the DHCP messages exchanged between a client and a DHCP server. I captured traffic on two links, R1–Switch1 and R2–Switch1, and compared the packets I could see.
 
-Dynamic Host Configuration Protocol (DHCP) lets a client obtain IPv4 configuration from a DHCP server. Depending on the scope and options, the configuration can include an IPv4 address, subnet mask, default gateway, DNS servers, and lease timers.
+## DHCP basics
 
-DHCP uses UDP:
-- Client: UDP port 68
-- Server: UDP port 67
+DHCP allows a client to obtain network settings such as an IPv4 address, subnet mask, default gateway, and DNS server.
+
+- DHCP client uses UDP port 68.
+- DHCP server uses UDP port 67.
 
 ## DORA sequence
 
-1. **Discover** — the client searches for a DHCP server. A typical initial Discover uses source IPv4 address `0.0.0.0`, destination `255.255.255.255`, and UDP ports 68 → 67.
-2. **Offer** — a server proposes an address and sends available configuration options.
-3. **Request** — the client indicates which offered address and server it wants to use.
-4. **ACK** — the server confirms the lease and supplies the accepted configuration.
+1. **Discover:** The client looks for a DHCP server. In my captures, the Discover packet uses source IP `0.0.0.0`, destination IP `255.255.255.255`, and UDP ports 68 → 67.
+2. **Offer:** The server replies with an address it is offering to the client.
+3. **Request:** The client requests the offered address and identifies the DHCP server it selected.
+4. **ACK:** The server acknowledges the request and sends the lease configuration.
 
-The exact IP and Ethernet destination addresses of Offer and ACK packets can vary with DHCP client behavior, BOOTP flags, server implementation, and network arrangement. Do not assume every Offer or ACK must be broadcast.
+## What I observed on R1–Switch1
 
-## R1–Switch1 capture
+The DHCP packets I examined were frames 8, 10, 11, and 12. They share transaction ID `0xa5338232`.
 
-The screenshots received so far show packets 8, 10, 11, and 12 with transaction ID `0xa5338232`.
+| Frame | Message | IPv4 source | IPv4 destination | UDP ports |
+|---:|---|---|---|---|
+| 8 | Discover | `0.0.0.0` | `255.255.255.255` | 68 → 67 |
+| 10 | Offer | `192.168.1.100` | `192.168.1.1` | 67 → 68 |
+| 11 | Request | `0.0.0.0` | `255.255.255.255` | 68 → 67 |
+| 12 | ACK | `192.168.1.100` | `192.168.1.1` | 67 → 68 |
 
-### Packet 8 — Discover
+In the Discover details, I saw client hardware address `00:50:79:66:68:00` and BOOTP flags `0x0000`, meaning the broadcast flag was not set. The Offer shows `192.168.1.1` as the offered client address. The ACK includes options for the subnet mask, router, DNS servers, and lease timers.
 
-- IPv4 source: `0.0.0.0`
-- IPv4 destination: `255.255.255.255`
-- UDP source/destination ports: 68 → 67
-- DHCP message type (option 53): Discover
-- Client hardware address: `00:50:79:66:68:00`
-- BOOTP flags: `0x0000` (broadcast flag not set)
+## What I observed on R2–Switch1
 
-### Packet 10 — Offer
+In the second capture, the packet list showed this sequence:
 
-- IPv4 source: `192.168.1.100`
-- IPv4 destination: `192.168.1.1`
-- UDP source/destination ports: 67 → 68
-- DHCP message type: Offer
-- Transaction ID matches the Discover: `0xa5338232`
-- The `yiaddr` / “Your (client) IP address” field shows `192.168.1.1`
+| Frame | Message | IPv4 source | IPv4 destination | UDP ports |
+|---:|---|---|---|---|
+| 7 | Discover | `0.0.0.0` | `255.255.255.255` | 68 → 67 |
+| 9 | Offer | `192.168.1.100` | `255.255.255.255` | 67 → 68 |
+| 10 | Request | `0.0.0.0` | `255.255.255.255` | 68 → 67 |
+| 11 | ACK | `192.168.1.100` | `255.255.255.255` | 67 → 68 |
 
-### Packet 11 — Request
+I noticed that the Offer and ACK destinations were different in the two captures. On R1–Switch1, the destination shown for those messages was `192.168.1.1`; on R2–Switch1, it was `255.255.255.255`.
 
-- IPv4 source: `0.0.0.0`
-- IPv4 destination: `255.255.255.255`
-- UDP source/destination ports: 68 → 67
-- DHCP message type: Request
-- Server identifier (option 54): `192.168.1.100`
-- Requested IP address (option 50): `192.168.1.1
+The R2 screenshot shows the packet list, but I did not capture the expanded BOOTP flags or Ethernet destination details for those packets. So, from the screenshots I have, I can describe the difference I observed, but I cannot say for certain why the R2 Offer and ACK were broadcast.
 
-### Packet 12 — ACK
+The console in the R2 screenshot also shows R2 receiving address `192.168.1.3/24` on `GigabitEthernet1/0`.
 
-- IPv4 source: `192.168.1.100`
-- IPv4 destination: `192.168.1.1`
-- UDP source/destination ports: 67 → 68
-- DHCP message type: ACK
-- Server identifier (option 54): `192.168.1.100`
-- Subnet mask (option 1): `255.255.255.0
-- Router (option 3), DNS server(s) (option 6), lease time (option 51), renewal time (option 58), and rebinding time (option 59) are present in the decoded options.
+## What I learned
 
-## Addressing note
+By comparing the captures, I learned that DHCP uses the same DORA sequence, but the IPv4 destination shown for the Offer and ACK was not the same at both capture points. To explain the exact reason, I would need to inspect more packet details rather than guess from the packet list alone.
 
-The DHCP packet details show `192.168.1.1` as the offered client address. Because that address is often used as a default gateway in example networks, confirm the actual lab addressing before documenting it as both a client lease and a router address. The packet evidence alone does not tell us whether the topology intentionally uses that address for a client.
+## DHCP options and header fields
 
-
-
-
-## Comparing R1–Switch1 and R2–Switch1
-
-| Message | R1–Switch1 IPv4 destination | R2–Switch1 IPv4 destination |
-|---|---|---|
-| Discover | `255.255.255.255` | `255.255.255.255` |
-| Offer | `192.168.1.1` | `255.255.255.255` |
-| Request | `255.255.255.255` | `255.255.255.255` |
-| ACK | `192.168.1.1` | `255.255.255.255` |
-
-The screenshots show the different IPv4 destinations, but the R2 BOOTP flags and Ethernet destination MAC addresses are not visible. Without those fields, the exact reason for the broadcast replies cannot be confirmed.
-
-See [R2–Switch1 capture analysis](capture-r2-switch.md) for the fields to verify.
+For the DHCP options and BOOTP header fields, see [DHCP options and header fields](dhcp-options-and-fields.md). For the packet-by-packet capture notes, see [R1–Switch1](capture-r1-switch.md) and [R2–Switch1](capture-r2-switch.md).
