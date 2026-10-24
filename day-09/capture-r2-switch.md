@@ -1,12 +1,10 @@
-# Wireshark Capture Notes — R2 to Switch1
+# R2–Switch1 DHCP Capture
 
-## Capture point
+## Capture link
 
-The supplied screenshot shows Wireshark capturing on **R2 GigabitEthernet1/0 to Switch1 Ethernet3**.
+The screenshot shows Wireshark capturing on **R2 GigabitEthernet1/0 to Switch1 Ethernet3**.
 
-## Observed DHCP exchange
-
-The packet list shows this sequence:
+## DHCP packets
 
 | Frame | Message | IPv4 source | IPv4 destination | UDP ports |
 |---:|---|---|---|---|
@@ -15,30 +13,14 @@ The packet list shows this sequence:
 | 10 | Request | `0.0.0.0` | `255.255.255.255` | 68 → 67 |
 | 11 | ACK | `192.168.1.100` | `255.255.255.255` | 67 → 68 |
 
-The screenshot shows DHCP Offer and ACK packets using the limited IPv4 broadcast destination. The packet list alone does not show the BOOTP broadcast flag, offered address (`yiaddr`), client hardware address (`chaddr`), or Ethernet destination MAC in enough detail to explain why this server/client exchange used broadcast replies.
+The Offer and ACK use the limited IPv4 broadcast destination in the packet list.
 
-## R2 interface evidence
+## R2 console
 
-The adjacent R2 console shows a DHCP address assignment message for `GigabitEthernet1/0`: address `192.168.1.3`, mask `255.255.255.0`, hostname R2. This is evidence about R2's own interface DHCP client configuration; it should not be confused with the DHCP server address `192.168.1.100` shown as the source of the captured Offer and ACK.
+The console shows R2 receiving DHCP address `192.168.1.3`, mask `255.255.255.0`, on `GigabitEthernet1/0`. This is R2's own interface address and is separate from the DHCP server address `192.168.1.100`.
 
-## Comparison with R1–Switch1 capture
+## Compare with R1–Switch1
 
-The earlier R1–Switch1 capture showed Discover and Request to `255.255.255.255`, but Offer and ACK to `192.168.1.1`. In this R2–Switch1 capture, all four DHCP messages shown use `255.255.255.255` as the IPv4 destination for Discover/Request and Offer/ACK.
+The R1–Switch1 capture shows Offer and ACK addressed to `192.168.1.1`; this R2–Switch1 capture shows Offer and ACK addressed to `255.255.255.255`.
 
-Possible factors include the client's BOOTP broadcast flag, DHCP client/server behavior, and the exact network arrangement. Do not state a definite cause until the detailed fields are checked.
-
-## Fields to inspect next
-
-Open the R2 capture's Discover, Offer, Request, and ACK packets and compare:
-
-1. BOOTP flags, especially whether the broadcast flag (`0x8000`) is set
-2. IPv4 destination and Ethernet destination MAC address
-3. `ciaddr` (client IP address) and `yiaddr` (offered client IP address)
-4. `chaddr` (client hardware address)
-5. Transaction ID and server identifier (DHCP option 54)
-
-A packet addressed to IPv4 `255.255.255.255` is normally carried in an Ethernet frame addressed to `ff:ff:ff:ff:ff:ff` on the local Ethernet segment, but verify the actual frame fields in Wireshark.
-
-## Evidence limitation
-
-This note is based on the screenshot supplied in the conversation. The screenshot itself has not yet been uploaded as a file in the GitHub repository, so this page does not embed it.
+The screenshot does not show the expanded BOOTP flags or Ethernet destination MAC addresses, so it is not enough to identify the exact reason for the broadcast replies. Those fields can be checked if a detailed packet view is captured later.
