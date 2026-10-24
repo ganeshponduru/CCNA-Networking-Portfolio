@@ -61,6 +61,12 @@ The screenshot also shows R2 reporting DHCP address `192.168.1.3/24` on `Gigabit
 
 - [Capture analysis: R2–Switch1](capture-r2-switch.md)
 
+### Uploaded R2–Switch1 screenshot
+
+The screenshot below shows the R2–Switch1 capture and R2 console output. The packet list shows broadcast IPv4 destinations for the DHCP Offer and ACK.
+
+![R2–Switch1 DHCP capture and R2 console](./Screenshot%202026-10-23%20233448.png)
+
 ## Evidence still to add
 
 - Detailed packet-field screenshots for the R2 Offer and ACK, including BOOTP flags and Ethernet destination MAC
