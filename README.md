@@ -26,6 +26,14 @@ I want to explain networking concepts in my own words, solve addressing problems
 | [Day 08](fundamentals/day-08/README.md) | TCP handshake, SSH, Telnet, and Cisco IOS CLI | Configuration notes, packet observations, and screenshots |
 | [Day 09](fundamentals/day-09/README.md) | DHCP, DORA, DHCP options, and Wireshark packet analysis | DHCP lab notes and R1–Switch1 / R2–Switch1 screenshots |
 
+## Routing protocols
+
+I am keeping routing topics separate from the fundamentals notes. This section will cover static routing and dynamic routing, with concepts, configurations, verification commands, and lab observations added as I work through them.
+
+- [Routing protocols overview](routing-protocols/README.md)
+- [Static routing](routing-protocols/static-routing.md)
+- [Dynamic routing](routing-protocols/dynamic-routing.md)
+
 ## Day 01 — How data moves across a network
 
 - [Day 1 overview](fundamentals/day-01/README.md)
