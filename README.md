@@ -34,6 +34,12 @@ I am keeping routing topics separate from the fundamentals notes. This section w
 - [Static routing](routing-protocols/static-routing.md)
 - [Dynamic routing](routing-protocols/dynamic-routing.md)
 
+## Day 10 — Static and default routing
+
+- [Day 10 routing notes](routing-protocols/README.md)
+- [Static routing](routing-protocols/day-10/static-routing.md)
+- [Default routing](routing-protocols/day-10/default-routing.md)
+
 ## Day 01 — How data moves across a network
 
 - [Day 1 overview](fundamentals/day-01/README.md)
