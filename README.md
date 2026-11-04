@@ -28,17 +28,14 @@ I want to explain networking concepts in my own words, solve addressing problems
 
 ## Routing protocols
 
-I am keeping routing topics separate from the fundamentals notes. This section will cover static routing and dynamic routing, with concepts, configurations, verification commands, and lab observations added as I work through them.
+I am keeping routing topics separate from the fundamentals notes. Each day has its own page with topic notes, lab observations, and revision questions.
 
 - [Routing protocols overview](routing-protocols/README.md)
-- [Static routing](routing-protocols/static-routing.md)
-- [Dynamic routing](routing-protocols/dynamic-routing.md)
-
-## Day 10 — Static and default routing
-
-- [Day 10 routing notes](routing-protocols/README.md)
-- [Static routing](routing-protocols/day-10/static-routing.md)
-- [Default routing](routing-protocols/day-10/default-routing.md)
+- [Day 10 — Static and default routing](routing-protocols/day-10/README.md)
+- [Static routing notes](routing-protocols/day-10/static-routing.md)
+- [Default routing notes](routing-protocols/day-10/default-routing.md)
+- [Floating static route and dual-ISP failover](routing-protocols/day-10/floating-static-route-and-failover.md)
+- [Day 10 interview and practice questions](routing-protocols/day-10/practice-questions.md)
 
 ## Day 01 — How data moves across a network
 
