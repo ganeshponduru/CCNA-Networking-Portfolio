@@ -1,4 +1,4 @@
-# Day 10 — Interview and Practice Questions
+# Static and Default Routing — Interview and Practice Questions
 
 This page covers static routing, default routing, administrative distance, route selection, floating static routes, and practical routing scenarios.
 
@@ -315,9 +315,9 @@ The value 20 sets the AD to 20. This can make the route less preferred than anot
 
 ---
 
-## Part 3 — Day 10 lab-based interview questions
+## Part 3 — Lab-based interview questions
 
-### 21. What was the objective of the Day 10 lab?
+### 21. What was the objective of the this lab?
 
 **Answer:**
 
@@ -490,7 +490,7 @@ It is a static candidate default route. Its AD is 10, metric is 0, and next hop 
 The floating static route can be installed in the routing table and used as the default path, provided its next hop remains reachable.
 </details>
 
-### Q8. In the Day 10 lab, which path was active when traceroute showed 192.168.13.3?
+### Q8. In the this lab, which path was active when traceroute showed 192.168.13.3?
 
 <details>
 <summary>Show answer</summary>
@@ -498,7 +498,7 @@ The floating static route can be installed in the routing table and used as the 
 Airtel was the active path. 192.168.13.3 was the Airtel next hop.
 </details>
 
-### Q9. In the Day 10 lab, which path was active when traceroute showed 192.168.14.4?
+### Q9. In the this lab, which path was active when traceroute showed 192.168.14.4?
 
 <details>
 <summary>Show answer</summary>
@@ -559,5 +559,5 @@ No. A floating static route can take over when the preferred route is removed fr
 - IPv4 default route is 0.0.0.0/0.
 - S means static route; S* marks a candidate default route.
 - A floating static route has a higher AD than the preferred route.
-- In the Day 10 lab, Airtel was primary and Tata was backup.
+- In the this lab, Airtel was primary and Tata was backup.
 - The lab's 8.8.8.8 was a simulated loopback destination on R5, not proof of public Internet access.
