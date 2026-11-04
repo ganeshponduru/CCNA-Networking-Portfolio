@@ -74,7 +74,7 @@ ping 8.8.8.8
 
 The screenshot shows successful replies from `8.8.8.8`. R1's own ping test also shows 5 successful replies out of 5.
 
-![PC1 IP settings and successful ping through the primary path](./day-10-primary-ping.png)
+![PC1 IP settings and successful ping through the primary path](./day-10-primary-ping-and-traceroute.png)
 
 ### 2. Traffic initially used Airtel
 
@@ -97,7 +97,7 @@ On R1, I entered interface configuration mode for Ethernet3/3 and used `shutdown
 
 I also tested a ping from R1 after shutting the interface. The screenshot shows that R1 could still ping `8.8.8.8` successfully.
 
-![R1 Ethernet3/3 shutdown and interface state messages](./day-10-airtel-shutdown.png)
+![R1 Ethernet3/3 shutdown and interface state messages](./day-10-airtel-shutdown-and-failover.png)
 
 ### 4. Traffic moved to Tata
 
@@ -108,11 +108,15 @@ After the Airtel path went down, I ran traceroute again from PC1. The hops chang
 
 This showed that traffic was now using the Tata path instead of Airtel.
 
-![PC1 traceroute showing the Tata backup path](./day-10-tata-failover.png)
+![PC1 traceroute showing the Tata backup path](./day-10-airtel-shutdown-and-failover.png)
+
+The route-table screenshot from R3, R4, and R5 is also included for reference:
+
+![ISP router routing tables](./day-10-router-routing-tables.png)
 
 I also ran a continuous ping from PC1. The screenshot shows successful replies continuing during the test after the path change.
 
-![Continuous ping from PC1](./day-10-continuous-ping.png)
+![Continuous ping from PC1](./day-10-continuous-ping-test.png)
 
 ## What I understood from this lab
 
