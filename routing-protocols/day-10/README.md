@@ -1,6 +1,6 @@
 # Day 10 — Static Routing and Default Routing
 
-This day covers static routes, default routes, administrative distance, and floating static routes. The lab uses two ISP paths—Airtel and Tata—to provide a primary route and a backup route to a simulated Internet destination.
+This section covers static routes, default routes, administrative distance, and floating static routes. The lab uses two ISP paths—Airtel and Tata—to provide a primary route and a backup route to a simulated Internet destination.
 
 ## Topics and notes
 
@@ -15,7 +15,7 @@ This day covers static routes, default routes, administrative distance, and floa
 
 The topology contains the office LAN, R1 as the office router/DHCP server, R3 as Airtel, R4 as Tata, and R5 as the simulated Google destination. The PCs connect to the office LAN through Switch1.
 
-![Day 10 lab topology](day-10-topology.png)
+![Lab topology](day-10-topology.png)
 
 ## Lab observations
 
@@ -47,10 +47,3 @@ The topology contains the office LAN, R1 as the office router/DHCP server, R3 as
 ## Important lab distinction
 
 The address `8.8.8.8` is configured as a loopback destination on R5 in this topology. The successful ping proves connectivity to that simulated destination inside the lab. These screenshots do not demonstrate access to the real public Internet or a NAT configuration.
-
-## Class and lab material
-
-- Class topic: Static and Default Routing
-- Instructor: E. Ramesh Goud
-- Training: TungaBadra Networks
-- Lab goal: Provide PC connectivity to the simulated `8.8.8.8` destination and verify the backup ISP path.
