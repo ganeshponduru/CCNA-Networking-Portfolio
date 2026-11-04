@@ -25,17 +25,18 @@ I want to explain networking concepts in my own words, solve addressing problems
 | [Day 07](fundamentals/day-07/README.md) | Networking hardware, fiber, transceivers, physical-link troubleshooting, console access | Study notes and troubleshooting checklist; hardware and console labs are not claimed as completed |
 | [Day 08](fundamentals/day-08/README.md) | TCP handshake, SSH, Telnet, and Cisco IOS CLI | Configuration notes, packet observations, and screenshots |
 | [Day 09](fundamentals/day-09/README.md) | DHCP, DORA, DHCP options, and Wireshark packet analysis | DHCP lab notes and R1–Switch1 / R2–Switch1 screenshots |
+| [Day 10](routing-protocols/day-10/README.md) | Static routing, default routing, administrative distance, floating static routes, dual-ISP failover | Topic notes, topology, routing-table observations, connectivity and failover tests |
 
 ## Routing protocols
 
-I am keeping routing topics separate from the fundamentals notes. Each day has its own page with topic notes, lab observations, and revision questions.
+Routing topics are documented separately from the fundamentals section. Each topic folder contains its overview, detailed notes, practical observations, and revision questions.
 
 - [Routing protocols overview](routing-protocols/README.md)
 - [Day 10 — Static and default routing](routing-protocols/day-10/README.md)
 - [Static routing notes](routing-protocols/day-10/static-routing.md)
 - [Default routing notes](routing-protocols/day-10/default-routing.md)
 - [Floating static route and dual-ISP failover](routing-protocols/day-10/floating-static-route-and-failover.md)
-- [Day 10 interview and practice questions](routing-protocols/day-10/practice-questions.md)
+- [Static and default routing interview and practice questions](routing-protocols/day-10/practice-questions.md)
 
 ## Day 01 — How data moves across a network
 
