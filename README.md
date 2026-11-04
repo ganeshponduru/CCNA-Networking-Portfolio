@@ -26,6 +26,7 @@ I want to explain networking concepts in my own words, solve addressing problems
 | [Day 08](fundamentals/day-08/README.md) | TCP handshake, SSH, Telnet, and Cisco IOS CLI | Configuration notes, packet observations, and screenshots |
 | [Day 09](fundamentals/day-09/README.md) | DHCP, DORA, DHCP options, and Wireshark packet analysis | DHCP lab notes and R1–Switch1 / R2–Switch1 screenshots |
 | [Day 10](routing-protocols/day-10/README.md) | Static routing, default routing, administrative distance, floating static routes, dual-ISP failover | Topic notes, topology, routing-table observations, connectivity and failover tests |
+| [Day 11](routing-protocols/day-11/README.md) | Dynamic routing, IGP and EGP, autonomous systems, OSPF, multi-area routing, cost, and ECMP | Concept notes, configuration reference, verification commands, and practice questions |
 
 ## Routing protocols
 
@@ -37,6 +38,11 @@ Routing topics are documented separately from the fundamentals section. Each top
 - [Default routing notes](routing-protocols/day-10/default-routing.md)
 - [Floating static route and dual-ISP failover](routing-protocols/day-10/floating-static-route-and-failover.md)
 - [Static and default routing interview and practice questions](routing-protocols/day-10/practice-questions.md)
+- [Day 11 — Dynamic routing and OSPF](routing-protocols/day-11/README.md)
+- [Dynamic routing fundamentals](routing-protocols/day-11/dynamic-routing-fundamentals.md)
+- [OSPF multi-area configuration](routing-protocols/day-11/ospf-multi-area-configuration.md)
+- [OSPF cost and load balancing](routing-protocols/day-11/ospf-cost-and-load-balancing.md)
+- [Dynamic routing and OSPF interview and practice questions](routing-protocols/day-11/practice-questions.md)
 
 ## Day 01 — How data moves across a network
 
