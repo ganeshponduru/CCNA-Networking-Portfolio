@@ -176,7 +176,7 @@ After the preferred route was withdrawn, the Tata floating static default route 
 2. 192.168.14.4 — Tata next hop
 3. 192.168.45.5 — R5, Google simulation side
 
-The continuous-ping capture shows replies continuing after the interface shutdown. The class demonstration reported a brief loss of one packet during the switchover, followed by continued replies. The Airtel interface was later brought back up with `no shutdown`.
+The continuous-ping capture shows replies continuing after the interface shutdown. The screenshot shows continuous ping replies after the interface shutdown. The capture does not clearly show the exact number of packets lost during the switchover, so no packet-loss count is claimed. The Airtel interface was later brought back up with `no shutdown`.
 
 ## 4. Commands used for verification
 
