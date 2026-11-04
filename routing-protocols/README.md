@@ -1,11 +1,13 @@
 # Routing Protocols
 
-This folder contains the routing topics I learned in class and the labs I worked on during my CCNA training. I am keeping each class in its own day folder, with the notes and screenshots together.
+This section contains my notes and lab work on routing topics covered during my CCNA training. Each class has a separate folder with a short overview, topic-wise notes, lab observations, and revision questions.
 
-## Day 10 — Static Routing, Default Routing, and ISP Failover
+## Daily index
 
-In this class, I learned about static routes, default routes, administrative distance, and floating static routes. In the lab, I configured a dual-ISP topology using Airtel as the primary path and Tata as the backup path.
+| Day | Topics | Work documented |
+|---|---|---|
+| [Day 10](day-10/README.md) | Static routing, default routing, administrative distance, floating static routes, dual-ISP failover | Class notes, topology, routing-table observations, connectivity and failover tests |
 
-I tested connectivity from PC1 to the simulated destination `8.8.8.8`. I then shut down the Airtel-facing interface and checked the route taken by traceroute. The path changed to Tata.
+## How I organize this section
 
-- [Day 10 class notes and lab](day-10/README.md)
+The daily pages link to the detailed notes and practice questions. Lab observations are based on the configurations and outputs I captured. Class concepts are kept separate from what I verified in the lab.
