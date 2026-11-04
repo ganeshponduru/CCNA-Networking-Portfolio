@@ -1,152 +1,56 @@
-# Day 10 — Static Routing, Default Routing, and ISP Failover
+# Day 10 — Static Routing and Default Routing
 
-## What I learned in this class
+This day covers static routes, default routes, administrative distance, and floating static routes. The lab uses two ISP paths—Airtel and Tata—to provide a primary route and a backup route to a simulated Internet destination.
 
-In this class, I learned how routers use static routes and a default route to send traffic towards another network. We also discussed administrative distance and how a floating static route can be used as a backup when the primary route is no longer available.
+## Topics and notes
 
-The instructor explained the example using two ISPs:
-- Airtel as the primary connection.
-- Tata as the backup connection.
-
-The idea was to configure both paths so that traffic normally uses Airtel, but can move to Tata if the Airtel path goes down.
-
-## What I did in the lab
-
-I worked on a topology with an office LAN, two ISP routers (Airtel and Tata), and a router representing the Google destination. The goal of the lab was to give the PCs connectivity to the destination address `8.8.8.8`, then test whether the backup ISP path works when the primary path is shut down.
-
-![Day 10 lab topology](./day-10-topology.png)
-
-### IP addresses shown in my topology
-
-| Device / interface | IP address |
+| Topic | Notes |
 |---|---|
-| PC1 | 192.168.1.1/24 |
-| R1 office LAN (e3/0) | 192.168.1.100/24 |
-| R1 to Airtel (e3/3) | 192.168.13.1/24 |
-| R3 Airtel to R5 | 192.168.35.3/24 |
-| R5 Airtel-side interface | 192.168.35.5/24 |
-| R1 to Tata (e3/4) | 192.168.14.1/24 |
-| R4 Tata to R5 | 192.168.45.4/24 |
-| R5 Tata-side interface | 192.168.45.5/24 |
-| R5 Loopback0 | 8.8.8.8/32 |
+| Static routing | [Static route fundamentals and route configuration](static-routing.md) |
+| Default routing | [Default route, gateway of last resort, and route lookup](default-routing.md) |
+| Administrative distance and failover | [Floating static route and dual-ISP lab](floating-static-route-and-failover.md) |
+| Revision | [Important interview and practice questions](practice-questions.md) |
 
-PC1 received these settings in the displayed `show ip` output:
-- IP address: `192.168.1.1/24`
-- Default gateway: `192.168.1.100`
-- DNS: `8.8.8.1`
-- DHCP server: `192.168.1.100`
+## Lab overview
 
-## Static route and default route
+The topology contains the office LAN, R1 as the office router/DHCP server, R3 as Airtel, R4 as Tata, and R5 as the simulated Google destination. The PCs connect to the office LAN through Switch1.
 
-A static route is entered manually to tell a router how to reach a destination network. The general command format discussed in class is:
+![Day 10 lab topology](day-10-topology.png)
 
-```text
-ip route <destination-network> <subnet-mask> <next-hop>
-```
+## Lab observations
 
-A default route is used when the routing table does not have a more specific route for the destination:
+1. PC1 received its network settings: `192.168.1.1/24`, gateway `192.168.1.100`, and DHCP server `192.168.1.100`.
+2. PC1 successfully pinged `8.8.8.8`.
+3. The first traceroute showed the Airtel path: R1 (`192.168.1.100`) → Airtel (`192.168.13.3`) → R5 (`192.168.35.5`).
+4. I shut down R1's Airtel-facing Ethernet3/3 interface.
+5. The later traceroute showed the Tata path: R1 (`192.168.1.100`) → Tata (`192.168.14.4`) → R5 (`192.168.45.5`).
+6. The continuous ping screenshot shows successful replies during the test after the path change.
 
-```text
-ip route 0.0.0.0 0.0.0.0 <next-hop>
-```
+## Lab screenshots
 
-In this lab, R1 had two default routes. The route table showed Airtel as the active route:
+**PC1 addressing, ping, and initial traceroute**
 
-```text
-S* 0.0.0.0/0 [10/0] via 192.168.13.3
-```
+![PC1 addressing, ping, and initial traceroute](day-10-primary-ping-and-traceroute.png)
 
-The configured preference was:
-- Airtel next hop: `192.168.13.3`, administrative distance 10.
-- Tata next hop: `192.168.14.4`, administrative distance 20.
+**Airtel interface shutdown and traceroute through Tata**
 
-Because both routes are default routes for the same prefix, the route with the lower administrative distance is preferred. The higher-AD static route is called a floating static route; it can be used when the preferred route is withdrawn.
+![Airtel shutdown and Tata backup path](day-10-airtel-shutdown-and-failover.png)
 
-## What I observed during testing
+**Continuous ping test**
 
-### 1. PC1 reached 8.8.8.8
+![Continuous ping test](day-10-continuous-ping-test.png)
 
-I checked PC1's IP settings and then ran:
+**Router routing tables**
 
-```text
-ping 8.8.8.8
-```
+![Router routing tables](day-10-router-routing-tables.png)
 
-The screenshot shows successful replies from `8.8.8.8`. R1's own ping test also shows 5 successful replies out of 5.
+## Important lab distinction
 
-![PC1 IP settings and successful ping through the primary path](./day-10-primary-ping-and-traceroute.png)
+The address `8.8.8.8` is configured as a loopback destination on R5 in this topology. The successful ping proves connectivity to that simulated destination inside the lab. These screenshots do not demonstrate access to the real public Internet or a NAT configuration.
 
-### 2. Traffic initially used Airtel
+## Class and lab material
 
-I ran traceroute from PC1:
-
-```text
-trace 8.8.8.8
-```
-
-The hops shown were:
-1. `192.168.1.100` — R1, the office gateway.
-2. `192.168.13.3` — Airtel.
-3. `192.168.35.5` — R5, the simulated Google destination side.
-
-This showed that the initial path was through Airtel.
-
-### 3. I shut down the Airtel-facing interface
-
-On R1, I entered interface configuration mode for Ethernet3/3 and used `shutdown`. The console displayed the interface and line protocol changing to down.
-
-I also tested a ping from R1 after shutting the interface. The screenshot shows that R1 could still ping `8.8.8.8` successfully.
-
-![R1 Ethernet3/3 shutdown and interface state messages](./day-10-airtel-shutdown-and-failover.png)
-
-### 4. Traffic moved to Tata
-
-After the Airtel path went down, I ran traceroute again from PC1. The hops changed to:
-1. `192.168.1.100` — R1.
-2. `192.168.14.4` — Tata.
-3. `192.168.45.5` — R5, the simulated Google destination side.
-
-This showed that traffic was now using the Tata path instead of Airtel.
-
-![PC1 traceroute showing the Tata backup path](./day-10-airtel-shutdown-and-failover.png)
-
-The route-table screenshot from R3, R4, and R5 is also included for reference:
-
-![ISP router routing tables](./day-10-router-routing-tables.png)
-
-I also ran a continuous ping from PC1. The screenshot shows successful replies continuing during the test after the path change.
-
-![Continuous ping from PC1](./day-10-continuous-ping-test.png)
-
-## What I understood from this lab
-
-- A static route is manually configured on a router.
-- A default route is used when there is no more-specific matching route.
-- Administrative distance helps select between routes to the same destination prefix.
-- A floating static route can act as a backup route.
-- Ping helped me check whether the destination was reachable.
-- Traceroute helped me see which ISP path was being used.
-- Shutting down the Airtel-facing interface allowed me to test whether traffic could use the Tata backup path.
-
-## A note about the lab result
-
-In this topology, `8.8.8.8` is configured as a loopback address on R5. So this lab demonstrates successful connectivity to a simulated Internet destination inside the lab, not a connection to the real public Internet. The screenshots provided here do not show a NAT configuration.
-
-## Commands I used during verification
-
-```text
-show ip
-show ip route
-ping 8.8.8.8
-trace 8.8.8.8
-config terminal
-interface e3/3
-shutdown
-no shutdown
-```
-
-## Class material
-
-- Topic: Static Routing and Default Routing
+- Class topic: Static and Default Routing
 - Instructor: E. Ramesh Goud
 - Training: TungaBadra Networks
+- Lab goal: Provide PC connectivity to the simulated `8.8.8.8` destination and verify the backup ISP path.
