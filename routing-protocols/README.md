@@ -1,12 +1,11 @@
 # Routing Protocols
 
-This section contains my notes and lab work on routing. Each topic includes the concepts, configurations visible in the lab, routing-table observations, and verification results.
+This folder contains the routing topics I learned in class and the labs I worked on during my CCNA training. I am keeping each class in its own day folder, with the notes and screenshots together.
 
-## Day 10 — Static and default routing
+## Day 10 — Static Routing, Default Routing, and ISP Failover
 
-The Day 10 lab uses a dual-ISP topology with R3 (Airtel) and R4 (Tata) connected to R1, and both paths leading toward R5 (Google).
+In this class, I learned about static routes, default routes, administrative distance, and floating static routes. In the lab, I configured a dual-ISP topology using Airtel as the primary path and Tata as the backup path.
 
-- [Static routing](day-10/static-routing.md) — topology, static routes on R3/R4/R5, routing-table observations, and connectivity tests.
-- [Default routing](day-10/default-routing.md) — R1's installed default route via R3 and PC1's connectivity test to `8.8.8.8`.
+I tested connectivity from PC1 to the simulated destination `8.8.8.8`. I then shut down the Airtel-facing interface and checked the route taken by traceroute. The path changed to Tata.
 
-**Lab note:** The current R1 screenshot shows one default route via Airtel. A backup default route via Tata and an R1 failover test are not included in the captured evidence yet.
+- [Day 10 class notes and lab](day-10/README.md)
