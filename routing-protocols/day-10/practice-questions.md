@@ -1,10 +1,8 @@
 # Day 10 — Interview and Practice Questions
 
-This page covers the static routing, default routing, administrative distance, route selection, and floating static route topics from the Day 10 class and lab.
+This page covers static routing, default routing, administrative distance, route selection, floating static routes, and practical routing scenarios.
 
-The first six interview questions follow the instructor's PDF. Additional questions cover important interview concepts and the lab scenarios.
-
-## Part 1 — Interview questions from the class PDF
+## Part 1 — Core interview questions
 
 ### 1. Explain the purpose of routing protocols. What are they?
 
@@ -45,7 +43,7 @@ Common Cisco default administrative distances:
 
 AD compares route sources for the same prefix. It is not the same as a routing protocol metric.
 
-**Correction to the PDF:** Cisco's default AD for IS-IS is 115, not 15.
+Cisco's default administrative distance for IS-IS is 115.
 
 ### 3. How does the route-selection process work in a routing table?
 
@@ -401,7 +399,7 @@ No. In this lab topology, 8.8.8.8 is configured as a loopback destination on R5.
 
 **Answer:**
 
-The instructor's PDF explains that the lab uses static and default routes for practice. In real ISP-to-ISP Internet routing, BGP is used to exchange routes between autonomous systems. The lab simplifies that environment so the primary and backup forwarding paths can be practised and verified.
+The lab uses static and default routes to demonstrate primary and backup forwarding paths. In real ISP-to-ISP Internet routing, BGP is used to exchange routes between autonomous systems.
 
 ### 30. What evidence showed that the backup path was working?
 
