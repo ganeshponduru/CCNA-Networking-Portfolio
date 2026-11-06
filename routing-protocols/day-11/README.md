@@ -29,7 +29,7 @@ On R2, `show ip ospf neighbor` displays three neighbors in the FULL state:
 | 3.3.3.3 (R3) | 192.168.23.3 | GigabitEthernet2/0 | FULL/DR |
 | 5.5.5.5 (R5) | 192.168.25.5 | Ethernet3/0 | FULL/DR |
 
-![R2 OSPF routing table and neighbor verification](Screenshot%202026-11-04%20215258.png)
+![R2 OSPF routing table and neighbor verification](../../r2-ospf-neighbors.png)
 
 ## Routing-table verification
 
@@ -39,13 +39,13 @@ The following screenshots show the routing tables on the routers. Routes marked 
 
 The left terminal shows R1's connected networks and the ping test to R5's loopback address, 5.5.5.5. The right terminal shows R5's OSPF-learned routes to the Area 0 networks.
 
-![R1 and R5 routing tables and R1 ping test](Screenshot%202026-11-04%20214440.png)
+![R1 and R5 routing tables and R1 ping test](r1-r5-routing-and-ping.png)
 
 ### R3 and R4
 
 These outputs show the OSPF routes learned by R3 and R4, including routes to the remote loopback networks and the 192.168.25.0/24 network.
 
-![R3 and R4 routing tables](Screenshot%202026-11-04%20215138.png)
+![R3 and R4 routing tables](r3-r4-routing-tables.png)
 
 ## End-to-end connectivity test
 
@@ -66,7 +66,9 @@ The traceroute from R1 to 5.5.5.5 is the load-balancing test, not a routing-tabl
 
 The extended traceroute using 10 probes also shows responses through both paths. This is consistent with OSPF equal-cost multipath (ECMP) forwarding. The output demonstrates that probes use both paths; it does not establish whether load sharing is per-packet or per-destination.
 
-The traceroute/R5 verification screenshot will be placed here once that image is added to this repository. It is kept separate from the router routing-table screenshots above.
+![OSPF equal-cost load-balancing traceroute](ospf-load-balancing-traceroute.png)
+
+This screenshot shows the traceroute probes taking both available paths toward R5. It is kept separate from the router routing-table screenshots above.
 
 ## Verification commands
 
