@@ -1,6 +1,6 @@
 # Day 11 — Dynamic Routing and OSPF
 
-This section covers dynamic routing, routing protocol types, autonomous systems, OSPF operation, multi-area design, route selection, and verification.
+This section covers dynamic routing fundamentals and the OSPF configuration and verification completed in the lab.
 
 ## Topics and notes
 
@@ -11,69 +11,62 @@ This section covers dynamic routing, routing protocol types, autonomous systems,
 | OSPF path selection | [OSPF cost, route types, and equal-cost load balancing](ospf-cost-and-load-balancing.md) |
 | Revision | [Interview and practice questions](practice-questions.md) |
 
-## Main concepts
-
-- Dynamic routing protocols exchange routing information and learn remote networks automatically.
-- IGPs operate within an autonomous system; BGP is used to exchange routing information between autonomous systems.
-- OSPF is a link-state IGP that uses the Shortest Path First (SPF) algorithm.
-- OSPF routers discover neighbors, form adjacencies, exchange link-state information, build a link-state database, and calculate routes.
-- Area 0 is the OSPF backbone. A router connecting Area 0 and another area is an Area Border Router (ABR).
-
 ## Practical topology
 
-The lab uses five routers. R1, R2, R3, and R4 form the Area 0 portion of the topology. R2 also connects to R5 through the 192.168.25.0/24 network, which is assigned to Area 10. R2 therefore acts as the ABR between Area 0 and Area 10.
+The topology contains five routers. R1, R2, R3, and R4 are in Area 0. R2 connects Area 0 to R5 through the 192.168.25.0/24 network in Area 10, so R2 functions as the Area Border Router (ABR).
 
 ![OSPF lab topology](Screenshot%202026-11-02%20091748.png)
 
-## OSPF neighbor verification
+## OSPF configuration and neighbor verification
 
-The `show ip ospf neighbor` output on R2 lists three neighbors:
+OSPF process 10 is used in the lab. The routing and neighbor outputs below show the resulting OSPF operation after configuration.
 
-| Neighbor ID | Neighbor address | Interface on R2 | Observed state |
+On R2, `show ip ospf neighbor` displays three neighbors in the FULL state:
+
+| Neighbor ID | Neighbor address | R2 interface | State |
 |---|---|---|---|
-| 4.4.4.4 | 192.168.24.4 | GigabitEthernet1/0 | FULL/DR |
-| 3.3.3.3 | 192.168.23.3 | GigabitEthernet2/0 | FULL/DR |
-| 5.5.5.5 | 192.168.25.5 | Ethernet3/0 | FULL/DR |
+| 4.4.4.4 (R4) | 192.168.24.4 | GigabitEthernet1/0 | FULL/DR |
+| 3.3.3.3 (R3) | 192.168.23.3 | GigabitEthernet2/0 | FULL/DR |
+| 5.5.5.5 (R5) | 192.168.25.5 | Ethernet3/0 | FULL/DR |
 
-All three displayed adjacencies reached the FULL state. The neighbor output confirms that R2 formed OSPF adjacencies with R3, R4, and R5.
+![R2 OSPF routing table and neighbor verification](Screenshot%202026-11-04%20215258.png)
 
-![R2 OSPF routing table and neighbor states](Screenshot%202026-11-04%20215258.png)
+## Routing-table verification
 
-## Routing-table observations
+The following screenshots show the routing tables on the routers. Routes marked `O` are OSPF routes, while `O IA` identifies OSPF inter-area routes. The displayed OSPF routes have an administrative distance of 110.
 
-The router outputs show OSPF-learned routes marked with `O` and inter-area routes marked with `O IA`.
+### R1 and R5
 
-- R3 learns remote loopbacks and networks through its OSPF neighbors.
-- R4 learns remote loopbacks and networks through its OSPF neighbors.
-- R2 learns the 5.5.5.5/32 loopback through R5 at 192.168.25.5.
-- R5 learns the Area 0 loopbacks and networks as inter-area routes through R2 at 192.168.25.2.
-- OSPF routes in the displayed routing tables use administrative distance 110.
+The left terminal shows R1's connected networks and the ping test to R5's loopback address, 5.5.5.5. The right terminal shows R5's OSPF-learned routes to the Area 0 networks.
 
-![R1 and R5 routing tables with ping test](Screenshot%202026-11-04%20214440.png)
+![R1 and R5 routing tables and R1 ping test](Screenshot%202026-11-04%20214440.png)
 
-![R3 and R4 OSPF routing tables](Screenshot%202026-11-04%20215138.png)
+### R3 and R4
+
+These outputs show the OSPF routes learned by R3 and R4, including routes to the remote loopback networks and the 192.168.25.0/24 network.
+
+![R3 and R4 routing tables](Screenshot%202026-11-04%20215138.png)
 
 ## End-to-end connectivity test
 
-From R1, the destination 5.5.5.5 was tested using ping.
+R1 was used to test reachability to R5's loopback address, 5.5.5.5.
 
-- The first test showed 2 successful replies out of 5 (40%). OSPF neighbor state-change messages appeared during this period, indicating that adjacencies were still transitioning to FULL.
-- A subsequent ping test showed 5 successful replies out of 5 (100%).
+- The first ping attempt received 2 replies out of 5 (40%) while OSPF neighbor state changes were still appearing.
+- The subsequent ping received 5 replies out of 5 (100%).
 
-This demonstrates successful reachability from R1 to R5's loopback after OSPF convergence in the lab.
+The successful second test confirms end-to-end IP reachability from R1 to R5 after OSPF converged.
 
 ## OSPF equal-cost load balancing
 
-The traceroute from R1 to 5.5.5.5 shows traffic taking both available paths through the Area 0 topology.
+The traceroute from R1 to 5.5.5.5 is the load-balancing test, not a routing-table screenshot. It shows probe responses through both available paths:
 
-- At the first hop, traceroute probes receive responses from both 192.168.13.3 (R3) and 192.168.14.4 (R4).
-- At the second hop, probes receive responses from both 192.168.23.2 and 192.168.24.2 (R2's two links toward the Area 0 routers).
-- The final hop reaches 192.168.25.5, the link address on R5.
-- The extended traceroute using 10 probes shows repeated responses through both first-hop paths and both second-hop addresses.
-- On R5, the neighbor output shows R2 (2.2.2.2) in the FULL/BDR state over Ethernet3/0.
-- R5's routing table shows inter-area routes to the Area 0 loopbacks and networks through 192.168.25.2.
+- First hop: 192.168.13.3 (R3) and 192.168.14.4 (R4).
+- Second hop: 192.168.23.2 and 192.168.24.2.
+- Final hop: 192.168.25.5 (R5).
 
-These observations are consistent with OSPF equal-cost multipath (ECMP) forwarding across the two available routes from R1. The traceroute output demonstrates that probes are using both paths; it does not by itself establish whether the router is configured for per-packet or per-destination load sharing.
+The extended traceroute using 10 probes also shows responses through both paths. This is consistent with OSPF equal-cost multipath (ECMP) forwarding. The output demonstrates that probes use both paths; it does not establish whether load sharing is per-packet or per-destination.
+
+The traceroute/R5 verification screenshot will be placed here once that image is added to this repository. It is kept separate from the router routing-table screenshots above.
 
 ## Verification commands
 
@@ -88,7 +81,3 @@ ping 5.5.5.5
 traceroute 5.5.5.5
 traceroute 5.5.5.5 probe 10
 ```
-
-## Load-balancing screenshot
-
-The new traceroute and R5 verification screenshot is pending addition to the repository. The observations above are documented from the screenshot provided.
