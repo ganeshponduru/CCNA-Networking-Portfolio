@@ -27,7 +27,7 @@ The lab uses five routers. R1, R2, R3, and R4 form the Area 0 portion of the top
 
 ## OSPF neighbor verification
 
-The show ip ospf neighbor output on R2 lists three neighbors:
+The `show ip ospf neighbor` output on R2 lists three neighbors:
 
 | Neighbor ID | Neighbor address | Interface on R2 | Observed state |
 |---|---|---|---|
@@ -41,12 +41,12 @@ All three displayed adjacencies reached the FULL state. The neighbor output conf
 
 ## Routing-table observations
 
-The router outputs show OSPF-learned routes marked with O and inter-area routes marked with O IA.
+The router outputs show OSPF-learned routes marked with `O` and inter-area routes marked with `O IA`.
 
 - R3 learns remote loopbacks and networks through its OSPF neighbors.
 - R4 learns remote loopbacks and networks through its OSPF neighbors.
-- R2 has an inter-area route to the 5.5.5.5/32 loopback through R5 at 192.168.25.5.
-- R5 learns the Area 0 loopbacks and networks through R2 at 192.168.25.2.
+- R2 learns the 5.5.5.5/32 loopback through R5 at 192.168.25.5.
+- R5 learns the Area 0 loopbacks and networks as inter-area routes through R2 at 192.168.25.2.
 - OSPF routes in the displayed routing tables use administrative distance 110.
 
 ![R1 and R5 routing tables with ping test](Screenshot%202026-11-04%20214440.png)
@@ -62,6 +62,19 @@ From R1, the destination 5.5.5.5 was tested using ping.
 
 This demonstrates successful reachability from R1 to R5's loopback after OSPF convergence in the lab.
 
+## OSPF equal-cost load balancing
+
+The traceroute from R1 to 5.5.5.5 shows traffic taking both available paths through the Area 0 topology.
+
+- At the first hop, traceroute probes receive responses from both 192.168.13.3 (R3) and 192.168.14.4 (R4).
+- At the second hop, probes receive responses from both 192.168.23.2 and 192.168.24.2 (R2's two links toward the Area 0 routers).
+- The final hop reaches 192.168.25.5, the link address on R5.
+- The extended traceroute using 10 probes shows repeated responses through both first-hop paths and both second-hop addresses.
+- On R5, the neighbor output shows R2 (2.2.2.2) in the FULL/BDR state over Ethernet3/0.
+- R5's routing table shows inter-area routes to the Area 0 loopbacks and networks through 192.168.25.2.
+
+These observations are consistent with OSPF equal-cost multipath (ECMP) forwarding across the two available routes from R1. The traceroute output demonstrates that probes are using both paths; it does not by itself establish whether the router is configured for per-packet or per-destination load sharing.
+
 ## Verification commands
 
 ```text
@@ -73,8 +86,9 @@ show ip route
 show ip protocols
 ping 5.5.5.5
 traceroute 5.5.5.5
+traceroute 5.5.5.5 probe 10
 ```
 
-## Load balancing
+## Load-balancing screenshot
 
-OSPF cost and equal-cost paths are covered in [OSPF cost and load balancing](ospf-cost-and-load-balancing.md). The additional load-balancing screenshots and observations will be added after that part of the lab is completed and captured.
+The new traceroute and R5 verification screenshot is pending addition to the repository. The observations above are documented from the screenshot provided.
