@@ -23,7 +23,7 @@ This section covers dynamic routing, routing protocol types, autonomous systems,
 
 The lab uses five routers. R1, R2, R3, and R4 form the Area 0 portion of the topology. R2 also connects to R5 through the 192.168.25.0/24 network, which is assigned to Area 10. R2 therefore acts as the ABR between Area 0 and Area 10.
 
-![OSPF lab topology](Screenshot%202026-11-04%20214229.png)
+![OSPF lab topology](Screenshot%202026-11-02%20091748.png)
 
 ## OSPF neighbor verification
 
