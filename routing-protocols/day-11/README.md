@@ -15,7 +15,7 @@ This section covers dynamic routing fundamentals and the OSPF configuration and 
 
 The topology contains five routers. R1, R2, R3, and R4 are in Area 0. R2 connects Area 0 to R5 through the 192.168.25.0/24 network in Area 10, so R2 functions as the Area Border Router (ABR).
 
-![OSPF lab topology](Screenshot%202026-11-02%20091748.png)
+![OSPF lab topology](../../ospf-topology.png)
 
 ## OSPF configuration and neighbor verification
 
