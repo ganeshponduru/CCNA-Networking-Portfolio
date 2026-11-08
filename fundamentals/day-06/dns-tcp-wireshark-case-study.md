@@ -97,14 +97,14 @@ The screenshots below are the evidence files uploaded to this folder. I have kep
 
 ### Uploaded Wireshark screenshots
 
-![Wireshark screenshot 1](Screenshot%202026-09-09%20085816.png)
+![Wireshark screenshot 1](screenshots/Screenshot%202026-09-09%20085816.png)
 
-![Wireshark screenshot 2](Screenshot%202026-09-09%20090300.png)
+![Wireshark screenshot 2](screenshots/Screenshot%202026-09-09%20090300.png)
 
-![Wireshark screenshot 3](Screenshot%202026-09-09%20120929.png)
+![Wireshark screenshot 3](screenshots/Screenshot%202026-09-09%20120929.png)
 
-![Wireshark screenshot 4](Screenshot%202026-09-09%20121037.png)
+![Wireshark screenshot 4](screenshots/Screenshot%202026-09-09%20121037.png)
 
-![Wireshark screenshot 5](Screenshot%202026-09-09%20121125.png)
+![Wireshark screenshot 5](screenshots/Screenshot%202026-09-09%20121125.png)
 
-![Wireshark screenshot 6](Screenshot%202026-09-10%20111315.png)
+![Wireshark screenshot 6](screenshots/Screenshot%202026-09-10%20111315.png)
