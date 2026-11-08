@@ -19,11 +19,6 @@ I'm learning what sits behind a network link: power supplies, interfaces, transc
 - Modular chassis can use line/interface cards and separate control-plane or routing-engine modules. Terminology differs by vendor and platform.
 - Redundant power supplies or control modules can improve availability, but the actual redundancy behavior depends on the model and configuration.
 - For an interface that stays down, I should verify both ends, optics, fiber polarity, compatibility, port configuration, alarms, and the physical path before assuming a cause.
-
-## Practice status
-
-These are study notes based on the lesson transcript and the supplied hardware handout. I have **not** marked a physical hardware troubleshooting lab or a console-login lab as completed here. I will add evidence when I personally perform and document those steps.
-
 ## Technical clarifications I kept in mind
 
 - SFP reach is not universally 35–40 km. It depends on the transceiver specification, fiber, wavelength, connector losses, and link budget.
