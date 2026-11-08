@@ -20,19 +20,19 @@ The lab uses two routers:
 | R1 | 1.1.1.1 | 192.168.1.1/24 |
 | R2 | 2.2.2.2 | 192.168.1.2/24 |
 
-Both routers run OSPF process 10 in Area 0. They exchange OSPF packets over the 192.168.1.0/24 network. Hello packets use the OSPF AllSPFRouters multicast address 224.0.0.5.
+Both routers run OSPF process 10 in Area 0. They exchange OSPF packets over the 192.168.1.0/24 network. Hello packets use the OSPF AllSPFRouters multicast address 224.0.0.5.\n\n![OSPF adjacency process topology](ospf-adjacency-process-topology.png)
 
 ## Hello packet verification
 
 The Hello packet capture shows the router IDs, Area ID, network mask, Hello interval, Dead interval, router priority, and neighbor information advertised by the routers.
 
-The displayed Hello and Dead intervals are 10 seconds and 40 seconds respectively. Both routers use priority 1. The capture identifies R1 as DR and R2 as BDR for this network.
+The displayed Hello and Dead intervals are 10 seconds and 40 seconds respectively. Both routers use priority 1. The capture identifies R1 as DR and R2 as BDR for this network.\n\n![OSPF Hello packet details](ospf-hello-packet-details.png)
 
 ## Database Description packets
 
 The DBD captures show the routers exchanging database summary information and LSA headers. The later exchange shows R2 (Router ID 2.2.2.2) with the Master bit set and R1 (Router ID 1.1.1.1) with the Master bit clear. This identifies R2 as the master and R1 as the slave in the displayed exchange.
 
-The DBD packets also show an interface MTU of 1500. An MTU mismatch can prevent an OSPF adjacency from progressing; the exact behavior depends on the platform and configuration.
+The DBD packets also show an interface MTU of 1500. An MTU mismatch can prevent an OSPF adjacency from progressing; the exact behavior depends on the platform and configuration.\n\n![OSPF Database Description packet details](ospf-database-description-packets.png)\n\nThe subsequent DBD exchange shows R2 acting as master and R1 as slave, with Router-LSA headers included in the database summary.\n\n![OSPF DBD LSA header exchange](ospf-dbd-lsa-header-exchange.png)
 
 ## Link-state request, update, and acknowledgment
 
@@ -42,7 +42,7 @@ The packet capture shows the following exchange:
 2. **LSU (Type 4):** R1 sends a Link State Update containing its Router-LSA. The displayed LSA includes the loopback 1.1.1.1 and the 192.168.1.0/24 network.
 3. **LSAck (Type 5):** An acknowledgment packet carries the LSA header for the Router-LSA advertised by R2.
 
-This exchange demonstrates how OSPF routers request missing link-state information, send LSAs, and acknowledge received LSAs.
+This exchange demonstrates how OSPF routers request missing link-state information, send LSAs, and acknowledge received LSAs.\n\n![OSPF LSR, LSU, and LSAck packets](ospf-lsr-lsu-lsack-packets.png)\n\nThe broader packet capture also shows OSPF Hello, DBD, LSR, LSU, and LSAck traffic between the routers.\n\n![OSPF packet exchange in Wireshark](ospf-packet-exchange-wireshark.png)
 
 ## OSPF database and routing-table verification
 
@@ -50,7 +50,7 @@ The router outputs show Router-LSAs in the OSPF link-state database. The routing
 
 - R1 learns 2.2.2.2/32 through R2.
 - R2 learns 1.1.1.1/32 through R1.
-- Both routers have the connected 192.168.1.0/24 network.
+- Both routers have the connected 192.168.1.0/24 network.\n\n![OSPF database and routing-table outputs](ospf-database-and-routing-tables.png)
 
 ## Verification commands
 
@@ -60,17 +60,4 @@ show ip ospf interface
 show ip ospf database
 show ip route
 show ip protocols
-```
-
-## Related screenshots
-
-The screenshot filenames identified for this lab are:
-
-- `ospf-adjacency-process-topology.png`
-- `ospf-packet-exchange-wireshark.png`
-- `ospf-database-and-routing-tables.png`
-- `ospf-hello-packet-details.png`
-- `ospf-database-description-packets.png`
-- `ospf-dbd-lsa-header-exchange.png`
-- `ospf-lsr-lsu-lsack-packets.png`
-
+```\n
