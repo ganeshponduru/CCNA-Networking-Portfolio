@@ -70,6 +70,12 @@ The router outputs show Router-LSAs in the OSPF link-state database. The routing
 
 ![OSPF database and routing-table outputs](screenshots/ospf-database-and-routing-tables.png)
 
+## Additional scenario: DR and BDR election
+
+A separate three-router broadcast-network scenario demonstrates how OSPF elects a Designated Router (DR), Backup Designated Router (BDR), and DROther when all interfaces have the same priority.
+
+[Read the OSPF DR and BDR election scenario](dr-bdr-election-scenario.md)
+
 ## Verification commands
 
 ```text
