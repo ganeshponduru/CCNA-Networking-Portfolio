@@ -8,9 +8,9 @@ I used VPCS hosts, a switch, a router, and Wireshark to study how ARP and ICMP w
 
 PC1 (`192.168.1.1/24`) pinged PC2 (`192.168.1.2/24`). My capture shows ARP resolution followed by ICMP Echo Requests and Replies.
 
-![Same-subnet topology](./Screenshot%202026-10-18%20232631.png)
+![Same-subnet topology](./screenshots/Screenshot%202026-10-18%20232631.png)
 
-![Successful ping and Wireshark packet list](./Screenshot%202026-10-18%20233353.png)
+![Successful ping and Wireshark packet list](./screenshots/Screenshot%202026-10-18%20233353.png)
 
 In the [packet-level walkthrough](packet-level-walkthrough.md#case-1--pc1-pings-pc2-on-the-same-subnet), I explain the ARP request, ARP reply, Ethernet addresses, IPv4 fields, and ICMP messages using the expanded packet screenshots.
 
@@ -18,13 +18,13 @@ In the [packet-level walkthrough](packet-level-walkthrough.md#case-1--pc1-pings-
 
 I configured PC3 (`192.168.1.1/24`) and PC4 (`192.168.20.1/24`) on separate networks connected through R1.
 
-![Different-subnet topology and gateway addresses](./Screenshot%202026-10-18%20235903.png)
+![Different-subnet topology and gateway addresses](./screenshots/Screenshot%202026-10-18%20235903.png)
 
 My Wireshark capture on the PC3-to-R1 G1/0 link shows ICMP Echo Requests from `192.168.1.1` to `192.168.20.1` and Echo Replies in the reverse direction. A separate capture shows PC3 resolving its default gateway `192.168.1.100` and successfully pinging that gateway.
 
-![ICMP exchange between PC3 and PC4](./Screenshot%202026-10-19%20005453.png)
+![ICMP exchange between PC3 and PC4](./screenshots/Screenshot%202026-10-19%20005453.png)
 
-![ARP resolution and ping to the default gateway](./Screenshot%202026-10-19%20010125.png)
+![ARP resolution and ping to the default gateway](./screenshots/Screenshot%202026-10-19%20010125.png)
 
 These screenshots support the observations stated above, but they do not show every packet on both router links. The detailed walkthrough distinguishes captured evidence from the expected routing sequence.
 
@@ -32,7 +32,7 @@ These screenshots support the observations stated above, but they do not show ev
 
 This separate capture shows repeated broadcast packets labelled as gratuitous ARP for several IPv4 addresses. The screenshot alone does not establish an IP conflict or the reason for each announcement.
 
-[View the gratuitous ARP capture](./Screenshot%202026-10-19%20005413.png)
+[View the gratuitous ARP capture](./screenshots/Screenshot%202026-10-19%20005413.png)
 
 ## What I learned
 
