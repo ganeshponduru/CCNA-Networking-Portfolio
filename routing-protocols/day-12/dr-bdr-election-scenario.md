@@ -2,7 +2,7 @@
 
 ## Topology
 
-![Three-router DR and BDR election topology](screenshots/dr-bdr-election-topology.png)
+![Three-router DR and BDR election topology](screenshots/r2-after-dr-failure.png)
 
 Three OSPF routers are connected to the same Ethernet broadcast network through a switch. All three interfaces belong to Area 0 and use OSPF process 10.
 
@@ -16,13 +16,13 @@ All three routers use the same OSPF interface priority. Therefore, the highest R
 
 ## DR and BDR roles before the failure
 
-![R2 OSPF interface state before R3 is turned off](screenshots/r2-before-dr-failure.png)
+![R2 OSPF interface state before R3 is turned off](screenshots/dr-bdr-election-topology.png)
 
 The initial output from R2 shows that its GigabitEthernet1/0 interface is in the BDR state. R3 (Router ID 3.3.3.3) is the DR, and R2 (Router ID 2.2.2.2) is the BDR. R2 has one adjacent neighbor, R3, in the DR role.
 
 ## DR failure and BDR takeover
 
-![R2 OSPF interface state after R3 is turned off](screenshots/r2-after-dr-failure.png)
+![R2 OSPF interface state after R3 is turned off](screenshots/r2-before-dr-failure.png)
 
 R3 is then turned off. R2 stops receiving Hello packets from R3 and detects the neighbor failure when the Dead timer expires. The console reports the neighbor-down event due to Dead timer expiration.
 
