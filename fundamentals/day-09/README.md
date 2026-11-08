@@ -26,19 +26,19 @@ The Offer shows `192.168.1.1` as the offered client address. This should be comp
 
 ### R1–Switch1 screenshots
 
-![R1–Switch1 DHCP capture 1](./Screenshot%202026-10-23%20225043.png)
+![R1–Switch1 DHCP capture 1](./screenshots/Screenshot%202026-10-23%20225043.png)
 
-![R1–Switch1 DHCP capture 2](./Screenshot%202026-10-23%20225205.png)
+![R1–Switch1 DHCP capture 2](./screenshots/Screenshot%202026-10-23%20225205.png)
 
-![R1–Switch1 DHCP capture 3](./Screenshot%202026-10-23%20225504.png)
+![R1–Switch1 DHCP capture 3](./screenshots/Screenshot%202026-10-23%20225504.png)
 
-![R1–Switch1 DHCP capture 4](./Screenshot%202026-10-23%20225640.png)
+![R1–Switch1 DHCP capture 4](./screenshots/Screenshot%202026-10-23%20225640.png)
 
-![R1–Switch1 DHCP capture 5](./Screenshot%202026-10-23%20225849.png)
+![R1–Switch1 DHCP capture 5](./screenshots/Screenshot%202026-10-23%20225849.png)
 
-![R1–Switch1 DHCP capture 6](./Screenshot%202026-10-23%20231757.png)
+![R1–Switch1 DHCP capture 6](./screenshots/Screenshot%202026-10-23%20231757.png)
 
-![R1–Switch1 DHCP capture 7](./Screenshot%202026-10-23%20232506.png)
+![R1–Switch1 DHCP capture 7](./screenshots/Screenshot%202026-10-23%20232506.png)
 
 ## R2–Switch1 capture
 
@@ -53,7 +53,7 @@ The packet list shows broadcast IPv4 destinations for all four DHCP messages.
 
 The console in the screenshot shows R2 receiving `192.168.1.3/24` on `GigabitEthernet1/0`.
 
-![R2–Switch1 DHCP capture and R2 console](./Screenshot%202026-10-23%20233448.png)
+![R2–Switch1 DHCP capture and R2 console](./screenshots/Screenshot%202026-10-23%20233448.png)
 
 The R2 screenshot does not show the expanded BOOTP flags or Ethernet destination fields, so the exact reason for its broadcast Offer and ACK is not confirmed.
 
