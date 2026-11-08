@@ -20,7 +20,3 @@ A host compares the network portion of its own IP address and the destination IP
 ## Important distinction
 
 Classful addressing is historical background. For modern network planning, I need to understand CIDR prefixes and choose a subnet based on the required number of hosts and the overall addressing plan.
-
-## Practice status
-
-The calculations here are written study examples. I have not claimed to complete a router, switch, or Packet Tracer lab. I'll add practical evidence when I perform the configuration and verify the results.
