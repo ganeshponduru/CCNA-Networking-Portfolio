@@ -19,11 +19,6 @@ Today I studied how a computer resolves a domain name, how a DNS query appears i
 5. For a TCP connection, the usual opening sequence is SYN, SYN-ACK, ACK.
 6. TCP flags help manage connection setup, data handling, and connection closure.
 7. Packet captures help me compare what I expect to happen with the traffic that is actually visible.
-
-## Practice status
-
-I reviewed Wireshark screenshots showing a DNS query/response, TCP flags and payload, and an SSH connection sequence. I documented only the fields visible in those screenshots in the [case study](dns-tcp-wireshark-case-study.md). The six uploaded screenshots are embedded in the [case study](dns-tcp-wireshark-case-study.md). The write-up separates visible packet evidence from conclusions that the screenshots cannot establish.
-
 ## Points I clarified while studying
 
 - DNS is a distributed system, not one server per domain. A domain can have multiple records, servers, and changing answers.
