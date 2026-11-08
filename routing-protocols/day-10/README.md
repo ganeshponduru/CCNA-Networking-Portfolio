@@ -15,7 +15,7 @@ This section covers static routes, default routes, administrative distance, and 
 
 The topology contains the office LAN, R1 as the office router/DHCP server, R3 as Airtel, R4 as Tata, and R5 as the simulated Google destination. The PCs connect to the office LAN through Switch1.
 
-![Lab topology](day-10-topology.png)
+![Lab topology](screenshots/day-10-topology.png)
 
 ## Lab observations
 
@@ -30,19 +30,19 @@ The topology contains the office LAN, R1 as the office router/DHCP server, R3 as
 
 **PC1 addressing, ping, and initial traceroute**
 
-![PC1 addressing, ping, and initial traceroute](day-10-primary-ping-and-traceroute.png)
+![PC1 addressing, ping, and initial traceroute](screenshots/day-10-primary-ping-and-traceroute.png)
 
 **Airtel interface shutdown and traceroute through Tata**
 
-![Airtel shutdown and Tata backup path](day-10-airtel-shutdown-and-failover.png)
+![Airtel shutdown and Tata backup path](screenshots/day-10-airtel-shutdown-and-failover.png)
 
 **Continuous ping test**
 
-![Continuous ping test](day-10-continuous-ping-test.png)
+![Continuous ping test](screenshots/day-10-continuous-ping-test.png)
 
 **Router routing tables**
 
-![Router routing tables](day-10-router-routing-tables.png)
+![Router routing tables](screenshots/day-10-router-routing-tables.png)
 
 ## Important lab distinction
 
