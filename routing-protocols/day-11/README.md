@@ -15,7 +15,7 @@ This section covers dynamic routing fundamentals and the OSPF configuration and 
 
 The topology contains five routers. R1, R2, R3, and R4 are in Area 0. R2 connects Area 0 to R5 through the 192.168.25.0/24 network in Area 10, so R2 functions as the Area Border Router (ABR).
 
-![OSPF lab topology](../../ospf-topology.png)
+![OSPF lab topology](screenshots/ospf-topology.png)
 
 ## OSPF configuration and neighbor verification
 
@@ -29,7 +29,7 @@ On R2, `show ip ospf neighbor` displays three neighbors in the FULL state:
 | 3.3.3.3 (R3) | 192.168.23.3 | GigabitEthernet2/0 | FULL/DR |
 | 5.5.5.5 (R5) | 192.168.25.5 | Ethernet3/0 | FULL/DR |
 
-![R2 OSPF routing table and neighbor verification](../../r2-ospf-neighbors.png)
+![R2 OSPF routing table and neighbor verification](screenshots/r2-ospf-neighbors.png)
 
 ## Routing-table verification
 
@@ -39,13 +39,13 @@ The following screenshots show the routing tables on the routers. Routes marked 
 
 The left terminal shows R1's connected networks and the ping test to R5's loopback address, 5.5.5.5. The right terminal shows R5's OSPF-learned routes to the Area 0 networks.
 
-![R1 and R5 routing tables and R1 ping test](r1-r5-routing-and-ping.png)
+![R1 and R5 routing tables and R1 ping test](screenshots/r1-r5-routing-and-ping.png)
 
 ### R3 and R4
 
 These outputs show the OSPF routes learned by R3 and R4, including routes to the remote loopback networks and the 192.168.25.0/24 network.
 
-![R3 and R4 routing tables](r3-r4-routing-tables.png)
+![R3 and R4 routing tables](screenshots/r3-r4-routing-tables.png)
 
 ## End-to-end connectivity test
 
@@ -66,7 +66,7 @@ The traceroute from R1 to 5.5.5.5 is the load-balancing test, not a routing-tabl
 
 The extended traceroute using 10 probes also shows responses through both paths. This is consistent with OSPF equal-cost multipath (ECMP) forwarding. The output demonstrates that probes use both paths; it does not establish whether load sharing is per-packet or per-destination.
 
-![OSPF equal-cost load-balancing traceroute](ospf-load-balancing-traceroute.png)
+![OSPF equal-cost load-balancing traceroute](screenshots/ospf-load-balancing-traceroute.png)
 
 This screenshot shows the traceroute probes taking both available paths toward R5. It is kept separate from the router routing-table screenshots above.
 
