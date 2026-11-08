@@ -20,7 +20,3 @@ In these notes, I organized what I learned about how networks move data, how swi
 - A subnet mask helps identify the network portion of an IPv4 address.
 - Binary conversion is useful for understanding IPv4 octets and subnet masks.
 - Class A/B/C addressing is useful historical background, but modern networks are planned with CIDR prefixes.
-
-## Practice status
-
-These files document my current understanding of the concepts. I have not marked a Packet Tracer or physical-network lab as completed. I'll add configurations, screenshots, and results after I perform and verify the practical work.
