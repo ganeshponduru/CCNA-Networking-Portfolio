@@ -13,6 +13,8 @@ Connectivity was already verified in the lab. This documentation focuses on the 
 
 ## Topology and area roles
 
+![Day 13 multi-area OSPF topology](screenshots/day-13-topology.png)
+
 The multi-area design contains:
 
 | Area | Routers |
@@ -27,15 +29,25 @@ Based on the interface-area assignments used in this run:
 - **R4** connects Area 0 and Area 10 and operates as an ABR.
 - **R2** remains an internal router in Area 0. Its G2/0 interface was deliberately assigned to Area 0, so R2 does not act as an ABR in this configuration.
 
-## Captured outputs
+## LSA database captures
 
-The screenshots reviewed for this analysis cover:
+### OSPF database on R1, R5, and R7
 
-- OSPF database output from R1, R5, and R7.
-- OSPF database output from R2 and R3.
-- OSPF interface-area assignments on R2, R4, and R5.
+![OSPF LSA database output from R1, R5, and R7](screenshots/lsa-database-r1-r5-r7.png)
 
-The observations below are based on those captures. The image files themselves still need to be added to the repository; no broken image links are included.
+These outputs show the Router Link States, Net Link States, and Summary Net Link States visible on routers in Areas 0, 10, and 20.
+
+### OSPF database on R2 and R3
+
+![OSPF LSA database output from R2 and R3](screenshots/ospf-lsa-database-r2-r3.png)
+
+R2's captured output shows its Area 0 database. R3's output shows the Area 0 and Area 20 database information.
+
+### OSPF interface area assignments
+
+![OSPF interface area assignments on R2, R4, and R5](screenshots/ospf-interface-area-assignments-r2-r4-r5.png)
+
+This output confirms the area assignments used in the experiment: R2's shown interfaces are in Area 0, R4 has interfaces in Areas 0 and 10, and R5's shown interface is in Area 10.
 
 ## Main observations
 
