@@ -131,11 +131,6 @@ O E2 8.8.8.8 [110/1] via 192.168.45.4
 7. R8 learns internal prefixes through BGP after OSPF-to-BGP redistribution.
 8. PC1 successfully pings both the internal loopback 7.7.7.7 and the external test loopback 8.8.8.8.
 
-## Important scope note
-
-The address 8.8.8.8 is configured as Loopback0 on the simulated R8 router. The successful test is therefore reachability to a lab endpoint; it is not a test of access to the real public Google DNS service.
-
-Stub, totally stubby, and NSSA configurations are not included here. They are reserved for the next lab.
 
 ## Verification commands
 
