@@ -40,7 +40,17 @@ The eBGP session is configured between R1 and R8 over 192.168.18.0/24:
 
 R8 advertises 8.8.8.8/32 through BGP. R1 learns this prefix as a BGP route and redistributes BGP routes into OSPF. R1 also redistributes OSPF routes into BGP so R8 can learn internal OSPF prefixes.
 
-The configured redistribution statements shown in the lab material are:
+Before redistribution into OSPF, R1's routing table shows the external prefix as a BGP route:
+
+```text
+B 8.8.8.8 [20/0] via 192.168.18.8
+```
+
+This is the starting point for the redistribution: R1 has learned the external prefix from R8 through BGP.
+
+![R1 routing table showing the BGP route before OSPF redistribution](screenshots/r1-bgp-route-before-ospf-redistribution.png)
+
+The configured redistribution statements are:
 
 ```text
 router ospf 110
@@ -50,7 +60,7 @@ router bgp 100
  redistribute ospf 110
 ```
 
-These statements show both redistribution directions. The routing-table captures provide the practical verification.
+These statements show both redistribution directions. The remaining routing-table and connectivity captures provide the practical verification.
 
 ## ASBR and ABR identification
 
@@ -89,7 +99,9 @@ This confirms that the external prefix has entered OSPF and is installed on R5 a
 
 ![R5 routing table showing the OSPF E2 route to 8.8.8.8](screenshots/r5-ospf-external-e2-route.png)
 
-## Connectivity verification
+## Reverse redistribution and end-to-end connectivity
+
+R8's routing table contains BGP routes to internal OSPF prefixes through R1 (192.168.18.1). This is consistent with the OSPF-to-BGP redistribution configured on R1.
 
 PC1 receives its address through DHCP:
 
@@ -102,23 +114,11 @@ The traceroute output shows the path through the Area 10 side, R2, the backbone,
 
 ![R8 BGP routes and PC1 ping and traceroute tests](screenshots/r8-bgp-routes-and-pc1-connectivity.png)
 
-## Routing-table observations
-
-Before redistribution into OSPF, R1's routing table shows the external destination as a BGP route:
-
-```text
-B 8.8.8.8 [20/0] via 192.168.18.8
-```
-
-After redistribution, R5 installs the same destination as an OSPF E2 route:
+After redistribution, R5 installs the external destination as an OSPF E2 route:
 
 ```text
 O E2 8.8.8.8 [110/1] via 192.168.45.4
 ```
-
-R8's routing table also shows BGP routes to internal OSPF prefixes through R1, which is consistent with OSPF-to-BGP redistribution.
-
-![R1 routing table showing the BGP route before OSPF redistribution](screenshots/r1-bgp-route-before-ospf-redistribution.png)
 
 ## What this lab demonstrates
 
