@@ -29,6 +29,7 @@ I want to explain networking concepts in my own words, solve addressing problems
 | [Day 11](routing-protocols/day-11/README.md) | Dynamic routing, IGP and EGP, autonomous systems, OSPF, multi-area routing, cost, and ECMP | Concept notes, configuration reference, verification commands, and practice questions |
 | [Day 12](routing-protocols/day-12/README.md) | OSPF packet types, adjacency states, and DR/BDR election | Packet-capture analysis, adjacency scenario, and revision questions |
 | [Day 13](routing-protocols/day-13/README.md) | Multi-area OSPF and LSA database analysis | Type 1, Type 2, and Type 3 LSA observations across three areas |
+| [Day 14](routing-protocols/day-14/README.md) | BGP–OSPF redistribution, Type 4 and Type 5 LSAs, and external E2 routes | Redistribution verification, Wireshark LSA flags, LSDB comparison, routing-table output, and PC1 connectivity |
 
 ## Routing protocols
 
@@ -51,6 +52,11 @@ Routing topics are documented separately from the fundamentals section. Each top
 - [Day 13 — LSA types](routing-protocols/day-13/ospf-lsa-types.md)
 - [Day 13 — LSA database observations](routing-protocols/day-13/lsa-database-observations.md)
 - [Day 13 — Practice questions](routing-protocols/day-13/practice-questions.md)
+- [Day 14 — OSPF external route redistribution](routing-protocols/day-14/README.md)
+- [Day 14 — BGP and OSPF redistribution](routing-protocols/day-14/route-redistribution.md)
+- [Day 14 — Type 4 and Type 5 LSAs](routing-protocols/day-14/ospf-type-4-and-type-5-lsas.md)
+- [Day 14 — E1 and E2 external routes](routing-protocols/day-14/e1-vs-e2.md)
+- [Day 14 — Practice questions](routing-protocols/day-14/practice-questions.md)
 
 ## Day 01 — How data moves across a network
 
