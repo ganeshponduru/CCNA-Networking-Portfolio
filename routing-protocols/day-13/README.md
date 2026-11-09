@@ -27,25 +27,15 @@ Based on the interface-area assignments used in this run:
 - **R4** connects Area 0 and Area 10 and operates as an ABR.
 - **R2** remains an internal router in Area 0. Its G2/0 interface was deliberately assigned to Area 0, so R2 does not act as an ABR in this configuration.
 
-## LSA database screenshots
+## Captured outputs
 
-### Database on R1, R5, and R7
+The screenshots reviewed for this analysis cover:
 
-![OSPF LSA database outputs from R1, R5, and R7](screenshots/lsa-database-r1-r5-r7.png)
+- OSPF database output from R1, R5, and R7.
+- OSPF database output from R2 and R3.
+- OSPF interface-area assignments on R2, R4, and R5.
 
-These outputs show the local Router LSAs, Network LSAs, and Summary Network LSAs visible in the respective areas.
-
-### Database on R2 and R3
-
-![OSPF LSA database outputs from R2 and R3](screenshots/ospf-lsa-database-r2-r3.png)
-
-R2's output shows its Area 0 database. R3's output shows the Area 0 and Area 20 database information captured during the lab.
-
-### Interface area assignments
-
-![OSPF interface area assignments on R2, R4, and R5](screenshots/ospf-interface-area-assignments-r2-r4-r5.png)
-
-The interface output confirms that R2's visible interfaces belong to Area 0, while R4 has an interface in Area 0 and another in Area 10. R5's shown interface belongs to Area 10.
+The observations below are based on those captures. The image files themselves still need to be added to the repository; no broken image links are included.
 
 ## Main observations
 
