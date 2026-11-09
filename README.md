@@ -27,6 +27,8 @@ I want to explain networking concepts in my own words, solve addressing problems
 | [Day 09](fundamentals/day-09/README.md) | DHCP, DORA, DHCP options, and Wireshark packet analysis | DHCP lab notes and R1–Switch1 / R2–Switch1 screenshots |
 | [Day 10](routing-protocols/day-10/README.md) | Static routing, default routing, administrative distance, floating static routes, dual-ISP failover | Topic notes, topology, routing-table observations, connectivity and failover tests |
 | [Day 11](routing-protocols/day-11/README.md) | Dynamic routing, IGP and EGP, autonomous systems, OSPF, multi-area routing, cost, and ECMP | Concept notes, configuration reference, verification commands, and practice questions |
+| [Day 12](routing-protocols/day-12/README.md) | OSPF packet types, adjacency states, and DR/BDR election | Packet-capture analysis, adjacency scenario, and revision questions |
+| [Day 13](routing-protocols/day-13/README.md) | Multi-area OSPF and LSA database analysis | Type 1, Type 2, and Type 3 LSA observations across three areas |
 
 ## Routing protocols
 
@@ -43,6 +45,12 @@ Routing topics are documented separately from the fundamentals section. Each top
 - [OSPF multi-area configuration](routing-protocols/day-11/ospf-multi-area-configuration.md)
 - [OSPF cost and load balancing](routing-protocols/day-11/ospf-cost-and-load-balancing.md)
 - [Dynamic routing and OSPF interview and practice questions](routing-protocols/day-11/practice-questions.md)
+- [Day 12 — OSPF adjacency and packet exchange](routing-protocols/day-12/README.md)
+- [Day 12 — DR/BDR election scenario](routing-protocols/day-12/dr-bdr-election-scenario.md)
+- [Day 13 — OSPF multi-area LSA database analysis](routing-protocols/day-13/README.md)
+- [Day 13 — LSA types](routing-protocols/day-13/ospf-lsa-types.md)
+- [Day 13 — LSA database observations](routing-protocols/day-13/lsa-database-observations.md)
+- [Day 13 — Practice questions](routing-protocols/day-13/practice-questions.md)
 
 ## Day 01 — How data moves across a network
 
