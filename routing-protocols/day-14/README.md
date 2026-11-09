@@ -27,7 +27,7 @@ The topology contains an OSPF multi-area domain and an external BGP router.
 - **R3 (3.3.3.3):** ABR between Area 0 and Area 20.
 - **R8:** External BGP router in AS 200. Its Loopback0 address, 8.8.8.8/32, is used as the external test destination.
 
-![OSPF multi-area topology connected to external BGP router](screenshots/ospf-external-redistribution-topology.png)
+![OSPF multi-area topology connected to external BGP router](screenshots/topology.png)
 
 ## BGP and OSPF redistribution
 
@@ -48,7 +48,7 @@ B 8.8.8.8 [20/0] via 192.168.18.8
 
 This is the starting point for the redistribution: R1 has learned the external prefix from R8 through BGP.
 
-![R1 routing table showing the BGP route before OSPF redistribution](screenshots/r1-bgp-route-before-ospf-redistribution.png)
+![R1 routing table showing the BGP route before OSPF redistribution](screenshots/bgp-route.png)
 
 The configured redistribution statements are:
 
@@ -71,7 +71,7 @@ The Wireshark capture contains Type 1 Router-LSAs:
 
 This matches the roles in the topology: R1 redistributes the external BGP route into OSPF, while R2 connects Areas 0 and 10.
 
-![Type 1 Router-LSA flags for R2 and R1](screenshots/ospf-router-lsa-abr-asbr-flags.png)
+![Type 1 Router-LSA flags for R2 and R1](screenshots/router-lsa-flags.png)
 
 ## Type 4 and Type 5 LSAs
 
@@ -85,7 +85,7 @@ The LSDB output from R5 in Area 10 and R6 in Area 20 shows:
 - **Type 4 – ASBR Summary LSA:** originated by an ABR to advertise reachability information for the ASBR into another area. The Link State ID identifies the ASBR's Router ID.
 - **Type 5 – AS External LSA:** originated by the ASBR to advertise the external prefix. In this lab, R1 advertises 8.8.8.8/32.
 
-![Type 4 and Type 5 LSAs in R5 Area 10 and R6 Area 20 databases](screenshots/ospf-type-4-and-type-5-lsas-area-10-area-20.png)
+![Type 4 and Type 5 LSAs in R5 Area 10 and R6 Area 20 databases](screenshots/type-4-5-lsa.png)
 
 ## External route installed on R5
 
@@ -97,7 +97,7 @@ O E2 8.8.8.8 [110/1] via 192.168.45.4, GigabitEthernet1/0
 
 This confirms that the external prefix has entered OSPF and is installed on R5 as an external Type 2 route. The next hop is R4 at 192.168.45.4.
 
-![R5 routing table showing the OSPF E2 route to 8.8.8.8](screenshots/r5-ospf-external-e2-route.png)
+![R5 routing table showing the OSPF E2 route to 8.8.8.8](screenshots/e2-route.png)
 
 ## Reverse redistribution and end-to-end connectivity
 
@@ -112,7 +112,7 @@ The captured tests show five successful ping replies to both 7.7.7.7 (an interna
 
 The traceroute output shows the path through the Area 10 side, R2, the backbone, and then either the internal Area 20 path or R1 toward R8. The final traceroute probes return ICMP destination-port-unreachable messages; the successful ping results separately confirm IP reachability.
 
-![R8 BGP routes and PC1 ping and traceroute tests](screenshots/pc1-dhcp-ping-and-traceroute-external-connectivity.png)
+![R8 BGP routes and PC1 ping and traceroute tests](screenshots/connectivity-test.png)
 
 After redistribution, R5 installs the external destination as an OSPF E2 route:
 
