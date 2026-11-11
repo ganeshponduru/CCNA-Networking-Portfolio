@@ -10,8 +10,8 @@ The following is a study template for a lab router. Replace placeholders with la
 enable
 configure terminal
 hostname R1
-ip domain-name lab.example
-username netadmin secret <choose-a-strong-lab-password>
+ip domain-name lab.example< write your domain name here > 
+username netadmin secret <choose-a-strong-lab-password ( here we need to write our password )>
 crypto key generate rsa modulus 2048
 ip ssh version 2
 line vty 0 4
