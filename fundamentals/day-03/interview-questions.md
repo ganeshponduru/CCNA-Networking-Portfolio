@@ -1,6 +1,5 @@
 # Day 03 — Subnetting Revision Questions
 
-Use these questions to check whether I can explain subnetting without simply memorising the examples.
 
 ## 1. What is subnetting?
 
@@ -47,4 +46,3 @@ CIDR uses explicit prefixes such as /24 and /26 rather than relying on historica
 
 ## Self-check
 
-Before I call a subnetting problem finished, I should be able to show the prefix, mask, block size, network address, usable host range, broadcast address, and the calculation behind the result.
