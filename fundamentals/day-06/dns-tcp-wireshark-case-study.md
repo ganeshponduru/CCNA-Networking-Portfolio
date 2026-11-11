@@ -91,7 +91,6 @@ ip.addr == 192.168.1.1 && ip.addr == 192.168.1.2
 - TCP port 443 is a useful clue, not proof by itself, that traffic is HTTPS.
 - A packet capture supports conclusions about visible packets only. I should clearly separate observations from assumptions.
 
-## Evidence status
 
 The screenshots below are the evidence files uploaded to this folder. I have kept their original filenames and included them here so they render directly in the case study.
 
