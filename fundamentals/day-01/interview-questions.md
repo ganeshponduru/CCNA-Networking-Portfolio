@@ -15,7 +15,3 @@ I use these questions to check whether I can explain the basic networking concep
 12. **What can Wireshark show?** Captured frames and decoded fields, subject to capture point, filters, encryption, and available data.
 13. **Why might DNS use TCP?** DNS supports TCP as well as UDP, including for some large responses and zone transfers.
 14. **What would you check when a website is unreachable?** Scope/symptoms, link/VLAN, IP/subnet/gateway, routing, DNS, transport reachability, and application/TLS behavior—validating each step with evidence.
-
-## Self-assessment
-
-Answer these from memory and revisit any that you cannot explain clearly. These are revision prompts, not evidence of interview experience.
