@@ -20,4 +20,3 @@ I use these questions to test my understanding of switching, traffic types, netw
 17. **What does NAT do?** It translates IP addressing information, commonly allowing private-addressed hosts to share public IPv4 connectivity.
 18. **What does ipconfig /all show?** Local network configuration such as IP address, subnet mask, gateway, and DNS servers.
 
-Try answering without reading the notes. If you cannot explain a concept with a simple example, review it before an interview.
