@@ -1,34 +1,31 @@
-# BGP Between R7 and R9, and BGP-to-OSPF Redistribution
+# BGP Between R7 and R9
 
-## Topology and router roles
+## Router connection
 
-This BGP connection is between R7 and R9. It is separate from the R1–R8 external BGP connection used in the earlier redistribution lab.
+The BGP session in this lab is between R7 and R9 over the `192.168.79.0/24` network.
 
-| Router | Role in this lab |
-|---|---|
-| R7 | BGP router in AS 100, connected to OSPF Area 20 (NSSA) |
-| R9 | BGP peer of R7; has Loopback0 `9.9.9.9/32` |
-| R3 | NSSA ABR between Area 20 and Area 0 |
+- R7 is in AS 100 and has a connection to OSPF Area 20 (NSSA).
+- R9 is the BGP peer. Its Loopback0 address is `9.9.9.9/32`.
+- R3 is the ABR between Area 20 and Area 0.
 
-R8's `8.8.8.8/32` loopback represents the simulated Google-side destination used in the earlier R1–R8 lab. It is not the BGP peer in this Day 15 R7–R9 session.
+R8 is not part of this BGP peering. Its `8.8.8.8/32` loopback was used as the simulated Google-side destination in the earlier R1–R8 lab. Keep that separate from the R7–R9 setup here.
 
-## BGP configuration visible in the lab
+## R9 BGP configuration shown in the screenshot
 
-The R9 screenshot shows these BGP configuration lines:
+The R9 configuration output shows these commands:
 
 ```cisco
 network 192.168.79.0
 neighbor 192.168.79.7 remote-as 100
 ```
 
-The neighbor statement identifies R7 at `192.168.79.7` as a peer in AS 100. The screenshot also shows R9's routing table learning BGP routes through `192.168.79.7`.
+The neighbor address `192.168.79.7` is R7, and R7 is in AS 100.
 
-R9's routing table shows Loopback0 `9.9.9.9/32` as directly connected. R7's routing table shows `9.9.9.9/32` as a BGP route through `192.168.79.9`. This is consistent with R9 advertising its loopback to R7.
+R9's routing table shows BGP routes using `192.168.79.7` as the next hop. R7's routing table shows `9.9.9.9/32` as a BGP route through `192.168.79.9`. The R9 routing table shows `9.9.9.9/32` as directly connected to Loopback0.
 
-### R7 — peer configuration template
+The screenshots do not show the complete BGP configuration on both routers or R9's local AS number. For that reason, the R7 neighbor command below is a template: use the actual AS configured on R9.
 
-The R7-side neighbor command must point to R9 and use R9's actual local AS:
-
+**R7 — BGP neighbor**
 ```cisco
 configure terminal
 router bgp 100
@@ -36,11 +33,9 @@ router bgp 100
 end
 ```
 
-The supplied screenshot does not expose R9's local AS number or the complete R7 BGP configuration. Replace `<R9-AS>` with the actual AS configured on R9; do not treat this placeholder as a literal IOS command.
+**R9 — advertising the loopback**
 
-### R9 — route advertisement
-
-The R9 routing table confirms that `9.9.9.9/32` is its connected Loopback0 prefix and the R7 routing table shows that prefix as BGP-learned. To originate that loopback using BGP's network statement, the configuration form is:
+If the loopback is advertised with a BGP network statement, the command is:
 
 ```cisco
 configure terminal
@@ -49,21 +44,13 @@ router bgp <R9-AS>
 end
 ```
 
-This is the IOS command form consistent with the observed route. The screenshot only visibly captures `network 192.168.79.0` and the neighbor statement, so the loopback network statement above is included as the configuration needed to advertise the observed prefix, not as a command independently verified in the screenshot.
+Replace `<R9-AS>` with R9's configured AS number. The screenshot confirms the route in the routing table, but does not show this exact network statement, so it is included as the command form rather than a verified line from the capture.
 
-## Redistributing BGP routes into OSPF Area 20
+## Redistributing the BGP route into OSPF
 
-R7 learns `9.9.9.9/32` through BGP from R9. The Area 20 LSDB shows a Type 7 AS External LSA for that prefix:
+R7 learns `9.9.9.9/32` from R9 through BGP. The Area 20 LSDB then shows a Type 7 AS External LSA for that prefix, with R7's Router ID `7.7.7.7` as the Advertising Router.
 
-| Field | Observed value |
-|---|---|
-| Link State ID | `9.9.9.9` |
-| Advertising Router | `7.7.7.7` (R7) |
-| Route tag | `300` |
-
-This supports the conclusion that R7, acting as an ASBR inside the NSSA, injects the BGP-learned route into OSPF as a Type 7 LSA.
-
-The IOS command form for redistributing BGP AS 100 into OSPF process 10 on R7 is:
+The command to redistribute BGP AS 100 into OSPF process 10 on R7 is:
 
 ```cisco
 configure terminal
@@ -72,18 +59,17 @@ router ospf 10
 end
 ```
 
-The captured LSA contains route tag `300`. The provided screenshot does not show the route-map or other configuration that set this tag, so the exact tag-setting command is not asserted here.
+This is how the BGP route can be advertised into the NSSA as a Type 7 LSA. The captured Type 7 entry has route tag `300`. The screenshot does not show how that tag was set, so no route-map configuration is assumed here.
 
-## Type 7-to-Type 5 translation
+## Type 7 translation on R3
 
-R6 and R7 show the Type 7 LSA for `9.9.9.9` in Area 20. R3's LSDB shows the same Type 7 entry in Area 20 and also shows a Type 5 external LSA for `9.9.9.9`, advertised by Router ID `3.3.3.3` (R3), with tag `300`.
+R6 and R7 show the Type 7 LSA for `9.9.9.9` in Area 20. R3's LSDB shows the Type 7 entry in Area 20 and also lists a Type 5 LSA for `9.9.9.9`. The Type 5 entry has Advertising Router `3.3.3.3` and the same tag `300`.
 
-This is the observed translation performed by R3, the NSSA ABR. The translated Type 5 LSA allows the external route to be advertised into the rest of the OSPF domain.
+This is the translation from Type 7 to Type 5 at R3, the NSSA ABR. The translated Type 5 LSA advertises the external route into the rest of the OSPF domain.
 
-## Verification commands
+## Commands to verify BGP and OSPF
 
-### BGP
-
+**BGP**
 ```cisco
 show ip bgp summary
 show ip bgp
@@ -91,8 +77,7 @@ show ip route bgp
 show running-config | section router bgp
 ```
 
-### OSPF and NSSA
-
+**OSPF**
 ```cisco
 show ip ospf neighbor
 show ip ospf database nssa-external
@@ -101,11 +86,10 @@ show ip route ospf
 show running-config | section router ospf
 ```
 
-The provided routing-table screenshot confirms BGP-learned routes on R9 and the BGP-learned `9.9.9.9/32` route on R7. It does not include `show ip bgp summary`, so the BGP Established state is not directly captured.
+The routing-table screenshot shows BGP routes on R9 and the BGP-learned `9.9.9.9/32` route on R7. There is no `show ip bgp summary` capture, so the neighbor's Established state is not shown directly.
 
-## Keep the two external connections separate
+## Difference from the earlier R1–R8 setup
 
-- **Earlier lab:** R1–R8, with R8's `8.8.8.8/32` loopback used as the simulated Google-side destination. Day 14 documents the BGP–OSPF redistribution across that connection.
-- **This lab:** R7–R9, with R9's `9.9.9.9/32` loopback learned by R7 through BGP and then represented inside NSSA Area 20 by a Type 7 LSA.
+In the earlier lab, R8's `8.8.8.8/32` loopback was used as the simulated Google-side destination, with the BGP connection between R1 and R8.
 
-These are different BGP relationships and different external prefixes. Do not describe R8 as the BGP neighbor of R7 in this lab.
+In this lab, R9's `9.9.9.9/32` loopback is learned by R7 over the R7–R9 BGP connection. R7 then advertises that route into NSSA Area 20, where it appears as a Type 7 LSA.
