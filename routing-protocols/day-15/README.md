@@ -35,6 +35,8 @@ PC1 successfully pinged both `8.8.8.8` and `7.7.7.7` with five replies each. The
 
 ## Area 20 — NSSA Type 7 LSA and Type 5 translation
 
+![NSSA Type 7 LSA and Type 5 translation](screenshots/nssa-area-20-type-7-lsa-and-type-5-translation.png)
+
 The LSDB outputs from R6 and R7 show a Type 7 AS External LSA in Area 20:
 
 - Link State ID: `9.9.9.9`
@@ -47,6 +49,8 @@ The same R3 Type 5 section also shows `8.8.8.8` advertised by `1.1.1.1`. This is
 
 ## BGP between R7 and R9
 
+![BGP configuration and routing tables on R7 and R9](screenshots/bgp-r7-r9-configuration-and-routing-tables.png)
+
 The R9 configuration output shows:
 
 ```
@@ -58,7 +62,3 @@ R9's routing table contains BGP routes to internal router loopbacks and network 
 
 These routing-table entries support that routes are being exchanged between R7 and R9. The provided screenshot does not show `show ip bgp summary`, so the BGP neighbor's Established state is not separately captured.
 
-## Verification still useful to capture
-
-- OSPF neighbor states for the relevant routers
-- A direct `show ip bgp summary` output, if you later want explicit BGP session-state evidence
