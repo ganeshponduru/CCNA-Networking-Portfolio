@@ -19,6 +19,8 @@ The topology labels describe the intended design. Practical observations below a
 
 ## Area 10 — Stub area LSDB
 
+Detailed explanation and IOS commands: [Stub Area](stub-area.md).
+
 ![Area 10 stub-area LSDB on R4 and R5](screenshots/area-10-stub-area-lsdb-r4-r5.png)
 
 The LSDB output from R4 and R5 shows Router LSAs (Type 1), Network LSAs (Type 2), and multiple Summary Net LSAs (Type 3). The Type 3 entries include the default route (0.0.0.0) as well as other summarized networks.
@@ -27,6 +29,8 @@ This is the stub-area observation captured before applying the totally-stubby co
 
 ## Area 10 — Totally stubby area
 
+Detailed explanation and IOS commands: [Totally Stubby Area](totally-stubby-area.md).
+
 ![Area 10 totally-stubby LSDB and PC1 connectivity](screenshots/area-10-totally-stubby-lsdb-and-connectivity.png)
 
 The configuration output shows `area 10 stub no-summary` on R4 and R5. In the resulting Area 10 LSDB, the Summary Net Link States section contains only the default summary route, `0.0.0.0`, advertised by R2. The other Type 3 summary entries visible in the earlier stub-area output are absent.
@@ -34,6 +38,8 @@ The configuration output shows `area 10 stub no-summary` on R4 and R5. In the re
 PC1 successfully pinged both `8.8.8.8` and `7.7.7.7` with five replies each. The traceroute to `8.8.8.8` reached `192.168.18.8`, where the output reported ICMP type 3, code 3 (destination port unreachable). The successful ping is the connectivity test; the traceroute response is recorded separately and is not described as a fully successful traceroute.
 
 ## Area 20 — NSSA Type 7 LSA and Type 5 translation
+
+Detailed explanation, configuration and LSA behavior: [NSSA Area](nssa-area.md).
 
 ![NSSA Type 7 LSA and Type 5 translation](screenshots/nssa-area-20-type-7-lsa-and-type-5-translation.png)
 
@@ -48,6 +54,8 @@ R3's Area 20 LSDB also contains the Type 7 LSA for `9.9.9.9`. R3's Type 5 AS Ext
 The same R3 Type 5 section also shows `8.8.8.8` advertised by `1.1.1.1`. This is a separate external route and should not be confused with the translated `9.9.9.9` route.
 
 ## BGP between R7 and R9
+
+Detailed BGP configuration, route advertisement and BGP-to-OSPF redistribution: [BGP and Redistribution](bgp-and-redistribution.md).
 
 ![BGP configuration and routing tables on R7 and R9](screenshots/bgp-r7-r9-configuration-and-routing-tables.png)
 
