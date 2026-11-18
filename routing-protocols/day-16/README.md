@@ -65,9 +65,4 @@ The probe destination was **4.4.4.4**, and the source address shown in the captu
 
 Three UDP probes were sent for each TTL value. The source UDP port shown starts at 49212 and increases, while the destination ports start at 33434 and increase.
 
-The final response is sourced from **192.168.34.4**, while the probe destination is **4.4.4.4**. These are different addresses in the capture, so I have kept them separate in the notes.
-
-## Screenshots
-
-The screenshot files are stored in the [screenshots](screenshots/) folder and are shown above under their matching headings.
-
+The final response is sourced from **192.168.34.4**, while the probe destination is **4.4.4.4**.
