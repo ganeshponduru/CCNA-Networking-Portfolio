@@ -1,5 +1,31 @@
 # Day 16 Screenshots
 
-Practical screenshots will be added here after the traceroute lab.
+## Traceroute topology
 
-Screenshots will be named clearly and placed under the matching section in the Day 16 README so the command output and packet captures can be checked alongside the explanation.
+The four-router topology used for this capture.
+
+Planned filename: `traceroute-topology.png`
+
+## Packet capture overview
+
+The packet list showing the UDP probes and the ICMP responses for TTL values 1, 2, and 3.
+
+Planned filename: `traceroute-overview.png`
+
+## TTL 1 — R2 response
+
+UDP probes with TTL 1 and the ICMP Time Exceeded response from 192.168.12.2 (R2).
+
+Planned filename: `ttl-1-r2-time-exceeded.png`
+
+## TTL 2 — R3 response
+
+UDP probes with TTL 2 and the ICMP Time Exceeded response from 192.168.23.3 (R3).
+
+Planned filename: `ttl-2-r3-time-exceeded.png`
+
+## TTL 3 — R4 Port Unreachable response
+
+UDP probes with TTL 3 and the ICMP Destination Unreachable, Code 3 response sourced from 192.168.34.4.
+
+Planned filename: `ttl-3-r4-port-unreachable.png`
