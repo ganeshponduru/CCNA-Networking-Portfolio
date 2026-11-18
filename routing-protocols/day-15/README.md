@@ -68,5 +68,4 @@ network 192.168.79.0
 
 R9's routing table contains BGP routes to internal router loopbacks and network prefixes through next hop `192.168.79.7`. R7's routing table shows a BGP route to `9.9.9.9/32` through `192.168.79.9`. The R7 output also shows the OSPF external route to `8.8.8.8/32` as `O E2`, via `192.168.67.6`.
 
-These routing-table entries support that routes are being exchanged between R7 and R9. The provided screenshot does not show `show ip bgp summary`, so the BGP neighbor's Established state is not separately captured.
-
+These routing-table entries support that routes are being exchanged between R7 and R9.
