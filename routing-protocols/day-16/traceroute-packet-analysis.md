@@ -9,38 +9,36 @@ Both commands help identify the path packets take to a destination and show the 
 | traceroute | Linux / Unix | UDP by default on common implementations |
 | tracert | Windows | ICMP Echo Request |
 
-The probe method can vary between traceroute implementations and options. The table describes the default behavior covered here. The PDF and session describe tracing up to 30 hops; the actual maximum can depend on the utility and its settings.
+The probe method can vary between traceroute implementations and options. The practical capture in this lab shows UDP probes.
 
-## UDP probes in traceroute
+## UDP probes in the capture
 
-The Linux/Unix UDP traceroute method sends three probes for each TTL value by default. It starts with TTL 1 and increases the TTL for the next group of probes.
+The capture shows three UDP probes for each TTL value. The destination IP address is **4.4.4.4**, and the source IP address is **192.168.12.1**.
 
-The PDF describes the UDP destination-port range as **33434–33523**. The destination port is varied across probes; the source port is normally selected from an ephemeral range.
+| Probe group | TTL | UDP source port | UDP destination ports |
+|---|---:|---:|---|
+| First | 1 | 49212 | 33434, 33435, 33436 |
+| Second | 2 | 49215 | 33437, 33438, 33439 |
+| Third | 3 | 49218 | 33440, 33441, 33442 |
 
-The three probes are not three different kinds of packets. They are separate attempts for the same hop, which give multiple RTT samples and help show whether responses are consistent.
+The capture shows the source port increasing between probe groups and the destination port increasing for each probe.
 
-## ICMP responses
+## ICMP responses in the capture
 
 Two ICMP responses are important when reading a UDP traceroute capture.
 
 | ICMP message | Type | Code | Meaning |
 |---|---:|---:|---|
 | Time Exceeded | 11 | 0 | A router discarded the probe because its TTL expired in transit |
-| Destination Unreachable — Port Unreachable | 3 | 3 | The destination was reached, but the UDP destination port was closed or unavailable |
+| Destination Unreachable — Port Unreachable | 3 | 3 | The destination side returned a port-unreachable response for the UDP probe |
 
-When the destination returns Type 3, Code 3, the UDP traceroute process treats that as the end of the trace. It does not mean that every application service on the destination is working. It only tells us that the destination IP responded with a port-unreachable message for the UDP probe.
+The observed response sequence was:
 
-## Packet flow example
+1. **TTL 1:** R2 returned ICMP Type 11, Code 0. Its response source address was 192.168.12.2.
+2. **TTL 2:** R3 returned ICMP Type 11, Code 0. Its response source address was 192.168.23.3.
+3. **TTL 3:** R4 returned ICMP Type 3, Code 3. Its response source address was 192.168.34.4, while the original probe destination was 4.4.4.4.
 
-For the R5-to-destination example:
-
-1. R5 sends three UDP probes with TTL 1.
-2. R4 receives them, expires the TTL, and returns ICMP Type 11, Code 0.
-3. R5 sends the next three probes with TTL 2. R2 returns the Time Exceeded messages.
-4. R5 repeats with TTL 3. R1 returns the Time Exceeded messages.
-5. R5 sends probes with TTL 4. The destination is reached. If the UDP destination port is closed, it returns ICMP Type 3, Code 3.
-
-The ICMP response is sent back to the source. The source uses the response to identify the router that expired the TTL.
+The Type 3, Code 3 response is the stopping response in this UDP traceroute test. It does not prove that every application service on the destination is working. It tells us that a Port Unreachable response was returned for the UDP probe.
 
 ## What to inspect in Wireshark
 
