@@ -2,27 +2,21 @@
 
 ## What is a stub area?
 
-A stub area is an OSPF area that does not receive Type 5 AS External LSAs. These LSAs describe routes redistributed into OSPF from another routing domain, such as BGP or static routing.
+A stub area is used when the routers in an area do not need to know about every external network in the OSPF domain. It does not accept Type 5 external LSAs. Instead, the ABR sends a default route into the area so that routers can forward traffic for destinations they do not know about.
 
-Instead of carrying those external LSAs, the ABR injects a default route into the stub area. Routers inside the area can use that default route to reach destinations that are not represented by specific intra-area or inter-area routes.
-
-A stub area still receives inter-area Type 3 Summary LSAs. This is the key difference between a stub area and a totally stubby area.
+Type 3 Summary LSAs are still allowed in a stub area. That means routers can still learn specific routes from other OSPF areas. This is the main difference between a stub area and a totally stubby area.
 
 ## Area 10 in this lab
 
-- Area 10 contains R4 and R5.
-- R2 connects Area 10 to the Area 0 backbone and acts as its ABR.
-- The captured LSDB on R4 and R5 contains Type 1 Router LSAs, Type 2 Network LSAs, and multiple Type 3 Summary LSAs.
-- The Type 3 entries include the default route as well as other inter-area prefixes.
+R4 and R5 are in Area 10, and R2 connects this area to Area 0.
 
-The captured LSDB is the stub-area state before applying the totally-stubby configuration.
+In the stub-area LSDB captured before changing the area type, the routers show Type 1 Router LSAs, Type 2 Network LSAs and several Type 3 Summary LSAs. The Type 3 entries include the default route as well as routes for other OSPF areas.
 
 ## Configuration
 
-The area type must match on the ABR and all routers inside the area.
+The stub setting must be configured on the ABR and on the routers inside the area.
 
-### R2 — ABR
-
+**R2 — ABR**
 ```cisco
 configure terminal
 router ospf 10
@@ -30,8 +24,7 @@ router ospf 10
 end
 ```
 
-### R4 and R5 — Internal area routers
-
+**R4 and R5 — Area 10 routers**
 ```cisco
 configure terminal
 router ospf 10
@@ -39,9 +32,9 @@ router ospf 10
 end
 ```
 
-The OSPF process ID is locally significant. The process ID shown in the Day 15 LSDB output is 10. If the local process ID differs on a router, use that router's configured process ID.
+The OSPF process ID used in the lab outputs is 10. Remember that the process ID is locally significant, so use the process ID configured on each router.
 
-## Verification commands
+## Commands used to check the area
 
 ```cisco
 show ip ospf
@@ -51,24 +44,16 @@ show ip route
 show running-config | section router ospf
 ```
 
-Check the following:
+After configuring the area, check that the neighbors are up, Type 5 LSAs are not present in Area 10, and Type 3 Summary LSAs are still visible. The routing table should also contain a default route learned from the ABR.
 
-- The OSPF area is identified as a stub area.
-- Neighbors reach the expected FULL state.
-- Type 5 external LSAs are not present inside Area 10.
-- Type 3 Summary LSAs for inter-area networks remain visible.
-- A default route is learned from the ABR.
+## Stub area compared with a normal area
 
-## Stub area vs. normal area
-
-| Behavior | Normal area | Stub area |
+| LSA | Normal area | Stub area |
 |---|---|---|
-| Type 1 and Type 2 LSAs | Present as applicable | Present as applicable |
-| Type 3 inter-area summaries | Allowed | Allowed |
-| Type 4 ASBR summary | Allowed | Not flooded into stub area |
-| Type 5 external LSAs | Allowed | Blocked |
-| Default route from ABR | Not required by stub behavior | Injected by ABR |
+| Type 1 — Router | Used | Used |
+| Type 2 — Network | Used when applicable | Used when applicable |
+| Type 3 — Summary | Allowed | Allowed |
+| Type 4 — ASBR Summary | Allowed | Not sent into the stub area |
+| Type 5 — AS External | Allowed | Blocked |
 
-## Important configuration rule
-
-All routers in the stub area, including the ABR, must agree that the area is a stub area. A mismatch in the stub-area setting prevents OSPF neighbor adjacency from forming across the affected link.
+The ABR injects a default route into the stub area. All routers in the area, including the ABR, must be configured for the same area type. If the stub setting does not match, OSPF neighbors will not form across the affected link.
