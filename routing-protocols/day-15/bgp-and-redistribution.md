@@ -23,7 +23,6 @@ The neighbor address `192.168.79.7` is R7, and R7 is in AS 100.
 
 R9's routing table shows BGP routes using `192.168.79.7` as the next hop. R7's routing table shows `9.9.9.9/32` as a BGP route through `192.168.79.9`. The R9 routing table shows `9.9.9.9/32` as directly connected to Loopback0.
 
-The screenshots do not show the complete BGP configuration on both routers or R9's local AS number. For that reason, the R7 neighbor command below is a template: use the actual AS configured on R9.
 
 **R7 — BGP neighbor**
 ```cisco
@@ -39,12 +38,10 @@ If the loopback is advertised with a BGP network statement, the command is:
 
 ```cisco
 configure terminal
-router bgp <R9-AS>
+router bgp 300
  network 9.9.9.9 mask 255.255.255.255
 end
 ```
-
-Replace `<R9-AS>` with R9's configured AS number. The screenshot confirms the route in the routing table, but does not show this exact network statement, so it is included as the command form rather than a verified line from the capture.
 
 ## Redistributing the BGP route into OSPF
 
@@ -86,7 +83,6 @@ show ip route ospf
 show running-config | section router ospf
 ```
 
-The routing-table screenshot shows BGP routes on R9 and the BGP-learned `9.9.9.9/32` route on R7. There is no `show ip bgp summary` capture, so the neighbor's Established state is not shown directly.
 
 ## Difference from the earlier R1–R8 setup
 
