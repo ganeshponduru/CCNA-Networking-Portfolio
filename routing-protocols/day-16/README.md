@@ -1,8 +1,8 @@
 # Traceroute and Tracert
 
-In this topic, I learned how traceroute finds the routers between a source and a destination. The important part is how it uses the TTL field in the IP header and reads the ICMP messages returned by routers.
+In this topic, I looked at how traceroute finds the routers between a source and a destination. I used Wireshark to inspect the UDP probes and the ICMP replies in a four-router topology.
 
-The notes cover the TTL process, the UDP probes used by the usual Linux/Unix traceroute command, the ICMP probes used by Windows tracert, and what to look for in a packet capture. Practical screenshots and the exact lab observations will be added after I complete the lab.
+The notes cover TTL-based hop discovery, UDP probes, ICMP responses, and how to read traceroute results. The practical section below records the packet capture from the R1–R2 link.
 
 ## Topics
 
@@ -15,22 +15,43 @@ The notes cover the TTL process, the UDP probes used by the usual Linux/Unix tra
 
 ## Commands covered
 
-**Cisco IOS**
-~~~text
-R5# traceroute 8.8.8.8
-R1> traceroute 4.4.4.4 source 1.1.1.1
-~~~
-
 **Linux / Unix**
 ~~~bash
-traceroute 8.8.8.8
+traceroute 4.4.4.4
 ~~~
 
 **Windows**
 ~~~text
-tracert 8.8.8.8
+tracert 4.4.4.4
 ~~~
 
-## Practical work
+The command syntax and probe method can vary by platform and implementation. The practical packet capture documented here shows UDP probes.
 
-The practical section is not filled in yet. I will add the topology, command output, and Wireshark screenshots after running the lab. The screenshots will be kept in the [screenshots](screenshots/) folder.
+## Practical topology
+
+The test used four routers connected in a line:
+
+~~~text
+R1 G1/0 --- G1/0 R2 G2/0 --- G2/0 R3 G1/0 --- G1/0 R4
+~~~
+
+The Wireshark capture was taken on the R1 GigabitEthernet1/0 to R2 GigabitEthernet1/0 link.
+
+## Traceroute packet capture
+
+The probe destination was **4.4.4.4**, and the source address shown in the capture was **192.168.12.1**.
+
+| TTL | Response source | ICMP response | What happened |
+|---:|---|---|---|
+| 1 | 192.168.12.2 (R2) | Type 11, Code 0 | The probe's TTL expired at R2. |
+| 2 | 192.168.23.3 (R3) | Type 11, Code 0 | The probe's TTL expired at R3. |
+| 3 | 192.168.34.4 (R4) | Type 3, Code 3 | R4 returned Port Unreachable for the UDP probe. |
+
+Three UDP probes were sent for each TTL value. The source UDP port shown starts at 49212 and increases, while the destination ports start at 33434 and increase.
+
+The final response is sourced from **192.168.34.4**, while the probe destination is **4.4.4.4**. These are different addresses in the capture, so I have kept them separate in the notes.
+
+## Screenshots
+
+The screenshots for this test are kept in the [screenshots](screenshots/) folder. The topology and packet captures are listed in [the screenshot index](screenshots/README.md).
+
