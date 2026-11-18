@@ -1,38 +1,26 @@
 # OSPF Totally Stubby Area
 
-## What is a totally stubby area?
+## What changes in a totally stubby area?
 
-A totally stubby area is a Cisco extension of the stub-area concept. It blocks Type 5 external LSAs and also suppresses Type 3 inter-area summary LSAs from entering the area. The ABR advertises a default route so routers inside the area can still reach destinations outside it.
+A totally stubby area takes the stub-area restriction one step further. It blocks Type 5 external LSAs and also stops the normal Type 3 inter-area summary LSAs from entering the area. The ABR still sends a default route, so routers inside the area can reach networks outside it without keeping all those individual routes.
 
-The result is a smaller LSDB and fewer specific inter-area routes inside the area.
-
-## Difference between stub and totally stubby areas
-
-| LSA / route behavior | Stub area | Totally stubby area |
-|---|---|---|
-| Type 1 Router LSA | Present | Present |
-| Type 2 Network LSA | Present when applicable | Present when applicable |
-| Type 3 inter-area summaries | Allowed | Suppressed, except the default summary |
-| Type 4 ASBR summary | Not flooded into the area | Not flooded into the area |
-| Type 5 external LSAs | Blocked | Blocked |
-| Default route | Injected by ABR | Injected by ABR |
+On Cisco IOS, this is configured with the `no-summary` keyword on the ABR.
 
 ## Area 10 in this lab
 
-- R2 is the ABR between Area 0 and Area 10.
-- R4 and R5 are internal routers in Area 10.
-- The captured totally-stubby LSDB shows only the default Type 3 summary route, `0.0.0.0`, advertised by R2. The other Type 3 entries seen in the earlier stub-area output are absent.
-- PC1 successfully pinged `8.8.8.8` and `7.7.7.7` with five replies each.
+R2 is the ABR for Area 10, and R4 and R5 are the routers inside the area.
 
-The traceroute to `8.8.8.8` reached `192.168.18.8`, where the destination returned ICMP type 3, code 3 (destination port unreachable). The successful ping is the connectivity result; the traceroute response is not recorded as a fully successful traceroute.
+In the first LSDB capture, from the stub-area setup, several Type 3 Summary LSAs are present. After changing Area 10 to totally stubby, the later LSDB capture shows only the default Type 3 summary route, `0.0.0.0`, advertised by R2. The other Type 3 entries seen earlier are no longer listed.
+
+PC1 also passed the connectivity test: it received five successful replies when pinging `8.8.8.8` and `7.7.7.7`.
+
+The traceroute to `8.8.8.8` reached `192.168.18.8`, but the destination returned ICMP type 3, code 3 (destination port unreachable). So the ping test succeeded; the traceroute did not complete normally.
 
 ## Configuration
 
-On Cisco IOS, configure the ABR and internal routers differently.
+The ABR and the internal routers do not use exactly the same command.
 
-### R2 — ABR
-
-The `no-summary` keyword suppresses Type 3 summary LSAs into the totally stubby area. Configure it on the ABR:
+**R2 — ABR**
 
 ```cisco
 configure terminal
@@ -41,9 +29,7 @@ router ospf 10
 end
 ```
 
-### R4 and R5 — Internal routers
-
-The internal routers use the regular stub command:
+**R4 and R5 — routers inside Area 10**
 
 ```cisco
 configure terminal
@@ -52,9 +38,9 @@ router ospf 10
 end
 ```
 
-Do not configure `no-summary` on the internal routers. The ABR is responsible for suppressing the inter-area summaries and injecting the default route.
+Use `no-summary` on the ABR. The internal routers use the normal `area 10 stub` command.
 
-## Verification commands
+## Commands to verify the result
 
 ```cisco
 show ip ospf
@@ -64,13 +50,15 @@ show ip route
 show running-config | section router ospf
 ```
 
-On an internal router in Area 10, verify that:
+On R4 or R5, check the Summary Net Link States section. The default summary route should remain, while the other Type 3 inter-area summaries should be absent. Also check that the routing table has a default route through the ABR.
 
-- Type 1 and applicable Type 2 LSAs remain.
-- The Summary Net Link States section contains the default route `0.0.0.0`, rather than the other Type 3 inter-area prefixes.
-- The routing table contains a default route via the ABR.
-- External destinations remain reachable when the upstream routing is working.
+## Stub vs. totally stubby
 
-## Configuration note
+| LSA / route | Stub area | Totally stubby area |
+|---|---|---|
+| Type 1 and Type 2 | Present as applicable | Present as applicable |
+| Type 3 inter-area summaries | Allowed | Suppressed, except the default route |
+| Type 4 and Type 5 | Not sent into the area | Not sent into the area |
+| Default route | Injected by ABR | Injected by ABR |
 
-The ABR and all internal routers must agree on the stub-area property. The `no-summary` option is an ABR-side control; the internal routers are configured with `area 10 stub`.
+The important point from this lab is the change in the Type 3 entries. A stub area still has inter-area summaries; a totally stubby area keeps the default summary instead.
