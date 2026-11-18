@@ -29,7 +29,7 @@ The screenshots do not show the complete BGP configuration on both routers or R9
 ```cisco
 configure terminal
 router bgp 100
- neighbor 192.168.79.9 remote-as <R9-AS>
+ neighbor 192.168.79.9 remote-as 300
 end
 ```
 
