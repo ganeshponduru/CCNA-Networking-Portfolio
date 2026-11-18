@@ -53,5 +53,5 @@ The final response is sourced from **192.168.34.4**, while the probe destination
 
 ## Screenshots
 
-The screenshots for this test are kept in the [screenshots](screenshots/) folder. The topology and packet captures are listed in [the screenshot index](screenshots/README.md).
+The screenshot index is in the [screenshots](screenshots/) folder. It lists the topology and packet captures with the filenames to use when the image files are added.
 
