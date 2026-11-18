@@ -13,28 +13,21 @@ For IPv4, the ICMP message used for TTL expiry is:
 | ICMP Type | 11 — Time Exceeded |
 | ICMP Code | 0 — TTL exceeded in transit |
 
-**Important:** The correct code for TTL expiry in transit is **Type 11, Code 0**. Type 3, Code 3 is a different message: Destination Unreachable — Port Unreachable.
+**Type 3, Code 3 is different:** it means Destination Unreachable — Port Unreachable.
 
 ## How traceroute uses TTL
 
-Traceroute deliberately starts with a small TTL and increases it one step at a time. This makes each router along the path return an ICMP message when the probe's TTL expires.
+Traceroute sends probes with a low TTL first and increases the TTL for each new round. Each router along the path reduces the TTL. When it reaches zero, that router drops the probe and normally sends an ICMP Time Exceeded message.
 
-The example below follows the four-router path discussed in the notes:
+In my packet capture, the test was run from R1 toward **4.4.4.4**. The capture was taken on the R1–R2 link.
 
-- R5 is the source.
-- R4 is the first hop.
-- R2 is the second hop.
-- R1 is the third hop.
-- The destination is reached after R1.
+| Probe TTL | Router response | Response address | ICMP result |
+|---:|---|---|---|
+| 1 | R2 | 192.168.12.2 | Type 11, Code 0 |
+| 2 | R3 | 192.168.23.3 | Type 11, Code 0 |
+| 3 | R4 | 192.168.34.4 | Type 3, Code 3 |
 
-| Probe round | Initial TTL | Where it expires | Response seen by R5 |
-|---|---:|---|---|
-| 1 | 1 | R4 | ICMP Type 11, Code 0 |
-| 2 | 2 | R2 | ICMP Type 11, Code 0 |
-| 3 | 3 | R1 | ICMP Type 11, Code 0 |
-| 4 | 4 | Destination | For UDP traceroute, often ICMP Type 3, Code 3 if the destination UDP port is closed |
-
-The source reads the source address of each ICMP response and displays it as a hop. In the example from the session, the hop addresses were 192.168.45.4, 192.168.24.2, and 192.168.12.1, followed by the destination-side address 192.168.18.8.
+The first two TTL values expire at intermediate routers. With TTL 3, the probe reaches the destination address 4.4.4.4, and the final device returns a Port Unreachable message. The response source address visible in the capture is 192.168.34.4.
 
 ## Why the TTL value increases
 
