@@ -9,7 +9,7 @@ Both commands help identify the path packets take to a destination and show the 
 | traceroute | Linux / Unix | UDP by default on common implementations |
 | tracert | Windows | ICMP Echo Request |
 
-The probe method can vary between traceroute implementations and options. The table describes the default behavior covered here.
+The probe method can vary between traceroute implementations and options. The table describes the default behavior covered here. The PDF and session describe tracing up to 30 hops; the actual maximum can depend on the utility and its settings.
 
 ## UDP probes in traceroute
 
