@@ -12,6 +12,7 @@ This section contains my notes and practical work on routing topics. Each topic 
 | [Day 13](day-13/README.md) | Multi-area OSPF and Type 1, Type 2, and Type 3 LSAs | LSA database comparison across Areas 0, 10, and 20; ABR identification and configuration experiment |
 | [Day 14](day-14/README.md) | BGP–OSPF route redistribution, ASBR and ABR roles, Type 4 and Type 5 LSAs, E2 external routes | Redistribution in both directions, Wireshark LSA flags, LSDB comparison, R5 E2 route, and PC1 connectivity |
 | [Day 15](day-15/README.md) | OSPF stub area, totally stubby area, NSSA, BGP peering, and BGP-to-OSPF redistribution | Topic explanations, IOS configuration, LSDB observations, routing tables, and connectivity tests |
+| [Day 17](day-17/README.md) | EIGRP, VRRP, HSRP, gateway redundancy and failover | EIGRP neighbor and route verification, packet captures, VRRP/HSRP election and failover tests |
 | [Day 16](day-16/README.md) | Traceroute, tracert, TTL, UDP probes, ICMP responses, RTT, and troubleshooting | Topic notes, four-router topology, Wireshark packet capture, and hop-by-hop ICMP responses |
 
 ## Organization
