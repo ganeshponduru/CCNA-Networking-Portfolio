@@ -66,3 +66,7 @@ show ip eigrp neighbors
 ~~~
 
 The lab demonstrated Active/Standby election, takeover by R2, and the corresponding HSRP messages in Wireshark.
+
+## VRRP-to-HSRP transition note
+
+During the change from VRRP to HSRP, the console showed duplicate-address warnings for 192.168.1.150 on Ethernet3/0. The output shows VRRP being removed on R2 before HSRP was configured there, but it does not clearly show the complete cleanup sequence on both routers. This warning should not be ignored: before running both protocols with the same virtual IP on the same LAN, remove the old VRRP group from both routers and verify that only the intended gateway redundancy protocol remains active.
